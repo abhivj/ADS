@@ -1,0 +1,8 @@
+These Datasets have these properties
+1. All are binary classification.
+2. All have equal or more then 5 attributes.
+
+To do the PCA we have done the following
+1.All nomial attribute converted to numerical.
+2.PCA is done and dimestions reduced to 5.
+3.In a way all have same structure.
