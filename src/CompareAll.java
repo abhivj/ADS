@@ -191,12 +191,12 @@ public class CompareAll {
 	}
 	public static void main(String[] args) {
 	
-		String initialResult = "d:/wrk8/initialResult.csv";
-		String allResult = "d:/wrk8/allResult.csv";
-		String topKResult = "d:/wrk8/topKResult.txt";
-		String csvFile = "d:/wrk8/NominalDataNew.csv";
+		String initialResult = "d:/work241/initialResult.csv";
+		String allResult = "d:/work241/allResult.csv";
+		String topKResult = "d:/work241/topKResult.txt";
+		String csvFile = "d:/work241/PCAClassData.csv";
 		int numberOfBins=16;
-		int numberOfFiles=24;
+		int numberOfFiles=8;
 		int topk=5;
 		compareAllDatasets(csvFile, initialResult, allResult, topKResult, numberOfBins, numberOfFiles, topk);
 		

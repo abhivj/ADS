@@ -433,12 +433,9 @@ public class AlgorithmRunner {
 	
 	public static void main(String[] args) throws Exception {
 		
-		String reportPath = "d:/reportnew.csv";
-		String filePath = "./data/NewDatasets/";
+		String reportPath = "d:/work241/reportnew.csv";
+		String filePath = "./data/BinaryDatasets/";
 		Algorunner(filePath, reportPath);
-		
-		
-
 	}
 
 }
