@@ -1,394 +1,299 @@
-% Citation Request:
-%    This breast cancer domain was obtained from the University Medical Centre,
-%    Institute of Oncology, Ljubljana, Yugoslavia.  Thanks go to M. Zwitter and 
-%    M. Soklic for providing the data.  Please include this citation if you plan
-%    to use this database.
-% 
-% 1. Title: Breast cancer data (Michalski has used this)
-% 
-% 2. Sources: 
-%    -- Matjaz Zwitter & Milan Soklic (physicians)
-%       Institute of Oncology 
-%       University Medical Center
-%       Ljubljana, Yugoslavia
-%    -- Donors: Ming Tan and Jeff Schlimmer (Jeffrey.Schlimmer@a.gp.cs.cmu.edu)
-%    -- Date: 11 July 1988
-% 
-% 3. Past Usage: (Several: here are some)
-%      -- Michalski,R.S., Mozetic,I., Hong,J., & Lavrac,N. (1986). The 
-%         Multi-Purpose Incremental Learning System AQ15 and its Testing 
-%         Application to Three Medical Domains.  In Proceedings of the 
-%         Fifth National Conference on Artificial Intelligence, 1041-1045,
-%         Philadelphia, PA: Morgan Kaufmann.
-%         -- accuracy range: 66%-72%
-%      -- Clark,P. & Niblett,T. (1987). Induction in Noisy Domains.  In 
-%         Progress in Machine Learning (from the Proceedings of the 2nd
-%         European Working Session on Learning), 11-30, Bled, 
-%         Yugoslavia: Sigma Press.
-%         -- 8 test results given: 65%-72% accuracy range
-%      -- Tan, M., & Eshelman, L. (1988). Using weighted networks to 
-%         represent classification knowledge in noisy domains.  Proceedings 
-%         of the Fifth International Conference on Machine Learning, 121-134,
-%         Ann Arbor, MI.
-%         -- 4 systems tested: accuracy range was 68%-73.5%
-%     -- Cestnik,G., Konenenko,I, & Bratko,I. (1987). Assistant-86: A
-%        Knowledge-Elicitation Tool for Sophisticated Users.  In I.Bratko
-%        & N.Lavrac (Eds.) Progress in Machine Learning, 31-45, Sigma Press.
-%        -- Assistant-86: 78% accuracy
-% 
-% 4. Relevant Information:
-%      This is one of three domains provided by the Oncology Institute
-%      that has repeatedly appeared in the machine learning literature.
-%      (See also lymphography and primary-tumor.)
-% 
-%      This data set includes 201 instances of one class and 85 instances of
-%      another class.  The instances are described by 9 attributes, some of
-%      which are linear and some are nominal.
-% 
-% 5. Number of Instances: 286
-% 
-% 6. Number of Attributes: 9 + the class attribute
-% 
-% 7. Attribute Information:
-%    1. Class: no-recurrence-events, recurrence-events
-%    2. age: 10-19, 20-29, 30-39, 40-49, 50-59, 60-69, 70-79, 80-89, 90-99.
-%    3. menopause: lt40, ge40, premeno.
-%    4. tumor-size: 0-4, 5-9, 10-14, 15-19, 20-24, 25-29, 30-34, 35-39, 40-44,
-%                   45-49, 50-54, 55-59.
-%    5. inv-nodes: 0-2, 3-5, 6-8, 9-11, 12-14, 15-17, 18-20, 21-23, 24-26,
-%                  27-29, 30-32, 33-35, 36-39.
-%    6. node-caps: yes, no.
-%    7. deg-malig: 1, 2, 3.
-%    8. breast: left, right.
-%    9. breast-quad: left-up, left-low, right-up, right-low, central.
-%   10. irradiat: yes, no.
-% 
-% 8. Missing Attribute Values: (denoted by "?")
-%    Attribute #:  Number of instances with missing values:
-%    6.             8
-%    9.             1.
-% 
-% 9. Class Distribution:
-%     1. no-recurrence-events: 201 instances
-%     2. recurrence-events: 85 instances
-%
-% Num Instances:     286
-% Num Attributes:    10
-% Num Continuous:    0 (Int 0 / Real 0)
-% Num Discrete:      10
-% Missing values:    9 /  0.3%
-%
-%     name                      type enum ints real     missing    distinct  (1)
-%   1 'age'                     Enum 100%   0%   0%     0 /  0%     6 /  2%   0% 
-%   2 'menopause'               Enum 100%   0%   0%     0 /  0%     3 /  1%   0% 
-%   3 'tumor-size'              Enum 100%   0%   0%     0 /  0%    11 /  4%   0% 
-%   4 'inv-nodes'               Enum 100%   0%   0%     0 /  0%     7 /  2%   0% 
-%   5 'node-caps'               Enum  97%   0%   0%     8 /  3%     2 /  1%   0% 
-%   6 'deg-malig'               Enum 100%   0%   0%     0 /  0%     3 /  1%   0% 
-%   7 'breast'                  Enum 100%   0%   0%     0 /  0%     2 /  1%   0% 
-%   8 'breast-quad'             Enum 100%   0%   0%     1 /  0%     5 /  2%   0% 
-%   9 'irradiat'                Enum 100%   0%   0%     0 /  0%     2 /  1%   0% 
-%  10 'Class'                   Enum 100%   0%   0%     0 /  0%     2 /  1%   0% 
-%
-%
-@relation breast-cancer
-@attribute age {'10-19','20-29','30-39','40-49','50-59','60-69','70-79','80-89','90-99'}
-@attribute menopause {'lt40','ge40','premeno'}
-@attribute tumor-size {'0-4','5-9','10-14','15-19','20-24','25-29','30-34','35-39','40-44','45-49','50-54','55-59'}
-@attribute inv-nodes {'0-2','3-5','6-8','9-11','12-14','15-17','18-20','21-23','24-26','27-29','30-32','33-35','36-39'}
-@attribute node-caps {'yes','no'}
-@attribute deg-malig {'1','2','3'}
-@attribute breast {'left','right'}
-@attribute breast-quad {'left_up','left_low','right_up','right_low','central'}
-@attribute 'irradiat' {'yes','no'}
-@attribute 'Class' {'no-recurrence-events','recurrence-events'}
+@relation 'breast-cancer-weka.filters.supervised.attribute.NominalToBinary_principal components-weka.filters.unsupervised.attribute.PrincipalComponents-R0.95-A50-M8'
+
+@attribute '0.42 inv-nodes=0-2+0.381node-caps+0.279deg-malig=1+0.279irradiat-0.273menopause=premeno+0.244menopause=ge40-0.24inv-nodes=3-5-0.199deg-malig=3-0.197age=40-49-0.186inv-nodes=6-8+0.186age=60-69-0.157inv-nodes=9-11+0.152tumor-size=10-14-0.121age=30-39-0.12inv-nodes=12-14-0.116inv-nodes=15-17+0.103breast-quad=central+0.101age=70-79-0.099tumor-size=30-34+0.098menopause=lt40+0.096tumor-size=15-19-0.096tumor-size=35-39+0.092age=50-59+0.092tumor-size=0-4-0.063tumor-size=25-29-0.06deg-malig=2-0.058breast-quad=right_up+0.053tumor-size=5-9-0.036breast-quad=right_low-0.032inv-nodes=24-26-0.031breast-0.028tumor-size=40-44+0.015tumor-size=50-54-0.01age=20-29+0.009breast-quad=left_up-0.006breast-quad=left_low-0.005tumor-size=20-24-0.002tumor-size=45-49' numeric
+@attribute '0.46 menopause=premeno-0.458menopause=ge40+0.321age=40-49-0.278age=60-69+0.266inv-nodes=0-2-0.248deg-malig=3+0.222node-caps-0.177inv-nodes=6-8+0.174deg-malig=2-0.17age=50-59+0.14 age=30-39-0.13inv-nodes=3-5+0.123irradiat-0.098tumor-size=30-34-0.097inv-nodes=24-26+0.083breast-quad=right_low-0.078inv-nodes=15-17-0.078tumor-size=40-44-0.068inv-nodes=9-11+0.062tumor-size=0-4+0.062deg-malig=1+0.06 breast+0.058tumor-size=25-29+0.055age=20-29+0.053tumor-size=10-14-0.052tumor-size=45-49-0.051age=70-79-0.039breast-quad=left_up+0.037tumor-size=5-9-0.034breast-quad=left_low+0.03 breast-quad=right_up+0.027tumor-size=20-24-0.016inv-nodes=12-14+0.016tumor-size=35-39-0.01menopause=lt40+0.009breast-quad=central-0.006tumor-size=15-19-0.002tumor-size=50-54' numeric
+@attribute '0.466breast-quad=left_up+0.416breast-0.395breast-quad=left_low+0.29 deg-malig=2+0.176tumor-size=50-54-0.175deg-malig=3-0.173age=30-39+0.17 tumor-size=20-24-0.17breast-quad=right_low+0.169age=60-69+0.167inv-nodes=3-5-0.149deg-malig=1-0.132inv-nodes=6-8-0.123age=50-59+0.121breast-quad=right_up-0.109tumor-size=0-4-0.101tumor-size=15-19+0.101age=40-49+0.097menopause=ge40-0.078tumor-size=35-39-0.078menopause=lt40-0.077inv-nodes=15-17-0.076breast-quad=central-0.073menopause=premeno-0.066inv-nodes=12-14-0.064tumor-size=5-9-0.062tumor-size=25-29+0.059tumor-size=40-44+0.057age=20-29-0.047irradiat-0.035inv-nodes=24-26-0.025tumor-size=30-34-0.021tumor-size=45-49+0.02 node-caps-0.015age=70-79-0.011inv-nodes=0-2+0.01 tumor-size=10-14+0.002inv-nodes=9-11' numeric
+@attribute '0.451deg-malig=2+0.411breast-quad=left_low-0.319deg-malig=3-0.289breast-quad=left_up+0.239inv-nodes=3-5+0.209age=60-69-0.201tumor-size=30-34+0.188tumor-size=20-24-0.183deg-malig=1-0.182tumor-size=35-39-0.156breast-quad=right_up-0.148inv-nodes=9-11-0.147breast-0.141inv-nodes=15-17-0.136inv-nodes=12-14+0.115inv-nodes=24-26-0.113age=50-59-0.102age=70-79-0.093irradiat-0.082menopause=lt40-0.076inv-nodes=0-2-0.073breast-quad=right_low+0.071tumor-size=15-19+0.06 tumor-size=45-49-0.059age=20-29+0.058tumor-size=25-29-0.055age=40-49+0.054menopause=ge40+0.052tumor-size=50-54+0.041age=30-39+0.035inv-nodes=6-8+0.033tumor-size=5-9-0.03tumor-size=0-4-0.028menopause=premeno+0.025breast-quad=central-0.02node-caps-0.017tumor-size=40-44+0.008tumor-size=10-14' numeric
+@attribute '-0.378breast-quad=right_low+0.331age=50-59+0.328tumor-size=35-39-0.304breast-quad=central+0.303breast-quad=left_low-0.269tumor-size=0-4-0.267inv-nodes=12-14+0.215inv-nodes=15-17+0.194irradiat-0.173age=60-69+0.163age=20-29-0.161tumor-size=45-49-0.156inv-nodes=6-8-0.148age=70-79-0.115age=30-39-0.114tumor-size=5-9+0.113menopause=lt40-0.106tumor-size=30-34+0.105breast-quad=right_up+0.085tumor-size=40-44-0.08age=40-49-0.077deg-malig=1+0.059tumor-size=50-54-0.055menopause=ge40+0.047inv-nodes=0-2+0.036deg-malig=3-0.034tumor-size=15-19+0.034deg-malig=2+0.034tumor-size=20-24+0.028inv-nodes=3-5-0.028inv-nodes=24-26+0.027tumor-size=10-14+0.027inv-nodes=9-11+0.02 menopause=premeno-0.019tumor-size=25-29+0.012node-caps+0.008breast-quad=left_up+0.006breast' numeric
+@attribute '0.431breast-quad=central+0.378tumor-size=0-4+0.288age=50-59-0.28age=40-49-0.234age=60-69+0.221deg-malig=2+0.22 breast-quad=right_up-0.208inv-nodes=12-14-0.2breast-quad=left_low+0.194age=30-39-0.18tumor-size=10-14+0.154irradiat-0.152breast-quad=left_up+0.146age=20-29-0.127deg-malig=1-0.125inv-nodes=24-26-0.121deg-malig=3+0.104age=70-79+0.096breast-0.095tumor-size=25-29+0.091inv-nodes=3-5+0.087tumor-size=40-44-0.087node-caps+0.085tumor-size=35-39+0.078tumor-size=5-9-0.074menopause=lt40-0.069inv-nodes=0-2+0.067inv-nodes=6-8+0.053inv-nodes=9-11-0.049breast-quad=right_low-0.034tumor-size=15-19+0.029menopause=ge40-0.029tumor-size=20-24+0.02 inv-nodes=15-17-0.014tumor-size=50-54-0.006menopause=premeno-0.004tumor-size=30-34+0.001tumor-size=45-49' numeric
+@attribute '0.356inv-nodes=3-5+0.354tumor-size=20-24-0.301age=20-29-0.291tumor-size=35-39-0.286breast-quad=right_up+0.222breast-quad=left_up-0.212age=60-69-0.211deg-malig=2-0.208tumor-size=45-49+0.204age=30-39-0.19tumor-size=50-54+0.188deg-malig=1+0.162menopause=lt40+0.135age=50-59+0.128tumor-size=40-44-0.126inv-nodes=0-2-0.121inv-nodes=6-8-0.12breast-quad=right_low-0.105menopause=ge40-0.104tumor-size=15-19-0.102inv-nodes=9-11-0.098tumor-size=5-9-0.081age=40-49-0.077inv-nodes=12-14+0.074breast-quad=central+0.074irradiat-0.068inv-nodes=15-17+0.06 age=70-79+0.059tumor-size=0-4+0.056tumor-size=10-14+0.055menopause=premeno+0.051deg-malig=3-0.039tumor-size=25-29+0.036inv-nodes=24-26-0.028tumor-size=30-34+0.013node-caps-0.006breast+0.001breast-quad=left_low' numeric
+@attribute '0.423tumor-size=25-29+0.413age=50-59-0.309breast-quad=right_up+0.286breast-quad=right_low-0.216deg-malig=1-0.212age=60-69-0.211tumor-size=45-49+0.21 deg-malig=2-0.184age=30-39+0.182inv-nodes=12-14-0.175tumor-size=30-34+0.173breast-quad=left_up-0.157age=20-29-0.123inv-nodes=24-26-0.116inv-nodes=3-5-0.115tumor-size=20-24-0.11tumor-size=40-44+0.108tumor-size=50-54-0.1tumor-size=35-39-0.098menopause=lt40-0.091breast-quad=left_low-0.08breast+0.075menopause=ge40-0.075age=70-79-0.069breast-quad=central-0.064age=40-49-0.064tumor-size=5-9+0.062tumor-size=15-19+0.061inv-nodes=9-11-0.044menopause=premeno+0.04 tumor-size=0-4+0.039inv-nodes=0-2-0.037tumor-size=10-14-0.03irradiat-0.024deg-malig=3+0.019inv-nodes=15-17-0.017inv-nodes=6-8-0.003node-caps' numeric
+@attribute Class {no-recurrence-events,recurrence-events}
+
 @data
-'40-49','premeno','15-19','0-2','yes','3','right','left_up','no','recurrence-events'
-'50-59','ge40','15-19','0-2','no','1','right','central','no','no-recurrence-events'
-'50-59','ge40','35-39','0-2','no','2','left','left_low','no','recurrence-events'
-'40-49','premeno','35-39','0-2','yes','3','right','left_low','yes','no-recurrence-events'
-'40-49','premeno','30-34','3-5','yes','2','left','right_up','no','recurrence-events'
-'50-59','premeno','25-29','3-5','no','2','right','left_up','yes','no-recurrence-events'
-'50-59','ge40','40-44','0-2','no','3','left','left_up','no','no-recurrence-events'
-'40-49','premeno','10-14','0-2','no','2','left','left_up','no','no-recurrence-events'
-'40-49','premeno','0-4','0-2','no','2','right','right_low','no','no-recurrence-events'
-'40-49','ge40','40-44','15-17','yes','2','right','left_up','yes','no-recurrence-events'
-'50-59','premeno','25-29','0-2','no','2','left','left_low','no','no-recurrence-events'
-'60-69','ge40','15-19','0-2','no','2','right','left_up','no','no-recurrence-events'
-'50-59','ge40','30-34','0-2','no','1','right','central','no','no-recurrence-events'
-'50-59','ge40','25-29','0-2','no','2','right','left_up','no','no-recurrence-events'
-'40-49','premeno','25-29','0-2','no','2','left','left_low','yes','recurrence-events'
-'30-39','premeno','20-24','0-2','no','3','left','central','no','no-recurrence-events'
-'50-59','premeno','10-14','3-5','no','1','right','left_up','no','no-recurrence-events'
-'60-69','ge40','15-19','0-2','no','2','right','left_up','no','no-recurrence-events'
-'50-59','premeno','40-44','0-2','no','2','left','left_up','no','no-recurrence-events'
-'50-59','ge40','20-24','0-2','no','3','left','left_up','no','no-recurrence-events'
-'50-59','lt40','20-24','0-2',?,'1','left','left_low','no','recurrence-events'
-'60-69','ge40','40-44','3-5','no','2','right','left_up','yes','no-recurrence-events'
-'50-59','ge40','15-19','0-2','no','2','right','left_low','no','no-recurrence-events'
-'40-49','premeno','10-14','0-2','no','1','right','left_up','no','no-recurrence-events'
-'30-39','premeno','15-19','6-8','yes','3','left','left_low','yes','recurrence-events'
-'50-59','ge40','20-24','3-5','yes','2','right','left_up','no','no-recurrence-events'
-'50-59','ge40','10-14','0-2','no','2','right','left_low','no','no-recurrence-events'
-'40-49','premeno','10-14','0-2','no','1','right','left_up','no','no-recurrence-events'
-'60-69','ge40','30-34','3-5','yes','3','left','left_low','no','no-recurrence-events'
-'40-49','premeno','15-19','15-17','yes','3','left','left_low','no','recurrence-events'
-'60-69','ge40','30-34','0-2','no','3','right','central','no','recurrence-events'
-'60-69','ge40','25-29','3-5',?,'1','right','left_low','yes','no-recurrence-events'
-'50-59','ge40','25-29','0-2','no','3','left','right_up','no','no-recurrence-events'
-'50-59','ge40','20-24','0-2','no','3','right','left_up','no','no-recurrence-events'
-'40-49','premeno','30-34','0-2','no','1','left','left_low','yes','recurrence-events'
-'30-39','premeno','15-19','0-2','no','1','left','left_low','no','no-recurrence-events'
-'40-49','premeno','10-14','0-2','no','2','right','left_up','no','no-recurrence-events'
-'60-69','ge40','45-49','6-8','yes','3','left','central','no','no-recurrence-events'
-'40-49','ge40','20-24','0-2','no','3','left','left_low','no','no-recurrence-events'
-'40-49','premeno','10-14','0-2','no','1','right','right_low','no','no-recurrence-events'
-'30-39','premeno','35-39','0-2','no','3','left','left_low','no','recurrence-events'
-'40-49','premeno','35-39','9-11','yes','2','right','right_up','yes','no-recurrence-events'
-'60-69','ge40','25-29','0-2','no','2','right','left_low','no','no-recurrence-events'
-'50-59','ge40','20-24','3-5','yes','3','right','right_up','no','recurrence-events'
-'30-39','premeno','15-19','0-2','no','1','left','left_low','no','no-recurrence-events'
-'50-59','premeno','30-34','0-2','no','3','left','right_up','no','recurrence-events'
-'60-69','ge40','10-14','0-2','no','2','right','left_up','yes','no-recurrence-events'
-'40-49','premeno','35-39','0-2','yes','3','right','left_up','yes','no-recurrence-events'
-'50-59','premeno','50-54','0-2','yes','2','right','left_up','yes','no-recurrence-events'
-'50-59','ge40','40-44','0-2','no','3','right','left_up','no','no-recurrence-events'
-'70-79','ge40','15-19','9-11',?,'1','left','left_low','yes','recurrence-events'
-'50-59','lt40','30-34','0-2','no','3','right','left_up','no','no-recurrence-events'
-'40-49','premeno','0-4','0-2','no','3','left','central','no','no-recurrence-events'
-'70-79','ge40','40-44','0-2','no','1','right','right_up','no','no-recurrence-events'
-'40-49','premeno','25-29','0-2',?,'2','left','right_low','yes','no-recurrence-events'
-'50-59','ge40','25-29','15-17','yes','3','right','left_up','no','no-recurrence-events'
-'50-59','premeno','20-24','0-2','no','1','left','left_low','no','no-recurrence-events'
-'50-59','ge40','35-39','15-17','no','3','left','left_low','no','no-recurrence-events'
-'50-59','ge40','50-54','0-2','no','1','right','right_up','no','no-recurrence-events'
-'30-39','premeno','0-4','0-2','no','2','right','central','no','recurrence-events'
-'50-59','ge40','40-44','6-8','yes','3','left','left_low','yes','recurrence-events'
-'40-49','premeno','30-34','0-2','no','2','right','right_up','yes','no-recurrence-events'
-'40-49','ge40','20-24','0-2','no','3','left','left_up','no','no-recurrence-events'
-'40-49','premeno','30-34','15-17','yes','3','left','left_low','no','recurrence-events'
-'40-49','ge40','20-24','0-2','no','2','right','left_up','no','recurrence-events'
-'50-59','ge40','15-19','0-2','no','1','right','central','no','no-recurrence-events'
-'30-39','premeno','25-29','0-2','no','2','right','left_low','no','no-recurrence-events'
-'60-69','ge40','15-19','0-2','no','2','left','left_low','no','no-recurrence-events'
-'50-59','premeno','50-54','9-11','yes','2','right','left_up','no','recurrence-events'
-'30-39','premeno','10-14','0-2','no','1','right','left_low','no','no-recurrence-events'
-'50-59','premeno','25-29','3-5','yes','3','left','left_low','yes','recurrence-events'
-'60-69','ge40','25-29','3-5',?,'1','right','left_up','yes','no-recurrence-events'
-'60-69','ge40','10-14','0-2','no','1','right','left_low','no','no-recurrence-events'
-'50-59','ge40','30-34','6-8','yes','3','left','right_low','no','recurrence-events'
-'30-39','premeno','25-29','6-8','yes','3','left','right_low','yes','recurrence-events'
-'50-59','ge40','10-14','0-2','no','1','left','left_low','no','no-recurrence-events'
-'50-59','premeno','15-19','0-2','no','1','left','left_low','no','no-recurrence-events'
-'40-49','premeno','25-29','0-2','no','2','right','central','no','no-recurrence-events'
-'40-49','premeno','25-29','0-2','no','3','left','right_up','no','recurrence-events'
-'60-69','ge40','30-34','6-8','yes','2','right','right_up','no','no-recurrence-events'
-'50-59','lt40','15-19','0-2','no','2','left','left_low','no','no-recurrence-events'
-'40-49','premeno','25-29','0-2','no','2','right','left_low','no','no-recurrence-events'
-'40-49','premeno','30-34','0-2','no','1','right','left_up','no','no-recurrence-events'
-'60-69','ge40','15-19','0-2','no','2','left','left_up','yes','no-recurrence-events'
-'30-39','premeno','0-4','0-2','no','2','right','central','no','no-recurrence-events'
-'50-59','ge40','35-39','0-2','no','3','left','left_up','no','no-recurrence-events'
-'40-49','premeno','40-44','0-2','no','1','right','left_up','no','no-recurrence-events'
-'30-39','premeno','25-29','6-8','yes','2','right','left_up','yes','no-recurrence-events'
-'50-59','ge40','20-24','0-2','no','1','right','left_low','no','no-recurrence-events'
-'50-59','ge40','30-34','0-2','no','1','left','left_up','no','no-recurrence-events'
-'60-69','ge40','20-24','0-2','no','1','right','left_up','no','recurrence-events'
-'30-39','premeno','30-34','3-5','no','3','right','left_up','yes','recurrence-events'
-'50-59','lt40','20-24','0-2',?,'1','left','left_up','no','recurrence-events'
-'50-59','premeno','10-14','0-2','no','2','right','left_up','no','no-recurrence-events'
-'50-59','ge40','20-24','0-2','no','2','right','left_up','no','no-recurrence-events'
-'40-49','premeno','45-49','0-2','no','2','left','left_low','yes','no-recurrence-events'
-'30-39','premeno','40-44','0-2','no','1','left','left_up','no','recurrence-events'
-'50-59','premeno','10-14','0-2','no','1','left','left_low','no','no-recurrence-events'
-'60-69','ge40','30-34','0-2','no','3','right','left_up','yes','recurrence-events'
-'40-49','premeno','35-39','0-2','no','1','right','left_up','no','recurrence-events'
-'40-49','premeno','20-24','3-5','yes','2','left','left_low','yes','recurrence-events'
-'50-59','premeno','15-19','0-2','no','2','left','left_low','no','recurrence-events'
-'50-59','ge40','30-34','0-2','no','3','right','left_low','no','no-recurrence-events'
-'60-69','ge40','20-24','0-2','no','2','left','left_up','no','no-recurrence-events'
-'40-49','premeno','20-24','0-2','no','1','left','right_low','no','no-recurrence-events'
-'60-69','ge40','30-34','3-5','yes','2','left','central','yes','recurrence-events'
-'60-69','ge40','20-24','3-5','no','2','left','left_low','yes','recurrence-events'
-'50-59','premeno','25-29','0-2','no','2','left','right_up','no','recurrence-events'
-'50-59','ge40','30-34','0-2','no','1','right','right_up','no','no-recurrence-events'
-'40-49','premeno','20-24','0-2','no','2','left','right_low','no','no-recurrence-events'
-'60-69','ge40','15-19','0-2','no','1','right','left_up','no','no-recurrence-events'
-'60-69','ge40','30-34','0-2','no','2','left','left_low','yes','no-recurrence-events'
-'30-39','premeno','30-34','0-2','no','2','left','left_up','no','no-recurrence-events'
-'30-39','premeno','40-44','3-5','no','3','right','right_up','yes','no-recurrence-events'
-'60-69','ge40','5-9','0-2','no','1','left','central','no','no-recurrence-events'
-'60-69','ge40','10-14','0-2','no','1','left','left_up','no','no-recurrence-events'
-'40-49','premeno','30-34','6-8','yes','3','right','left_up','no','recurrence-events'
-'60-69','ge40','10-14','0-2','no','1','left','left_up','no','no-recurrence-events'
-'40-49','premeno','35-39','9-11','yes','2','right','left_up','yes','no-recurrence-events'
-'40-49','premeno','20-24','0-2','no','1','right','left_low','no','no-recurrence-events'
-'40-49','premeno','30-34','0-2','yes','3','right','right_up','no','recurrence-events'
-'50-59','premeno','25-29','0-2','yes','2','left','left_up','no','no-recurrence-events'
-'40-49','premeno','15-19','0-2','no','2','left','left_low','no','no-recurrence-events'
-'30-39','premeno','35-39','9-11','yes','3','left','left_low','no','recurrence-events'
-'30-39','premeno','10-14','0-2','no','2','left','right_low','no','no-recurrence-events'
-'50-59','ge40','30-34','0-2','no','1','right','left_low','no','no-recurrence-events'
-'60-69','ge40','30-34','0-2','no','2','left','left_up','no','no-recurrence-events'
-'60-69','ge40','25-29','0-2','no','2','left','left_low','no','no-recurrence-events'
-'40-49','premeno','15-19','0-2','no','2','left','left_up','no','recurrence-events'
-'60-69','ge40','15-19','0-2','no','2','right','left_low','no','no-recurrence-events'
-'40-49','premeno','30-34','0-2','no','2','left','right_low','no','no-recurrence-events'
-'20-29','premeno','35-39','0-2','no','2','right','right_up','no','no-recurrence-events'
-'40-49','premeno','30-34','0-2','no','3','right','right_up','no','recurrence-events'
-'40-49','premeno','25-29','0-2','no','2','right','left_low','no','recurrence-events'
-'30-39','premeno','30-34','0-2','no','3','left','left_low','no','no-recurrence-events'
-'30-39','premeno','15-19','0-2','no','1','right','left_low','no','recurrence-events'
-'50-59','ge40','0-4','0-2','no','1','right','central','no','no-recurrence-events'
-'50-59','ge40','0-4','0-2','no','1','left','left_low','no','no-recurrence-events'
-'60-69','ge40','50-54','0-2','no','3','right','left_up','no','recurrence-events'
-'50-59','premeno','30-34','0-2','no','1','left','central','no','no-recurrence-events'
-'60-69','ge40','20-24','24-26','yes','3','left','left_low','yes','recurrence-events'
-'40-49','premeno','25-29','0-2','no','2','left','left_up','no','no-recurrence-events'
-'40-49','premeno','30-34','3-5','no','2','right','left_up','no','recurrence-events'
-'50-59','premeno','20-24','3-5','yes','2','left','left_low','no','no-recurrence-events'
-'50-59','ge40','15-19','0-2','yes','2','left','central','yes','no-recurrence-events'
-'50-59','premeno','10-14','0-2','no','3','left','left_low','no','no-recurrence-events'
-'30-39','premeno','30-34','9-11','no','2','right','left_up','yes','recurrence-events'
-'60-69','ge40','10-14','0-2','no','1','left','left_low','no','no-recurrence-events'
-'40-49','premeno','40-44','0-2','no','2','right','left_low','no','no-recurrence-events'
-'50-59','ge40','30-34','9-11',?,'3','left','left_up','yes','no-recurrence-events'
-'40-49','premeno','50-54','0-2','no','2','right','left_low','yes','recurrence-events'
-'50-59','ge40','15-19','0-2','no','2','right','right_up','no','no-recurrence-events'
-'50-59','ge40','40-44','3-5','yes','2','left','left_low','no','no-recurrence-events'
-'30-39','premeno','25-29','3-5','yes','3','left','left_low','yes','recurrence-events'
-'60-69','ge40','10-14','0-2','no','2','left','left_low','no','no-recurrence-events'
-'60-69','lt40','10-14','0-2','no','1','left','right_up','no','no-recurrence-events'
-'30-39','premeno','30-34','0-2','no','2','left','left_up','no','recurrence-events'
-'30-39','premeno','20-24','3-5','yes','2','left','left_low','no','recurrence-events'
-'50-59','ge40','10-14','0-2','no','1','right','left_up','no','no-recurrence-events'
-'60-69','ge40','25-29','0-2','no','3','right','left_up','no','no-recurrence-events'
-'50-59','ge40','25-29','3-5','yes','3','right','left_up','no','no-recurrence-events'
-'40-49','premeno','30-34','6-8','no','2','left','left_up','no','no-recurrence-events'
-'60-69','ge40','50-54','0-2','no','2','left','left_low','no','no-recurrence-events'
-'50-59','premeno','30-34','0-2','no','3','left','left_low','no','no-recurrence-events'
-'40-49','ge40','20-24','3-5','no','3','right','left_low','yes','recurrence-events'
-'50-59','ge40','30-34','6-8','yes','2','left','right_low','yes','recurrence-events'
-'60-69','ge40','25-29','3-5','no','2','right','right_up','no','recurrence-events'
-'40-49','premeno','20-24','0-2','no','2','left','central','no','no-recurrence-events'
-'40-49','premeno','20-24','0-2','no','2','left','left_up','no','no-recurrence-events'
-'40-49','premeno','50-54','0-2','no','2','left','left_low','no','no-recurrence-events'
-'50-59','ge40','20-24','0-2','no','2','right','central','no','recurrence-events'
-'50-59','ge40','30-34','3-5','no','3','right','left_up','no','recurrence-events'
-'40-49','ge40','25-29','0-2','no','2','left','left_low','no','no-recurrence-events'
-'50-59','premeno','25-29','0-2','no','1','right','left_up','no','recurrence-events'
-'40-49','premeno','40-44','3-5','yes','3','right','left_up','yes','no-recurrence-events'
-'40-49','premeno','20-24','0-2','no','2','right','left_up','no','no-recurrence-events'
-'40-49','premeno','20-24','3-5','no','2','right','left_up','no','no-recurrence-events'
-'40-49','premeno','25-29','9-11','yes','3','right','left_up','no','recurrence-events'
-'40-49','premeno','25-29','0-2','no','2','right','left_low','no','recurrence-events'
-'40-49','premeno','20-24','0-2','no','1','right','right_up','no','no-recurrence-events'
-'30-39','premeno','40-44','0-2','no','2','right','right_up','no','no-recurrence-events'
-'60-69','ge40','10-14','6-8','yes','3','left','left_up','yes','recurrence-events'
-'40-49','premeno','35-39','0-2','no','1','left','left_low','no','no-recurrence-events'
-'50-59','ge40','30-34','3-5','no','3','left','left_low','no','recurrence-events'
-'40-49','premeno','5-9','0-2','no','1','left','left_low','yes','no-recurrence-events'
-'60-69','ge40','15-19','0-2','no','1','left','right_low','no','no-recurrence-events'
-'40-49','premeno','30-34','0-2','no','3','right','right_up','no','no-recurrence-events'
-'40-49','premeno','25-29','0-2','no','3','left','left_up','no','recurrence-events'
-'50-59','ge40','5-9','0-2','no','2','right','right_up','no','no-recurrence-events'
-'50-59','premeno','25-29','0-2','no','2','right','right_low','no','no-recurrence-events'
-'50-59','premeno','25-29','0-2','no','2','left','right_up','no','recurrence-events'
-'40-49','premeno','10-14','0-2','no','2','left','left_low','yes','no-recurrence-events'
-'60-69','ge40','35-39','6-8','yes','3','left','left_low','no','recurrence-events'
-'60-69','ge40','50-54','0-2','no','2','right','left_up','yes','no-recurrence-events'
-'40-49','premeno','25-29','0-2','no','2','right','left_up','no','no-recurrence-events'
-'30-39','premeno','20-24','3-5','no','2','right','central','no','no-recurrence-events'
-'30-39','premeno','30-34','0-2','no','1','right','left_up','no','recurrence-events'
-'60-69','lt40','30-34','0-2','no','1','left','left_low','no','no-recurrence-events'
-'40-49','premeno','15-19','12-14','no','3','right','right_low','yes','no-recurrence-events'
-'60-69','ge40','20-24','0-2','no','3','right','left_low','no','recurrence-events'
-'30-39','premeno','5-9','0-2','no','2','left','right_low','no','no-recurrence-events'
-'40-49','premeno','30-34','0-2','no','3','left','left_up','no','no-recurrence-events'
-'60-69','ge40','30-34','0-2','no','3','left','left_low','no','no-recurrence-events'
-'40-49','premeno','25-29','0-2','no','1','right','right_low','no','no-recurrence-events'
-'40-49','premeno','25-29','0-2','no','1','left','right_low','no','no-recurrence-events'
-'60-69','ge40','40-44','3-5','yes','3','right','left_low','no','recurrence-events'
-'50-59','ge40','25-29','0-2','no','2','left','left_low','no','no-recurrence-events'
-'50-59','premeno','30-34','0-2','no','3','right','left_up','yes','recurrence-events'
-'40-49','ge40','30-34','3-5','no','3','left','left_low','no','recurrence-events'
-'40-49','premeno','25-29','0-2','no','1','right','left_low','yes','no-recurrence-events'
-'40-49','ge40','25-29','12-14','yes','3','left','right_low','yes','recurrence-events'
-'40-49','premeno','40-44','0-2','no','1','left','left_low','no','recurrence-events'
-'40-49','premeno','20-24','0-2','no','2','left','left_low','no','no-recurrence-events'
-'50-59','ge40','25-29','0-2','no','1','left','right_low','no','no-recurrence-events'
-'40-49','premeno','20-24','0-2','no','2','right','left_up','no','no-recurrence-events'
-'70-79','ge40','40-44','0-2','no','1','right','left_up','no','no-recurrence-events'
-'60-69','ge40','25-29','0-2','no','3','left','left_up','no','recurrence-events'
-'50-59','premeno','25-29','0-2','no','2','left','left_low','no','no-recurrence-events'
-'60-69','ge40','45-49','0-2','no','1','right','right_up','yes','recurrence-events'
-'50-59','ge40','20-24','0-2','yes','2','right','left_up','no','no-recurrence-events'
-'50-59','ge40','25-29','0-2','no','1','left','left_low','no','no-recurrence-events'
-'50-59','ge40','20-24','0-2','no','3','left','left_up','no','no-recurrence-events'
-'40-49','premeno','20-24','3-5','no','2','right','left_low','no','no-recurrence-events'
-'50-59','ge40','35-39','0-2','no','2','left','left_up','no','no-recurrence-events'
-'30-39','premeno','20-24','0-2','no','3','left','left_up','yes','recurrence-events'
-'60-69','ge40','30-34','0-2','no','1','right','left_up','no','no-recurrence-events'
-'60-69','ge40','25-29','0-2','no','3','right','left_low','no','no-recurrence-events'
-'40-49','ge40','30-34','0-2','no','2','left','left_up','yes','no-recurrence-events'
-'30-39','premeno','25-29','0-2','no','2','left','left_low','no','no-recurrence-events'
-'40-49','premeno','20-24','0-2','no','2','left','left_low','no','recurrence-events'
-'30-39','premeno','20-24','0-2','no','2','left','right_low','no','no-recurrence-events'
-'40-49','premeno','10-14','0-2','no','2','right','left_low','no','no-recurrence-events'
-'50-59','premeno','15-19','0-2','no','2','right','right_low','no','no-recurrence-events'
-'50-59','premeno','25-29','0-2','no','1','right','left_up','no','no-recurrence-events'
-'60-69','ge40','20-24','0-2','no','2','right','left_up','no','no-recurrence-events'
-'60-69','ge40','40-44','0-2','no','2','right','left_low','no','recurrence-events'
-'30-39','lt40','15-19','0-2','no','3','right','left_up','no','no-recurrence-events'
-'40-49','premeno','30-34','12-14','yes','3','left','left_up','yes','recurrence-events'
-'60-69','ge40','30-34','0-2','yes','2','right','right_up','yes','recurrence-events'
-'50-59','ge40','40-44','6-8','yes','3','left','left_low','yes','recurrence-events'
-'50-59','ge40','30-34','0-2','no','3','left',?,'no','recurrence-events'
-'70-79','ge40','10-14','0-2','no','2','left','central','no','no-recurrence-events'
-'30-39','premeno','40-44','0-2','no','2','left','left_low','yes','no-recurrence-events'
-'40-49','premeno','30-34','0-2','no','2','right','right_low','no','no-recurrence-events'
-'40-49','premeno','30-34','0-2','no','1','left','left_low','no','no-recurrence-events'
-'60-69','ge40','15-19','0-2','no','2','left','left_low','no','no-recurrence-events'
-'40-49','premeno','10-14','0-2','no','2','left','left_low','no','no-recurrence-events'
-'60-69','ge40','20-24','0-2','no','1','left','left_low','no','no-recurrence-events'
-'50-59','ge40','10-14','0-2','no','1','left','left_up','no','no-recurrence-events'
-'50-59','premeno','25-29','0-2','no','1','left','left_low','no','no-recurrence-events'
-'50-59','ge40','30-34','9-11','yes','3','left','right_low','yes','recurrence-events'
-'50-59','ge40','10-14','0-2','no','2','left','left_low','no','no-recurrence-events'
-'40-49','premeno','30-34','0-2','no','1','left','right_up','no','no-recurrence-events'
-'70-79','ge40','0-4','0-2','no','1','left','right_low','no','no-recurrence-events'
-'40-49','premeno','25-29','0-2','no','3','right','left_up','yes','no-recurrence-events'
-'50-59','premeno','25-29','0-2','no','3','right','left_low','yes','recurrence-events'
-'50-59','ge40','40-44','0-2','no','2','left','left_low','no','no-recurrence-events'
-'60-69','ge40','25-29','0-2','no','3','left','right_low','yes','recurrence-events'
-'40-49','premeno','30-34','3-5','yes','2','right','left_low','no','no-recurrence-events'
-'50-59','ge40','20-24','0-2','no','2','left','left_up','no','recurrence-events'
-'70-79','ge40','20-24','0-2','no','3','left','left_up','no','no-recurrence-events'
-'30-39','premeno','25-29','0-2','no','1','left','central','no','no-recurrence-events'
-'60-69','ge40','30-34','0-2','no','2','left','left_low','no','no-recurrence-events'
-'40-49','premeno','20-24','3-5','yes','2','right','right_up','yes','recurrence-events'
-'50-59','ge40','30-34','9-11',?,'3','left','left_low','yes','no-recurrence-events'
-'50-59','ge40','0-4','0-2','no','2','left','central','no','no-recurrence-events'
-'40-49','premeno','20-24','0-2','no','3','right','left_low','yes','no-recurrence-events'
-'30-39','premeno','35-39','0-2','no','3','left','left_low','no','recurrence-events'
-'60-69','ge40','30-34','0-2','no','1','left','left_up','no','no-recurrence-events'
-'60-69','ge40','20-24','0-2','no','1','left','left_low','no','no-recurrence-events'
-'50-59','ge40','25-29','6-8','no','3','left','left_low','yes','recurrence-events'
-'50-59','premeno','35-39','15-17','yes','3','right','right_up','no','recurrence-events'
-'30-39','premeno','20-24','3-5','yes','2','right','left_up','yes','no-recurrence-events'
-'40-49','premeno','20-24','6-8','no','2','right','left_low','yes','no-recurrence-events'
-'50-59','ge40','35-39','0-2','no','3','left','left_low','no','no-recurrence-events'
-'50-59','premeno','35-39','0-2','no','2','right','left_up','no','no-recurrence-events'
-'40-49','premeno','25-29','0-2','no','2','left','left_up','yes','no-recurrence-events'
-'40-49','premeno','35-39','0-2','no','2','right','right_up','no','no-recurrence-events'
-'50-59','premeno','30-34','3-5','yes','2','left','left_low','yes','no-recurrence-events'
-'40-49','premeno','20-24','0-2','no','2','right','right_up','no','no-recurrence-events'
-'60-69','ge40','15-19','0-2','no','3','right','left_up','yes','no-recurrence-events'
-'50-59','ge40','30-34','6-8','yes','2','left','left_low','no','no-recurrence-events'
-'50-59','premeno','25-29','3-5','yes','2','left','left_low','yes','no-recurrence-events'
-'30-39','premeno','30-34','6-8','yes','2','right','right_up','no','no-recurrence-events'
-'50-59','premeno','15-19','0-2','no','2','right','left_low','no','no-recurrence-events'
-'50-59','ge40','40-44','0-2','no','3','left','right_up','no','no-recurrence-events'
-%
-%
-%
+-1.177784,0.845633,0.640935,-1.640637,-0.126147,-0.983934,0.043158,0.113768,recurrence-events
+2.891032,-0.679314,-0.682451,-0.664883,-0.813782,2.024729,0.354048,0.278517,no-recurrence-events
+1.078613,-0.614568,-1.091441,0.742151,2.636257,0.959781,-1.599166,0.831653,recurrence-events
+-2.563658,0.653422,-1.02722,-0.928595,1.454019,-0.981336,-1.422539,-0.971829,no-recurrence-events
+-3.242932,0.570593,0.964446,0.543785,-0.008327,1.074258,-0.208813,-1.658328,recurrence-events
+-2.100104,0.127979,1.988605,0.818131,0.351144,0.655744,1.426773,2.095515,no-recurrence-events
+1.079609,-1.874015,0.275156,-1.64709,1.045513,0.325953,1.044609,0.90033,no-recurrence-events
+0.354135,2.373561,1.18692,-0.002065,0.083299,-1.181129,0.08152,0.410919,no-recurrence-events
+0.188763,3.071281,-0.268902,-0.153345,-3.002365,2.051412,-0.661909,1.278256,no-recurrence-events
+-2.669769,-1.812614,2.093674,-0.760726,1.078583,0.165298,-0.353639,0.31916,no-recurrence-events
+0.268918,1.307159,-1.275487,1.454302,1.423636,0.302554,-0.213225,2.074705,no-recurrence-events
+2.017603,-0.925919,2.200784,0.715884,-0.519913,-0.40674,-1.135555,0.423265,no-recurrence-events
+2.334986,-0.900764,-0.412161,-1.388854,-0.960809,2.125317,0.626251,-0.354414,no-recurrence-events
+1.272739,-0.422306,1.690721,-0.127384,0.677688,0.654794,-0.079953,2.704083,no-recurrence-events
+-1.00213,2.067818,-0.689985,1.791723,0.097199,-1.269286,-0.846118,1.133326,recurrence-events
+-0.046554,1.224574,-1.37531,-0.182277,-1.263285,1.797423,1.963111,-1.284931,no-recurrence-events
+-0.010518,0.238115,1.146166,-0.848597,0.697116,-0.081327,2.745387,-0.097993,no-recurrence-events
+2.017603,-0.925919,2.200784,0.715884,-0.519913,-0.40674,-1.135555,0.423265,no-recurrence-events
+0.359127,0.856032,0.896625,-0.211624,1.184928,0.961476,0.831301,1.133851,no-recurrence-events
+1.170514,-1.511497,0.50215,-1.08795,0.814113,-0.077872,1.496681,1.009732,no-recurrence-events
+2.165874,-0.073178,-1.961619,0.010985,1.997911,-0.691857,2.607693,-0.773126,recurrence-events
+-0.739673,-2.486683,3.390283,1.531098,-0.566427,0.102417,0.868567,-0.561329,no-recurrence-events
+1.715516,-0.57765,-0.276515,1.407816,1.219471,0.69913,-0.786144,1.276,no-recurrence-events
+1.057411,2.287006,1.093147,-1.621233,-0.151427,-1.725915,0.926569,-0.669289,no-recurrence-events
+-3.490618,-1.173033,-3.144352,0.889078,-0.92842,0.000468,-0.017918,-0.784835,recurrence-events
+-1.225858,-2.06026,2.77467,1.160847,0.759092,1.472357,2.277333,0.890445,no-recurrence-events
+1.910077,-0.380909,0.088828,1.202763,1.421765,0.204456,-0.259064,0.949531,no-recurrence-events
+1.057411,2.287006,1.093147,-1.621233,-0.151427,-1.725915,0.926569,-0.669289,no-recurrence-events
+-1.468629,-3.708921,-0.637576,1.080008,-0.11483,-0.642362,0.543632,-1.503884,no-recurrence-events
+-2.91548,-0.41455,-2.49519,-0.701859,1.858979,-0.970355,-0.596769,-0.237309,recurrence-events
+1.524637,-1.921705,0.234005,-0.901572,-1.836261,0.959177,-0.512546,-1.309793,recurrence-events
+-0.257292,-2.355661,0.282956,1.880909,-0.579909,-1.248633,0.674587,-0.539023,no-recurrence-events
+0.822652,-1.25832,-0.70922,-1.311411,0.990405,0.764691,-0.896062,1.060586,no-recurrence-events
+1.107604,-1.39082,1.333536,-1.381037,0.825449,0.113482,1.484494,0.849756,no-recurrence-events
+-0.316347,1.472166,-1.517905,-0.17627,-0.360043,-1.771414,0.04339,-1.29705,recurrence-events
+0.951081,1.713318,-2.635556,0.573972,0.065929,-0.32572,0.733012,-1.150798,no-recurrence-events
+0.291225,2.494238,2.018306,-0.295152,0.094635,-0.989775,0.069333,0.250943,no-recurrence-events
+-0.895791,-4.223106,-1.325639,0.845091,-3.964458,1.447949,-2.72871,-2.934333,no-recurrence-events
+0.519796,-0.451616,-0.816105,0.484959,0.547504,-1.378482,0.571756,-0.552112,no-recurrence-events
+0.909709,2.668619,-0.50118,-1.274875,-1.529398,-1.579511,0.024994,-0.004752,no-recurrence-events
+-0.828303,1.112779,-2.656045,-0.658709,1.752049,0.155103,-0.415322,-1.306895,recurrence-events
+-4.233182,0.73142,1.161803,-1.291505,1.185072,1.270486,-3.118119,-1.037585,no-recurrence-events
+1.509094,-0.747324,0.57965,2.086967,0.150175,-0.629252,-1.361885,0.749608,no-recurrence-events
+-1.738856,-2.775596,1.206114,-0.316268,1.083146,1.773608,1.449038,-0.913028,recurrence-events
+0.951081,1.713318,-2.635556,0.573972,0.065929,-0.32572,0.733012,-1.150798,no-recurrence-events
+-0.291617,0.191778,-0.952619,-2.117866,0.930574,0.926905,-0.542987,-0.688043,recurrence-events
+1.558969,-1.016774,2.675699,0.728486,-0.771512,-1.261732,-0.782704,0.166391,no-recurrence-events
+-2.530792,0.641796,0.766966,-2.381736,0.848084,-0.892247,-0.956279,-0.42096,no-recurrence-events
+-1.12504,0.405031,2.63387,0.142473,0.749195,0.602544,-1.015586,2.117446,no-recurrence-events
+1.016699,-1.753338,1.106541,-1.940178,1.05685,0.517307,1.032423,0.740354,no-recurrence-events
+0.39003,-2.277075,-1.739623,-0.498741,-1.189006,0.016533,-0.229888,-0.563619,recurrence-events
+1.021203,-0.846987,0.129377,-3.007406,1.320431,-0.358605,1.747264,-0.063514,no-recurrence-events
+0.462456,1.794655,-1.743029,-1.100101,-2.805051,2.978984,0.602658,-0.326431,no-recurrence-events
+2.405023,-0.885792,0.691781,-2.011865,-0.616889,1.611423,0.126221,-2.432817,no-recurrence-events
+-1.310562,2.324932,-0.500183,0.694906,-1.892836,-0.989782,-1.288121,2.350417,no-recurrence-events
+-1.769449,-3.025302,0.168139,-2.485371,2.049728,0.459984,0.235098,2.280256,no-recurrence-events
+1.183353,1.022943,-1.595725,0.474578,1.313401,-0.267576,1.674348,-0.227848,no-recurrence-events
+-1.002511,-2.657229,-2.564102,-1.665307,4.038719,0.546482,-1.250909,0.399465,no-recurrence-events
+2.089658,-0.616593,1.38325,-1.163296,1.148218,1.088603,-1.634123,0.026274,no-recurrence-events
+0.771115,2.538966,-0.687327,0.450744,-2.980597,5.063623,0.843958,-0.431486,recurrence-events
+-2.315385,-4.064442,-1.990877,0.395086,0.399103,0.534233,0.150545,0.267197,recurrence-events
+-1.312191,1.964644,1.426374,-0.473524,-0.39646,0.25374,-1.722177,-1.317391,no-recurrence-events
+0.552662,-0.463242,0.97808,-0.968182,-0.058431,-1.289394,1.038016,-0.001242,no-recurrence-events
+-3.471526,-0.636,-2.224901,-1.42583,1.711952,-0.869767,-0.324566,-0.870241,recurrence-events
+0.803135,0.548966,2.771573,0.338739,-0.059029,-0.390719,0.49172,0.310788,recurrence-events
+2.891032,-0.679314,-0.682451,-0.664883,-0.813782,2.024729,0.354048,0.278517,no-recurrence-events
+-0.353659,2.208196,-0.705961,1.524906,0.387481,0.46835,0.10352,0.486671,no-recurrence-events
+2.047647,-1.034971,-0.424786,2.462113,0.074685,-0.687183,-1.589628,0.032371,no-recurrence-events
+-2.288004,-0.285472,2.563479,-0.707853,1.239892,1.409702,-1.106683,2.290686,recurrence-events
+1.082731,2.030736,-1.438828,0.075832,0.27956,-0.62904,1.247905,-1.637243,no-recurrence-events
+-3.344507,-1.432938,-1.648994,1.013822,0.927255,-0.113531,1.473604,1.240977,recurrence-events
+-0.224426,-2.367287,2.077142,0.427768,-1.185844,-1.159544,1.140847,0.011847,no-recurrence-events
+2.945484,-0.924784,-0.153217,0.637893,0.042255,-1.726642,-0.2175,-1.374306,no-recurrence-events
+-1.914773,-3.355777,-2.181279,-1.358479,-1.709318,0.794222,-0.656535,1.394587,recurrence-events
+-4.081097,-0.636077,-2.771443,-0.299763,-2.848174,0.102536,-0.213302,1.307785,recurrence-events
+2.739174,-0.708819,-1.667716,0.169771,1.164367,-0.723037,0.610358,0.189275,no-recurrence-events
+1.510747,0.932958,-2.373697,0.21028,1.113421,-0.300162,0.40408,0.27726,no-recurrence-events
+-0.002515,2.581661,0.551052,0.534364,-1.224761,1.344126,-0.40112,0.826504,no-recurrence-events
+-0.829066,1.628453,-0.573928,-1.356186,0.269211,-0.518628,-1.033924,-0.188872,recurrence-events
+-1.44699,-2.885632,1.283205,0.486189,-1.153274,1.360107,-2.479333,-1.692992,no-recurrence-events
+1.920678,0.156941,-1.804377,1.062803,2.050122,-0.032314,0.486878,0.650529,no-recurrence-events
+-0.411845,2.476092,0.031829,1.280982,0.562429,-0.717614,-0.684076,0.903755,no-recurrence-events
+0.306804,1.868815,0.998094,-2.140152,-0.500748,-1.130654,0.671692,-0.975751,no-recurrence-events
+1.427318,-1.334193,1.47897,1.226625,-0.985143,-0.958412,-1.297597,0.652836,no-recurrence-events
+0.771115,2.538966,-0.687327,0.450744,-2.980597,5.063623,0.843958,-0.431486,no-recurrence-events
+0.798096,-1.517723,-0.259363,-2.310999,2.042256,0.341548,-0.598796,0.910517,no-recurrence-events
+0.444551,1.817733,1.278782,-1.711024,0.077659,-0.794832,1.217686,-0.95733,no-recurrence-events
+-3.682921,-0.005482,0.616376,0.6608,-1.4708,0.854807,0.141976,0.955278,no-recurrence-events
+2.154308,-0.694897,-0.423702,0.346032,1.173388,-0.004425,1.34136,-0.14934,no-recurrence-events
+2.021433,-1.138636,0.031416,-1.80229,0.209109,-0.038688,0.821741,0.433682,no-recurrence-events
+2.456395,-1.043165,2.053598,-0.345899,-0.565996,-1.110295,0.991949,-1.002075,recurrence-events
+-3.053557,-0.371611,0.861876,-1.060099,-0.895594,0.156876,2.322087,-1.314693,recurrence-events
+2.19874,-0.084804,-0.167434,-1.442156,1.391976,-0.602768,3.073954,-0.222256,recurrence-events
+0.909077,1.445982,1.542375,-0.41492,0.967179,0.221747,0.527998,1.261917,no-recurrence-events
+1.420988,-0.49929,2.295642,0.218972,0.813515,0.820803,0.950384,1.321762,no-recurrence-events
+-0.856938,1.413131,-0.739586,2.232005,-1.432388,-1.012836,-2.788621,-2.009476,no-recurrence-events
+0.565647,1.42916,-0.290393,-1.174013,-0.108626,0.199778,2.017469,-1.214439,recurrence-events
+1.705308,1.129698,-2.008354,0.005228,1.315716,-0.794835,0.93116,-0.049209,no-recurrence-events
+0.494978,-2.326496,1.618539,-1.390442,-1.108899,-1.373791,-0.503471,-0.612077,recurrence-events
+0.163037,2.174025,0.744264,-2.374933,1.074402,-0.779236,-0.425719,-0.947143,recurrence-events
+-3.500727,0.429864,0.393964,3.079954,0.178603,-0.451723,1.511168,-0.680312,recurrence-events
+0.744561,1.14019,-1.448538,1.536361,1.359483,0.435978,-0.453155,1.197492,recurrence-events
+0.846086,-1.69063,-0.968332,-0.916164,1.084378,0.092396,0.020169,0.171063,no-recurrence-events
+1.753119,-0.956611,2.147371,1.273269,-0.331271,-0.565509,0.1469,0.078133,no-recurrence-events
+0.450663,2.441186,-0.919936,-0.512438,-1.54305,-1.243606,0.78037,-0.023415,no-recurrence-events
+-1.39911,-2.99942,0.953326,2.151053,-2.367849,1.76638,0.11825,-1.039534,recurrence-events
+-0.618724,-2.233217,0.991707,3.836468,-0.203229,-0.58185,0.866565,-0.842821,recurrence-events
+0.10217,1.471727,-0.087751,0.124055,1.12982,1.400215,-1.10937,1.294108,recurrence-events
+1.758909,-0.841765,0.256352,-1.972483,0.532566,1.161238,-0.55285,-1.057761,no-recurrence-events
+-0.315523,2.648418,0.005222,0.813643,-1.296988,-0.507467,-0.076866,0.896816,no-recurrence-events
+2.783789,-1.133151,1.275626,-0.610196,-0.765975,-1.14288,-0.278319,-0.496967,no-recurrence-events
+0.838406,-1.544018,-0.044925,1.955795,-0.526235,-0.946913,-1.491654,-0.530966,no-recurrence-events
+-0.338286,1.687473,0.354077,-0.27706,-0.440971,0.600096,0.614239,-0.312628,no-recurrence-events
+-3.115424,-0.246499,0.536115,-0.508077,-0.005068,1.50127,1.505677,-2.627739,no-recurrence-events
+3.355992,-0.802868,-1.048142,0.440931,-2.817439,1.414175,-0.941245,-1.708751,no-recurrence-events
+3.041261,-1.057088,0.809583,-0.522161,-0.575018,-1.828907,0.260947,-0.66346,no-recurrence-events
+-3.481699,-0.729939,0.379726,-2.042699,-1.041204,-0.444148,0.09499,-0.679383,recurrence-events
+3.041261,-1.057088,0.809583,-0.522161,-0.575018,-1.828907,0.260947,-0.66346,no-recurrence-events
+-4.033568,0.555227,1.768253,-1.414399,0.872953,0.261914,-1.755714,0.293882,no-recurrence-events
+0.50259,2.191877,-0.288409,0.301258,0.452194,-1.287744,1.203497,-1.398797,no-recurrence-events
+-1.933444,0.800376,0.304775,-2.241714,0.038945,0.125226,-1.047044,-1.850631,recurrence-events
+-0.65928,0.735199,0.468777,0.050633,0.787279,0.610131,0.21983,2.633936,no-recurrence-events
+0.126708,2.188446,-0.972608,1.656128,0.486939,-0.775544,-0.91182,0.186518,no-recurrence-events
+-3.605526,-0.425655,-2.666786,-1.241909,1.758431,0.820433,-0.713853,-1.055698,recurrence-events
+0.264619,2.487277,-1.145197,0.588217,-1.469621,0.151238,-0.032458,0.658371,no-recurrence-events
+1.925656,-1.006333,-0.931384,-0.642236,0.826382,0.063578,0.343295,-0.277163,no-recurrence-events
+1.524467,-1.268047,1.639688,0.285001,-0.678277,-0.497506,-0.851166,-0.049691,no-recurrence-events
+1.572005,-0.868001,-0.251735,2.380055,0.138838,-0.820606,-1.349698,0.909584,no-recurrence-events
+0.159574,2.17682,0.821577,0.202987,-0.118996,-0.686456,-0.44556,0.737388,recurrence-events
+1.984737,-0.914293,0.406599,2.169026,0.086022,-0.495829,-1.601815,-0.127605,no-recurrence-events
+-0.544175,2.336982,-0.50246,-0.174626,-1.643995,-0.439464,-1.074932,0.768993,no-recurrence-events
+-0.554697,2.794991,1.804083,-1.807928,4.566422,4.031507,-7.568015,-3.879517,no-recurrence-events
+-0.97238,1.360711,0.354696,-2.291186,0.069368,-0.093263,-1.013839,-1.858992,recurrence-events
+-0.411845,2.476092,0.031829,1.280982,0.562429,-0.717614,-0.684076,0.903755,recurrence-events
+-0.684536,0.807569,-2.402215,-0.423928,0.176899,-0.196314,0.682089,-1.335504,no-recurrence-events
+0.88817,1.833995,-1.804171,0.280884,0.077266,-0.134366,0.720826,-1.310774,recurrence-events
+3.130834,-0.287143,-1.009988,-1.074485,-2.330516,4.424839,1.05146,0.314824,no-recurrence-events
+2.784415,-0.513389,-2.360596,-0.03478,-0.554662,2.171746,0.780691,0.552051,no-recurrence-events
+1.478922,-1.813728,2.635865,-0.798909,-0.039354,-1.086108,-1.410516,0.402362,recurrence-events
+1.364031,0.817075,-1.584184,-1.260309,-0.820796,1.862165,0.959239,-0.432922,no-recurrence-events
+-1.708496,-4.927272,-1.115332,3.512275,-0.775227,-3.460542,0.909102,-3.040025,recurrence-events
+-0.316069,2.343789,0.994629,0.120929,-0.054843,-0.819879,-0.20563,1.614601,no-recurrence-events
+-2.145165,1.075411,2.452202,0.078332,-0.278687,0.038551,1.17461,-0.495199,recurrence-events
+-2.22968,-0.330795,-0.191538,2.742533,1.50504,1.120117,2.144061,0.261067,no-recurrence-events
+0.573497,-1.44069,-0.529027,1.22141,-1.063372,2.427685,-0.698434,1.436681,no-recurrence-events
+0.625738,0.445401,-2.045302,-0.2687,1.573712,-0.766016,0.608034,0.399017,no-recurrence-events
+-2.870551,0.542455,1.334214,-0.985166,-0.846724,0.877972,0.162499,-0.160173,recurrence-events
+3.008395,-1.045462,-0.984602,0.930981,0.030918,-1.917995,-0.205313,-1.21433,no-recurrence-events
+-0.354502,2.036591,0.409756,1.068198,0.929656,-0.14778,-0.10581,-0.587968,no-recurrence-events
+-1.721088,-3.201503,0.133163,-2.481271,0.043889,0.120666,0.052372,1.196024,no-recurrence-events
+-0.814694,2.025247,1.365537,1.66591,0.513009,-0.916555,-1.907305,0.54724,recurrence-events
+1.548768,-0.413082,0.911221,0.077569,0.925655,1.79679,-1.682288,0.495402,no-recurrence-events
+-1.286719,-2.53183,-0.077894,2.347935,1.585091,1.595739,1.371188,0.390148,no-recurrence-events
+-3.904173,-0.652578,-1.910854,1.377514,-0.120237,-0.13909,1.802536,-0.187081,recurrence-events
+2.242208,-0.83823,-0.059444,2.257061,0.27698,-1.181856,-1.062549,-0.294098,no-recurrence-events
+2.983898,-0.025625,-0.493342,-1.037367,0.57909,-1.360425,0.159378,-2.780373,no-recurrence-events
+-0.338286,1.687473,0.354077,-0.27706,-0.440971,0.600096,0.614239,-0.312628,recurrence-events
+-2.789346,0.449565,-0.453398,3.106225,0.457548,1.094559,2.472993,-1.166991,recurrence-events
+2.70913,-0.599767,0.957855,-1.576458,0.569768,-0.442595,1.064432,0.580169,no-recurrence-events
+1.228576,-1.650479,1.411729,-0.966183,-0.443826,-1.247485,-0.361515,0.828472,no-recurrence-events
+-1.68749,-2.874807,1.207643,-0.785518,0.6352,0.599027,1.781105,1.80076,no-recurrence-events
+-2.144341,0.601248,0.560369,-0.199075,-1.034053,-0.146669,-0.393728,-0.055763,no-recurrence-events
+1.822351,-1.03125,0.972401,2.547328,0.54331,-0.65923,-2.398699,0.483474,no-recurrence-events
+-0.12487,0.027209,-2.140355,-0.787619,1.224391,-0.170755,0.353157,0.092555,no-recurrence-events
+-1.882091,-1.61917,0.653801,1.301929,0.080947,-1.114381,1.745495,-1.082171,recurrence-events
+-2.254584,-2.751844,-1.109601,0.459184,-2.175145,1.141224,-1.364873,1.936188,recurrence-events
+-0.343436,-1.583391,2.296335,1.649124,-0.167642,0.901473,-0.897876,-0.470668,recurrence-events
+0.208643,2.384,0.324587,1.173808,-1.100272,1.318781,0.641404,-0.395841,no-recurrence-events
+-0.16782,2.266806,1.59955,0.467284,0.080984,-0.65387,0.824708,0.23228,no-recurrence-events
+-0.098589,2.192166,0.42458,1.741344,0.955565,-0.747591,-1.72089,0.637621,no-recurrence-events
+1.797452,-0.382096,1.02068,0.925495,-0.36774,2.793454,0.767081,0.693641,recurrence-events
+-0.80683,-2.702892,1.354802,-1.476902,0.454442,0.61455,1.846582,0.282254,recurrence-events
+0.684931,0.516898,-0.458919,1.738612,0.399743,-0.83717,-0.992692,1.302215,no-recurrence-events
+1.00506,1.208979,0.424925,-1.618007,0.582976,-0.153143,1.098084,1.545367,recurrence-events
+-3.935061,-0.715131,1.830434,-0.825424,-0.17266,-0.474777,2.04728,-0.870826,no-recurrence-events
+-0.230731,2.387483,2.430935,0.174197,0.09232,-0.462516,0.812522,0.072304,no-recurrence-events
+-1.916513,1.386848,2.959884,1.066601,0.06832,-0.029451,2.172675,-0.367375,no-recurrence-events
+-3.469587,0.034503,0.853166,-2.355368,-0.02519,-0.670517,0.017763,1.233817,recurrence-events
+-0.411845,2.476092,0.031829,1.280982,0.562429,-0.717614,-0.684076,0.903755,recurrence-events
+0.335842,2.356445,0.899327,-1.028989,0.158378,-0.190084,0.307353,-2.179395,no-recurrence-events
+-0.463063,1.933263,0.859701,-0.018125,0.460892,2.135843,-0.214358,-1.78565,no-recurrence-events
+-1.400437,-3.943438,0.300787,-0.207054,-1.569366,-1.502719,-0.489984,-0.297496,recurrence-events
+0.193081,2.064973,-1.881307,-0.628704,1.669001,-1.059679,-0.879793,-1.338036,no-recurrence-events
+-0.776785,-2.811944,-1.270768,0.269327,1.049041,0.334108,1.392509,-0.10864,recurrence-events
+0.372528,2.027384,-2.005615,0.599218,-1.071887,-1.096244,-0.720622,-1.407757,no-recurrence-events
+2.698997,-0.872216,-1.150087,0.02925,-2.155284,-1.18783,-1.167707,0.327545,no-recurrence-events
+-0.97238,1.360711,0.354696,-2.291186,0.069368,-0.093263,-1.013839,-1.858992,no-recurrence-events
+-0.629453,1.452259,0.032522,-1.47908,-0.042908,-1.5272,0.32848,1.142595,recurrence-events
+1.681597,-0.079315,0.693801,0.129085,0.066783,2.572548,-2.174097,-0.248236,no-recurrence-events
+0.091171,1.797823,-0.244244,0.054432,-0.548934,0.7294,-0.660726,3.130135,no-recurrence-events
+0.10217,1.471727,-0.087751,0.124055,1.12982,1.400215,-1.10937,1.294108,recurrence-events
+-0.331926,2.09759,-0.497694,1.66873,0.235341,-1.630535,-0.558969,-0.070356,no-recurrence-events
+-1.674483,-3.757197,-1.951853,0.274733,0.716291,-0.284811,-2.134303,-1.195815,recurrence-events
+1.139111,-1.209795,3.707543,1.018753,-0.505181,-0.739105,-2.118854,0.943963,no-recurrence-events
+-0.378979,2.464467,1.826014,-0.172159,-0.043506,-0.628525,-0.217816,1.454625,no-recurrence-events
+-1.481863,1.236145,0.947132,2.017048,-1.287884,3.129163,2.776968,-1.41258,no-recurrence-events
+0.36499,1.600919,0.260304,-1.896228,-0.675697,0.05531,1.459288,-1.392836,recurrence-events
+2.400038,-0.608384,-1.776132,-0.226039,0.523584,-1.862824,0.800645,-2.306239,no-recurrence-events
+-3.156648,0.730152,-1.414151,-2.28075,-4.657221,-3.300488,-1.46725,2.531508,no-recurrence-events
+1.343959,-1.715837,0.222464,0.833314,0.297936,-1.170564,0.202563,-1.104719,recurrence-events
+0.202886,2.624303,-1.72796,0.844786,-2.530788,1.42167,-1.051347,0.241201,no-recurrence-events
+-0.709856,1.06384,0.12976,-2.120993,-0.254088,-1.293189,0.360752,-0.36755,no-recurrence-events
+1.178217,-2.147951,-1.116604,0.138133,-0.060407,-1.293916,-0.783316,-1.072566,no-recurrence-events
+0.239505,2.638847,-0.693472,-1.151881,-1.66754,-1.218261,-0.262155,1.19893,no-recurrence-events
+0.302415,2.51817,-1.524857,-0.858793,-1.678877,-1.409615,-0.249968,1.358906,no-recurrence-events
+-1.393792,-3.639325,0.474498,1.216049,0.474914,-0.115186,1.07744,-1.645438,recurrence-events
+1.302784,-0.531358,-0.934849,1.618845,1.272287,0.374352,-0.534027,2.313189,no-recurrence-events
+-0.808109,-0.151335,0.594787,-2.316194,0.175899,-0.250631,0.633002,0.553044,recurrence-events
+-1.394638,-1.763688,-0.794838,0.389094,0.176497,-0.877414,0.933844,-1.119614,recurrence-events
+-0.298854,1.981264,-0.783758,0.172555,-0.137526,-1.814071,-0.001069,0.053119,no-recurrence-events
+-3.496578,-1.622409,-1.78177,-1.855707,-4.786176,-3.33498,-1.56914,3.815542,recurrence-events
+0.474595,1.708681,-1.346788,0.035205,0.672257,-1.075274,0.763612,-1.348224,recurrence-events
+-0.200686,2.278431,-0.194636,1.920426,0.686919,-0.742959,0.358448,-0.31859,no-recurrence-events
+1.954134,-0.368604,-1.66015,-0.814019,-0.957682,-0.126296,-0.112105,2.608364,no-recurrence-events
+-0.230731,2.387483,2.430935,0.174197,0.09232,-0.462516,0.812522,0.072304,no-recurrence-events
+2.604637,-1.061986,1.29823,-2.13476,-0.929008,0.602851,1.488625,-1.10135,no-recurrence-events
+1.291487,-1.771157,0.580343,-0.673095,-0.455163,-1.438839,-0.349328,0.988448,recurrence-events
+0.268918,1.307159,-1.275487,1.454302,1.423636,0.302554,-0.213225,2.074705,no-recurrence-events
+1.60053,-1.732271,0.902198,0.088576,-2.373184,-0.3716,-3.517524,-4.024428,recurrence-events
+0.459924,-1.059625,2.245721,0.268443,0.783093,1.039292,0.917179,1.330123,no-recurrence-events
+2.06897,-0.738591,-1.860008,0.292764,1.026225,-0.361788,0.323209,1.392957,no-recurrence-events
+1.170514,-1.511497,0.50215,-1.08795,0.814113,-0.077872,1.496681,1.009732,no-recurrence-events
+-1.949379,1.398473,1.165699,2.519742,0.674255,-0.118539,1.706415,-0.918245,no-recurrence-events
+1.11148,-0.626194,0.702744,-0.71099,2.030322,1.048869,-1.132905,1.382523,no-recurrence-events
+-1.076213,0.819783,0.009224,-0.671147,-0.535923,-0.535546,1.972186,-0.587215,recurrence-events
+2.227743,-1.354601,1.545915,-1.334167,-0.913003,-1.042292,-0.006117,-1.129899,no-recurrence-events
+1.19571,-1.638854,-0.382457,0.486958,0.162109,-1.336573,-0.827775,0.277602,no-recurrence-events
+-0.015801,-0.170744,1.542076,-0.138788,-0.871265,-0.874388,-0.668388,0.412535,no-recurrence-events
+-0.290749,2.087519,-1.537347,1.817994,0.376144,0.276996,0.115707,0.646647,no-recurrence-events
+-0.200686,2.278431,-0.194636,1.920426,0.686919,-0.742959,0.358448,-0.31859,recurrence-events
+-0.257337,2.380522,-0.732568,1.057567,-1.471936,0.678497,0.710731,0.479732,no-recurrence-events
+0.258359,2.505864,0.22412,1.157989,0.700571,-1.078863,-0.396927,-0.299927,no-recurrence-events
+0.566814,1.630854,-0.417295,0.13649,-0.613087,0.862824,-0.900656,2.252922,no-recurrence-events
+1.00506,1.208979,0.424925,-1.618007,0.582976,-0.153143,1.098084,1.545367,no-recurrence-events
+1.690208,-0.835933,2.978756,0.980182,-0.319934,-0.374155,0.134713,-0.081843,no-recurrence-events
+1.566437,-1.186825,0.957577,1.874182,0.517402,-0.059419,-0.783619,-0.742115,recurrence-events
+1.017583,0.154824,-0.402773,-1.919743,0.419966,-0.484752,1.803994,-0.858641,no-recurrence-events
+-4.463145,-0.553924,-0.430841,-3.008521,-3.468036,-3.319169,-0.314492,1.402377,recurrence-events
+-0.352316,-1.819107,1.924275,0.381933,-0.839136,0.56059,-2.43319,-1.463177,recurrence-events
+-2.315385,-4.064442,-1.990877,0.395086,0.399103,0.534233,0.150545,0.267197,recurrence-events
+0.921366,-1.757274,-0.996449,-1.4199,0.534036,0.23021,0.071475,0.5248,recurrence-events
+2.890685,-0.388965,-0.068594,0.280723,-2.104623,2.189204,0.169155,-0.361222,no-recurrence-events
+-0.8866,1.360421,-1.049848,1.822862,0.289478,0.486511,0.519744,-0.775481,no-recurrence-events
+-0.607085,2.45766,0.328925,-0.467713,-1.632658,-0.24811,-1.087118,0.609017,no-recurrence-events
+0.336848,1.759763,-1.627477,-0.393923,0.09385,-1.411096,0.217618,-1.366645,no-recurrence-events
+2.047647,-1.034971,-0.424786,2.462113,0.074685,-0.687183,-1.589628,0.032371,no-recurrence-events
+0.321269,2.385186,-0.607265,1.451076,0.689234,-1.270217,-0.384741,-0.139951,no-recurrence-events
+2.486439,-1.152217,-0.571973,1.40033,0.028603,-1.390737,0.537875,-1.392969,no-recurrence-events
+2.77204,-0.720445,0.126469,-1.283371,0.558431,-0.633949,1.076618,0.740145,no-recurrence-events
+1.035104,1.099927,-2.200645,0.128222,1.177574,-0.433585,0.644011,1.154473,no-recurrence-events
+-2.636259,-3.267352,-1.501029,-2.095407,-1.358377,0.441546,-0.875718,1.867237,recurrence-events
+1.972988,-0.501587,-0.742558,1.495851,1.410428,0.013102,-0.246878,1.109507,no-recurrence-events
+0.1701,1.924331,-0.439741,-1.72417,-0.199966,-0.313435,-0.678526,-2.147243,no-recurrence-events
+3.177945,-0.136348,-2.005998,-1.610073,-4.26643,2.521601,0.478453,0.37398,no-recurrence-events
+-1.345558,1.285341,0.973479,-1.554514,-0.485465,-1.696164,0.142065,1.052215,no-recurrence-events
+-0.760572,0.24871,-1.296637,-0.221141,0.993015,-0.573731,0.134469,1.512319,recurrence-events
+1.360127,-0.97086,-0.556923,1.40606,1.639514,0.944185,0.044239,0.821465,no-recurrence-events
+0.490589,-1.677141,-0.904413,-0.109084,-2.287027,-1.652753,-1.425131,1.72258,recurrence-events
+-3.139095,0.526702,0.608095,1.580945,0.296826,0.167951,0.675144,-1.037707,no-recurrence-events
+1.483898,-0.619968,1.464257,0.512059,0.802178,0.629449,0.962571,1.481738,recurrence-events
+1.678882,-1.504444,0.656891,-1.55646,-0.913749,0.036491,1.629757,-0.383746,no-recurrence-events
+0.884768,1.985855,-1.943282,-0.254705,-1.657109,1.602595,1.255899,-0.350836,no-recurrence-events
+1.491601,-1.256421,-0.154497,1.738142,-0.072342,-0.586595,-1.317426,-0.600561,no-recurrence-events
+-3.730386,0.71511,2.413085,1.45662,-0.103876,0.837291,0.602837,-1.620885,recurrence-events
+-1.753954,-3.189877,-1.661022,-1.02813,0.649824,0.031577,-0.413888,0.645154,no-recurrence-events
+2.427558,-0.200589,-0.916215,0.544682,-2.095791,4.969625,0.206411,1.395032,no-recurrence-events
+-1.230176,1.219983,-0.215786,0.244983,0.256297,-1.619244,0.706143,-0.880976,no-recurrence-events
+-0.828303,1.112779,-2.656045,-0.658709,1.752049,0.155103,-0.415322,-1.306895,recurrence-events
+2.290654,-1.475279,0.71453,-1.04108,-0.924339,-1.233646,0.00607,-0.969923,no-recurrence-events
+2.486439,-1.152217,-0.571973,1.40033,0.028603,-1.390737,0.537875,-1.392969,no-recurrence-events
+-1.411664,-3.064606,-2.318883,0.558399,0.062298,-0.254088,-0.394516,1.750559,recurrence-events
+-3.227099,-1.0938,-0.93554,-3.403713,3.877167,1.982187,-1.871644,-0.771231,recurrence-events
+-3.472586,0.27102,2.281744,1.57765,-0.590944,1.014683,2.752838,-0.706502,no-recurrence-events
+-2.664661,0.757391,0.214823,2.166901,-0.523667,-0.472724,-0.048338,-0.56919,no-recurrence-events
+0.76523,-1.506098,-2.053548,-0.857858,2.648192,0.25246,-1.065056,0.359647,no-recurrence-events
+0.014703,1.333001,1.193492,-1.16862,2.193008,1.168425,-0.82429,0.984063,no-recurrence-events
+-0.969264,2.056193,1.1042,0.338582,-0.508736,-1.180197,-0.379858,1.684196,no-recurrence-events
+-0.802763,2.557451,1.062973,-0.925958,1.632583,0.965475,-2.645359,-1.358378,no-recurrence-events
+-3.111527,-0.929828,-0.589649,1.971918,0.70414,0.827802,0.971767,0.202838,no-recurrence-events
+-0.430345,2.563677,1.824485,0.297091,0.40444,0.546056,-0.549883,-1.259163,no-recurrence-events
+1.051024,-2.105045,1.348249,-0.666471,-0.961872,-1.474379,-0.775674,0.020854,no-recurrence-events
+-1.486553,-2.834234,-1.41903,1.348313,0.262655,1.266051,-0.75533,0.651186,no-recurrence-events
+-3.031123,-0.541408,-0.686887,2.613831,0.91532,0.59379,0.939495,1.712983,no-recurrence-events
+-3.309743,0.069889,-0.002406,-0.075872,-0.915968,2.457709,-1.013928,-1.955929,no-recurrence-events
+0.68165,1.260867,-0.617153,1.243273,1.37082,0.627332,-0.465342,1.037516,no-recurrence-events
+0.879996,-1.697821,-0.331293,-1.524196,1.357632,1.334525,-0.317795,-0.431137,no-recurrence-events

@@ -14,12 +14,14 @@ public class CompareBinaryClass {
 
 	public static void main(String[] args) {
 	
-		
-		double[][] dataMatrix = readCSV("D:/work15/NumericalDataBinary.csv",10,16);
-		double[][] valueMatrix = generateCompareMatrix(dataMatrix,10,16);
+		int datasets = 8;
+		int bins = 16;
+		int topk=5;
+		double[][] dataMatrix = readCSV("D:/work241/NumericalDataBinary6.csv",datasets,bins);
+		double[][] valueMatrix = generateCompareMatrix(dataMatrix,datasets,bins);
 		int[][] rankMatrix = calculateRankMatrix(valueMatrix);
-		printTopK(rankMatrix, 5, "D:/work15/NumericalCompare.txt");
-		System.out.println("Dome");
+		printTopK(rankMatrix, topk, "D:/work241/BinaryClassTopk6.txt");
+		System.out.println("Done");
 
 	}
 	/**

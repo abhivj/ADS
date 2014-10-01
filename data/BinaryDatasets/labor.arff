@@ -1,164 +1,70 @@
-% Date: Tue, 15 Nov 88 15:44:08 EST
-% From: stan <stan@csi2.UofO.EDU>
-% To: aha@ICS.UCI.EDU
-% 
-% 1. Title: Final settlements in labor negotitions in Canadian industry
-% 
-% 2. Source Information
-%    -- Creators: Collective Barganing Review, montly publication,
-%       Labour Canada, Industrial Relations Information Service,
-%         Ottawa, Ontario, K1A 0J2, Canada, (819) 997-3117
-%         The data includes all collective agreements reached
-%         in the business and personal services sector for locals
-%         with at least 500 members (teachers, nurses, university
-%         staff, police, etc) in Canada in 87 and first quarter of 88.   
-%    -- Donor: Stan Matwin, Computer Science Dept, University of Ottawa,
-%                 34 Somerset East, K1N 9B4, (stan@uotcsi2.bitnet)
-%    -- Date: November 1988
-%  
-% 3. Past Usage:
-%    -- testing concept learning software, in particular
-%       an experimental method to learn two-tiered concept descriptions.
-%       The data was used to learn the description of an acceptable
-%       and unacceptable contract.
-%       The unacceptable contracts were either obtained by interviewing
-%       experts, or by inventing near misses.
-%       Examples of use are described in:
-%         Bergadano, F., Matwin, S., Michalski, R.,
-%         Zhang, J., Measuring Quality of Concept Descriptions, 
-%         Procs. of the 3rd European Working Sessions on Learning,
-%         Glasgow, October 1988.
-%         Bergadano, F., Matwin, S., Michalski, R., Zhang, J.,
-%         Representing and Acquiring Imprecise and Context-dependent
-%         Concepts in Knowledge-based Systems, Procs. of ISMIS'88,
-%         North Holland, 1988.
-% 4. Relevant Information:
-%    -- data was used to test 2tier approach with learning
-% from positive and negative examples
-% 
-% 5. Number of Instances: 57 
-% 
-% 6. Number of Attributes: 16 
-% 
-% 7. Attribute Information:
-%    1.  dur: duration of agreement 
-%        [1..7]
-%    2   wage1.wage : wage increase in first year of contract 
-%        [2.0 .. 7.0]
-%    3   wage2.wage : wage increase in second year of contract
-%        [2.0 .. 7.0]
-%    4   wage3.wage : wage increase in third year of contract
-%        [2.0 .. 7.0]
-%    5   cola : cost of living allowance 
-%        [none, tcf, tc]
-%    6   hours.hrs : number of working hours during week
-%        [35 .. 40]
-%    7   pension : employer contributions to pension plan
-%        [none, ret_allw, empl_contr]
-%    8   stby_pay : standby pay
-%        [2 .. 25]
-%    9   shift_diff : shift differencial : supplement for work on II and III shift
-%        [1 .. 25]
-%   10   educ_allw.boolean : education allowance 
-%        [true false]
-%   11   holidays : number of statutory holidays 
-%        [9 .. 15]
-%   12   vacation : number of paid vacation days
-%        [ba, avg, gnr]
-%   13   lngtrm_disabil.boolean : 
-%        employer's help during employee longterm disabil
-%        ity [true , false]
-%   14   dntl_ins : employers contribution towards the dental plan
-%        [none, half, full]
-%   15   bereavement.boolean : employer's financial contribution towards the 
-%        covering the costs of bereavement
-%        [true , false]
-%   16   empl_hplan : employer's contribution towards the health plan
-%        [none, half, full]
-% 
-% 8. Missing Attribute Values: None
-% 
-% 9. Class Distribution:
-% 
-% 10. Exceptions from format instructions: no commas between attribute values.
-% 
-% 
-@relation 'labor-neg-data'
-@attribute 'duration' numeric
-@attribute 'wage-increase-first-year' numeric
-@attribute 'wage-increase-second-year' numeric
-@attribute 'wage-increase-third-year' numeric
-@attribute 'cost-of-living-adjustment' {'none','tcf','tc'}
-@attribute 'working-hours' numeric
-@attribute 'pension' {'none','ret_allw','empl_contr'}
-@attribute 'standby-pay' numeric
-@attribute 'shift-differential' numeric
-@attribute 'education-allowance' {'yes','no'}
-@attribute 'statutory-holidays' numeric
-@attribute 'vacation' {'below_average','average','generous'}
-@attribute 'longterm-disability-assistance' {'yes','no'}
-@attribute 'contribution-to-dental-plan' {'none','half','full'}
-@attribute 'bereavement-assistance' {'yes','no'}
-@attribute 'contribution-to-health-plan' {'none','half','full'}
-@attribute 'class' {'bad','good'}
+@relation 'labor-neg-data-weka.filters.supervised.attribute.NominalToBinary_principal components-weka.filters.unsupervised.attribute.PrincipalComponents-R0.95-A530-M8'
+
+@attribute '-0.319contribution-to-health-plan=none-0.312longterm-disability-assistance+0.272contribution-to-dental-plan=full-0.247bereavement-assistance+0.247standby-pay+0.244pension=empl_contr+0.23 statutory-holidays+0.218contribution-to-health-plan=full+0.216wage-increase-first-year-0.214pension=none-0.207contribution-to-dental-plan=none+0.201vacation=generous-0.193vacation=below_average-0.183working-hours+0.175shift-differential+0.171duration+0.17 wage-increase-second-year+0.169wage-increase-third-year-0.157cost-of-living-adjustment=tc-0.149education-allowance+0.147cost-of-living-adjustment=tcf-0.084contribution-to-dental-plan=half+0.053contribution-to-health-plan=half-0.046pension=ret_allw-0.002vacation=average+0.002cost-of-living-adjustment=none' numeric
+@attribute '-0.437contribution-to-dental-plan=half+0.367bereavement-assistance+0.306contribution-to-dental-plan=none-0.283duration-0.247vacation=below_average+0.239cost-of-living-adjustment=none+0.239contribution-to-health-plan=none-0.188education-allowance+0.188wage-increase-second-year-0.182cost-of-living-adjustment=tc+0.179wage-increase-third-year+0.174contribution-to-dental-plan=full+0.151longterm-disability-assistance+0.146statutory-holidays+0.142vacation=average-0.141contribution-to-health-plan=half+0.124wage-increase-first-year-0.112cost-of-living-adjustment=tcf+0.11 vacation=generous+0.102standby-pay+0.098pension=ret_allw-0.083working-hours-0.076contribution-to-health-plan=full-0.037pension=empl_contr-0.034pension=none-0.006shift-differential' numeric
+@attribute 0.419contribution-to-health-plan=full-0.39contribution-to-health-plan=half+0.383cost-of-living-adjustment=none-0.293wage-increase-third-year-0.293cost-of-living-adjustment=tcf+0.248contribution-to-dental-plan=full+0.215pension=none-0.212wage-increase-second-year-0.172cost-of-living-adjustment=tc-0.171vacation=generous-0.142contribution-to-dental-plan=half-0.137pension=empl_contr-0.131statutory-holidays-0.124bereavement-assistance-0.114contribution-to-dental-plan=none+0.109vacation=average-0.106pension=ret_allw-0.101contribution-to-health-plan=none+0.082education-allowance+0.081working-hours+0.059vacation=below_average+0.051duration+0.047standby-pay-0.044longterm-disability-assistance+0.039shift-differential+0.006wage-increase-first-year numeric
+@attribute '0.344pension=none-0.332wage-increase-first-year+0.32 cost-of-living-adjustment=tcf-0.302working-hours-0.28education-allowance-0.272pension=ret_allw+0.264contribution-to-dental-plan=none-0.226wage-increase-second-year+0.206standby-pay-0.198contribution-to-dental-plan=full-0.192cost-of-living-adjustment=none+0.19 duration+0.175statutory-holidays+0.164contribution-to-health-plan=full-0.156contribution-to-health-plan=half-0.145pension=empl_contr+0.1  longterm-disability-assistance-0.096cost-of-living-adjustment=tc+0.093shift-differential+0.09 vacation=generous+0.065bereavement-assistance-0.052vacation=average-0.039contribution-to-dental-plan=half-0.036vacation=below_average-0.036contribution-to-health-plan=none-0.021wage-increase-third-year' numeric
+@attribute -0.429pension=ret_allw+0.406vacation=average+0.332contribution-to-health-plan=half+0.282cost-of-living-adjustment=none-0.273contribution-to-health-plan=full+0.262pension=empl_contr-0.256cost-of-living-adjustment=tc-0.255vacation=generous-0.189contribution-to-dental-plan=full+0.171working-hours+0.169standby-pay-0.152vacation=below_average+0.136contribution-to-dental-plan=half-0.12wage-increase-second-year-0.093cost-of-living-adjustment=tcf-0.092education-allowance+0.067shift-differential+0.062duration+0.062wage-increase-third-year+0.054contribution-to-dental-plan=none+0.045pension=none-0.044bereavement-assistance-0.032statutory-holidays-0.025wage-increase-first-year-0.016contribution-to-health-plan=none+0.006longterm-disability-assistance numeric
+@attribute '0.423wage-increase-second-year+0.415vacation=below_average-0.307pension=empl_contr+0.304wage-increase-first-year+0.301pension=none+0.295standby-pay-0.242cost-of-living-adjustment=tc+0.236shift-differential-0.236vacation=average-0.188vacation=generous+0.153contribution-to-health-plan=half+0.124cost-of-living-adjustment=tcf-0.101contribution-to-health-plan=full+0.098longterm-disability-assistance+0.09 cost-of-living-adjustment=none+0.06 contribution-to-dental-plan=half+0.053working-hours-0.043duration-0.038contribution-to-dental-plan=none-0.037contribution-to-health-plan=none-0.028contribution-to-dental-plan=full-0.024education-allowance+0.013pension=ret_allw-0.012statutory-holidays-0.01bereavement-assistance+0.002wage-increase-third-year' numeric
+@attribute '-0.421shift-differential+0.323vacation=average+0.317statutory-holidays-0.306pension=empl_contr+0.243pension=none-0.221contribution-to-health-plan=none+0.221duration+0.205contribution-to-dental-plan=full-0.197vacation=generous+0.193longterm-disability-assistance+0.186contribution-to-health-plan=half+0.18 wage-increase-first-year+0.171wage-increase-third-year-0.166cost-of-living-adjustment=none+0.151education-allowance-0.143contribution-to-dental-plan=half+0.137working-hours+0.136cost-of-living-adjustment=tcf-0.127vacation=below_average+0.092pension=ret_allw-0.082standby-pay+0.064cost-of-living-adjustment=tc-0.064contribution-to-dental-plan=none-0.063wage-increase-second-year+0.023contribution-to-health-plan=full-0.02bereavement-assistance' numeric
+@attribute '0.471vacation=generous-0.433vacation=average-0.353shift-differential+0.35 education-allowance-0.331pension=ret_allw+0.18 cost-of-living-adjustment=none+0.179longterm-disability-assistance+0.173wage-increase-first-year+0.15 contribution-to-dental-plan=none-0.139cost-of-living-adjustment=tc+0.138pension=empl_contr+0.12 working-hours-0.118contribution-to-health-plan=none-0.105contribution-to-dental-plan=full+0.101pension=none+0.088statutory-holidays-0.082cost-of-living-adjustment=tcf+0.081contribution-to-health-plan=half-0.056wage-increase-second-year-0.048bereavement-assistance-0.029vacation=below_average-0.029contribution-to-dental-plan=half+0.028contribution-to-health-plan=full+0.016standby-pay-0.015duration+0.006wage-increase-third-year' numeric
+@attribute class {bad,good}
+
 @data
-1,5,?,?,?,40,?,?,2,?,11,'average',?,?,'yes',?,'good'
-2,4.5,5.8,?,?,35,'ret_allw',?,?,'yes',11,'below_average',?,'full',?,'full','good'
-?,?,?,?,?,38,'empl_contr',?,5,?,11,'generous','yes','half','yes','half','good'
-3,3.7,4,5,'tc',?,?,?,?,'yes',?,?,?,?,'yes',?,'good'
-3,4.5,4.5,5,?,40,?,?,?,?,12,'average',?,'half','yes','half','good'
-2,2,2.5,?,?,35,?,?,6,'yes',12,'average',?,?,?,?,'good'
-3,4,5,5,'tc',?,'empl_contr',?,?,?,12,'generous','yes','none','yes','half','good'
-3,6.9,4.8,2.3,?,40,?,?,3,?,12,'below_average',?,?,?,?,'good'
-2,3,7,?,?,38,?,12,25,'yes',11,'below_average','yes','half','yes',?,'good'
-1,5.7,?,?,'none',40,'empl_contr',?,4,?,11,'generous','yes','full',?,?,'good'
-3,3.5,4,4.6,'none',36,?,?,3,?,13,'generous',?,?,'yes','full','good'
-2,6.4,6.4,?,?,38,?,?,4,?,15,?,?,'full',?,?,'good'
-2,3.5,4,?,'none',40,?,?,2,'no',10,'below_average','no','half',?,'half','bad'
-3,3.5,4,5.1,'tcf',37,?,?,4,?,13,'generous',?,'full','yes','full','good'
-1,3,?,?,'none',36,?,?,10,'no',11,'generous',?,?,?,?,'good'
-2,4.5,4,?,'none',37,'empl_contr',?,?,?,11,'average',?,'full','yes',?,'good'
-1,2.8,?,?,?,35,?,?,2,?,12,'below_average',?,?,?,?,'good'
-1,2.1,?,?,'tc',40,'ret_allw',2,3,'no',9,'below_average','yes','half',?,'none','bad'
-1,2,?,?,'none',38,'none',?,?,'yes',11,'average','no','none','no','none','bad'
-2,4,5,?,'tcf',35,?,13,5,?,15,'generous',?,?,?,?,'good'
-2,4.3,4.4,?,?,38,?,?,4,?,12,'generous',?,'full',?,'full','good'
-2,2.5,3,?,?,40,'none',?,?,?,11,'below_average',?,?,?,?,'bad'
-3,3.5,4,4.6,'tcf',27,?,?,?,?,?,?,?,?,?,?,'good'
-2,4.5,4,?,?,40,?,?,4,?,10,'generous',?,'half',?,'full','good'
-1,6,?,?,?,38,?,8,3,?,9,'generous',?,?,?,?,'good'
-3,2,2,2,'none',40,'none',?,?,?,10,'below_average',?,'half','yes','full','bad'
-2,4.5,4.5,?,'tcf',?,?,?,?,'yes',10,'below_average','yes','none',?,'half','good'
-2,3,3,?,'none',33,?,?,?,'yes',12,'generous',?,?,'yes','full','good'
-2,5,4,?,'none',37,?,?,5,'no',11,'below_average','yes','full','yes','full','good'
-3,2,2.5,?,?,35,'none',?,?,?,10,'average',?,?,'yes','full','bad'
-3,4.5,4.5,5,'none',40,?,?,?,'no',11,'average',?,'half',?,?,'good'
-3,3,2,2.5,'tc',40,'none',?,5,'no',10,'below_average','yes','half','yes','full','bad'
-2,2.5,2.5,?,?,38,'empl_contr',?,?,?,10,'average',?,?,?,?,'bad'
-2,4,5,?,'none',40,'none',?,3,'no',10,'below_average','no','none',?,'none','bad'
-3,2,2.5,2.1,'tc',40,'none',2,1,'no',10,'below_average','no','half','yes','full','bad'
-2,2,2,?,'none',40,'none',?,?,'no',11,'average','yes','none','yes','full','bad'
-1,2,?,?,'tc',40,'ret_allw',4,0,'no',11,'generous','no','none','no','none','bad'
-1,2.8,?,?,'none',38,'empl_contr',2,3,'no',9,'below_average','yes','half',?,'none','bad'
-3,2,2.5,2,?,37,'empl_contr',?,?,?,10,'average',?,?,'yes','none','bad'
-2,4.5,4,?,'none',40,?,?,4,?,12,'average','yes','full','yes','half','good'
-1,4,?,?,'none',?,'none',?,?,'yes',11,'average','no','none','no','none','bad'
-2,2,3,?,'none',38,'empl_contr',?,?,'yes',12,'generous','yes','none','yes','full','bad'
-2,2.5,2.5,?,'tc',39,'empl_contr',?,?,?,12,'average',?,?,'yes',?,'bad'
-2,2.5,3,?,'tcf',40,'none',?,?,?,11,'below_average',?,?,'yes',?,'bad'
-2,4,4,?,'none',40,'none',?,3,?,10,'below_average','no','none',?,'none','bad'
-2,4.5,4,?,?,40,?,?,2,'no',10,'below_average','no','half',?,'half','bad'
-2,4.5,4,?,'none',40,?,?,5,?,11,'average',?,'full','yes','full','good'
-2,4.6,4.6,?,'tcf',38,?,?,?,?,?,?,'yes','half',?,'half','good'
-2,5,4.5,?,'none',38,?,14,5,?,11,'below_average','yes',?,?,'full','good'
-2,5.7,4.5,?,'none',40,'ret_allw',?,?,?,11,'average','yes','full','yes','full','good'
-2,7,5.3,?,?,?,?,?,?,?,11,?,'yes','full',?,?,'good'
-3,2,3,?,'tcf',?,'empl_contr',?,?,'yes',?,?,'yes','half','yes',?,'good'
-3,3.5,4,4.5,'tcf',35,?,?,?,?,13,'generous',?,?,'yes','full','good'
-3,4,3.5,?,'none',40,'empl_contr',?,6,?,11,'average','yes','full',?,'full','good'
-3,5,4.4,?,'none',38,'empl_contr',10,6,?,11,'generous','yes',?,?,'full','good'
-3,5,5,5,?,40,?,?,?,?,12,'average',?,'half','yes','half','good'
-3,6,6,4,?,35,?,?,14,?,9,'generous','yes','full','yes','full','good'
-%
-%
-%
+-0.297206,0.660186,0.258033,-1.091804,0.881299,-0.352528,0.972067,-0.356352,good
+1.316998,1.150915,0.511951,-1.145208,-3.526045,1.581633,0.181892,-2.472976,good
+1.325961,-1.514868,-2.393035,-0.994709,1.496699,-0.741493,-1.331229,1.373397,good
+0.348909,-0.632368,-1.34114,0.506052,-0.654833,-0.844046,0.600891,-1.181164,good
+0.621434,-1.067173,-1.963977,-0.950131,2.572666,0.45676,1.847337,-0.552671,good
+0.165233,0.500437,0.185332,1.643631,1.026999,-1.48267,0.170447,-1.918928,good
+1.309865,-0.010941,-3.928928,-0.248164,0.328747,-1.436997,-0.041019,1.359726,good
+-0.079959,-0.838745,0.702607,-0.904412,-0.485803,1.771252,0.507443,0.625153,good
+1.975031,-0.794763,-0.549926,0.771465,0.638189,4.189376,-4.173532,-3.226662,good
+1.907068,1.55285,0.544662,-2.250738,0.037493,-0.834567,-1.134662,1.732949,good
+1.750939,0.501257,0.605246,0.905164,-0.685498,-0.777761,0.327312,1.647142,good
+2.150819,1.733385,-0.290339,-1.135472,-0.958539,1.393803,1.808749,0.328105,good
+-2.120243,-1.580602,-0.737502,-1.666057,1.576442,1.671449,0.335902,1.621398,bad
+2.97512,0.189566,-0.772992,1.749529,-2.021231,-0.618226,1.744514,0.651344,good
+0.245853,0.851816,0.321955,-0.274888,-0.343433,-0.106898,-1.783879,1.169611,good
+1.615773,1.181877,1.16051,-1.544064,1.449307,-1.166291,0.081143,-0.531099,good
+-0.600434,0.064357,-0.200794,0.292808,-0.722039,0.460717,-0.354539,0.060173,good
+-4.277999,-1.824381,-1.816537,-3.251585,-3.324653,-1.117227,-1.072621,-2.22973,bad
+-4.375323,4.851775,-0.154231,2.183995,1.562555,0.23912,-0.220494,-0.978514,bad
+2.761036,0.888749,-2.154116,2.540496,-1.028124,1.098761,0.58373,0.833082,good
+1.801679,0.935032,0.851189,-0.098537,-1.718263,-0.491918,0.459843,1.074155,good
+-1.64757,-0.912005,0.993002,1.092602,-0.071393,1.175757,0.404699,0.124208,bad
+1.627771,-0.297888,-1.786981,2.774476,-1.142851,-0.05432,0.29158,-0.986127,good
+0.322856,-0.971655,0.224219,-0.191762,-0.649769,-0.322756,-0.783628,1.272931,good
+0.108765,0.708879,-0.249637,-0.933687,-0.657012,0.098326,-0.857454,1.426937,good
+-2.030501,-3.093856,3.428728,1.50136,0.311647,0.705382,-0.649888,0.338374,bad
+-0.067762,-0.167564,-2.798495,1.187806,0.521662,1.913624,-0.130403,-0.553138,good
+1.489361,0.801086,0.926965,1.776332,-0.706837,-1.118917,-1.109344,0.617574,good
+1.087081,-0.102669,2.43378,-1.325617,-1.088506,0.929986,0.059255,0.51774,good
+-0.42162,-0.849903,2.084576,2.34121,0.473621,-0.928133,1.179341,-1.085214,bad
+0.072065,-0.510791,0.227191,-1.284715,1.847808,0.090942,0.987368,-0.033771,good
+-2.171208,-4.446063,1.86604,0.927918,-1.305256,-0.168826,0.261631,-0.080991,bad
+-0.010173,-0.203341,0.22312,-0.152441,1.731598,-2.268421,-0.544666,-0.81742,bad
+-3.973316,1.664082,0.531521,0.164225,0.282309,2.360625,-0.041661,1.644109,bad
+-4.24899,-4.369784,1.618905,0.687875,-1.9271,-1.012455,1.339503,0.699981,bad
+-1.4899,0.374462,2.688824,1.634934,1.287147,-1.052926,1.019493,0.407715,bad
+-5.308808,3.258584,-3.154833,-1.090343,-3.849392,-2.387244,0.260161,0.232612,bad
+-2.619846,-1.020317,-0.347728,-2.665453,0.526303,-0.965076,-2.97494,0.387773,bad
+-1.229311,-0.550771,0.654695,0.207283,1.690328,-2.524394,-1.524923,-1.318487,bad
+1.160426,0.781569,0.258088,-1.947681,2.086168,0.095531,1.80788,-0.460535,good
+-4.060143,5.033327,-0.14423,1.690646,1.528518,0.687575,0.046926,-0.721816,bad
+1.290347,1.272543,0.392981,1.603116,0.444674,-2.298568,-2.14385,1.334376,bad
+-0.094005,-0.912994,-0.723716,-0.18524,0.75979,-3.091486,0.367483,-1.168734,bad
+-1.099942,-1.588922,-0.105765,2.154931,-0.53662,1.480798,0.941618,-0.230534,bad
+-3.9186,1.758139,0.615416,0.788844,0.531047,1.990229,-0.201479,1.188228,bad
+-1.961439,-1.912557,-1.414604,-1.565479,1.059853,1.740217,0.762837,1.430575,bad
+1.13047,1.012533,2.488813,-1.124815,0.512147,-0.423989,1.116829,-0.642592,good
+0.710421,-1.773885,-2.948137,0.037849,0.836815,1.286746,0.530696,-0.307361,good
+1.362788,0.224314,1.715406,0.061222,0.114272,2.283833,-0.958509,0.314582,good
+1.458683,1.501582,1.986295,-2.782511,-1.449098,0.032883,1.51321,-2.1044,good
+1.631096,0.970958,0.419974,-1.690651,-0.721137,1.095962,0.628346,-0.077918,good
+1.296399,-2.26088,-1.720543,1.796491,0.871269,-1.31096,-1.009684,-1.07544,good
+2.33596,-0.427796,-1.19873,2.524795,-1.71309,-0.522247,0.828463,0.70211,good
+2.109372,0.425807,2.242975,-1.136946,1.288262,-1.683533,0.247726,-0.6888,good
+2.676214,0.298045,0.792926,-0.250242,0.262466,-0.562519,-1.596543,1.586665,good
+0.782241,-0.931504,-2.063329,-1.180669,2.50587,0.771392,1.88341,-0.515882,good
+3.180265,0.420873,1.00432,-0.483036,-1.75745,1.064716,-1.460777,-0.385466,good
