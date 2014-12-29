@@ -1,74 +1,33 @@
 import java.io.BufferedReader;
-import java.io.FileReader;
-import java.lang.reflect.Array;
-import java.util.*;
-import java.io.*;
-
-import weka.classifiers.functions.MultilayerPerceptron;
-import weka.classifiers.*;
-import weka.filters.*;
-import weka.core.*;
-import weka.classifiers.Evaluation;
-import weka.classifiers.meta.Bagging;
-import weka.classifiers.trees.RandomForest;
-import weka.classifiers.trees.SimpleCart;
-import weka.core.Instances;
-import weka.filters.Filter;
-import weka.filters.unsupervised.attribute.ReplaceMissingValues;
-import weka.filters.unsupervised.attribute.Remove;
-import weka.attributeSelection.GainRatioAttributeEval;
-import weka.classifiers.Evaluation;
-import weka.classifiers.functions.Logistic;
-import weka.classifiers.meta.Bagging;
-import weka.classifiers.trees.BFTree;
-import weka.classifiers.trees.J48;
-import weka.classifiers.trees.RandomForest;
-import weka.classifiers.trees.j48.*;
-import weka.core.Debug;
-import weka.core.Instance;
-import weka.core.Instances;
-import weka.core.Utils;
-import weka.core.converters.ArffSaver;
-import weka.core.converters.CSVLoader;
-
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Random;
 
-import weka.attributeSelection.RankSearch;
-import weka.filters.Filter;
-import weka.filters.unsupervised.attribute.Remove;
-import weka.filters.unsupervised.attribute.ReplaceMissingValues;
-import weka.attributeSelection.*;
-import weka.classifiers.evaluation.MarginCurve;
-
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
+import weka.classifiers.bayes.NaiveBayes;
 import weka.classifiers.evaluation.NominalPrediction;
-import weka.classifiers.rules.DecisionTable;
-import weka.classifiers.rules.OneR;
-import weka.classifiers.rules.PART;
-import weka.classifiers.trees.DecisionStump;
-import weka.classifiers.trees.J48;
-import weka.core.FastVector;
-import weka.core.Instances;
+import weka.classifiers.functions.Logistic;
+import weka.classifiers.functions.MultilayerPerceptron;
 import weka.classifiers.lazy.IBk;
 import weka.classifiers.meta.AdaBoostM1;
 import weka.classifiers.meta.Bagging;
-import weka.classifiers.bayes.NaiveBayes;
-import weka.classifiers.functions.Logistic;
-import weka.classifiers.functions.VotedPerceptron;
+import weka.classifiers.rules.DecisionTable;
+import weka.classifiers.rules.PART;
+import weka.classifiers.trees.DecisionStump;
+import weka.classifiers.trees.J48;
+import weka.classifiers.trees.RandomForest;
+import weka.classifiers.trees.SimpleCart;
+import weka.core.FastVector;
+import weka.core.Instances;
 import wlsvm.WLSVM;
-public class AlgorithmRunner {
 
+
+public class AlgorithmRunnerNewParameter {
 	/**
 	 * Reads a filename at specific path and return a inputReader object
 	 * @param filename
@@ -251,33 +210,14 @@ public class AlgorithmRunner {
     			//eval.evaluateModel(svm, filedata2);
     			//single data
     			eval.crossValidateModel(models[j], data,5, new Random(1));
-    			double errormid = eval.errorRate();
-    			double accuracy = 1-errormid;
+    			double recall = eval.fMeasure(0)+eval.fMeasure(1);
+    			
+    			double accuracy = recall;
     			// System.out.println("SVM error rate : "+errormid*100);
     			// System.out.println(models[j].getClass().getSimpleName() + ": " + String.format("%.2f%%", (1-errormid)*100) + "\n=====================");
        
     			Comparision[i][j]= accuracy;
-    			//
-    			/*
-           		// Collect every group of predictions for current model in a FastVector
-           		FastVector predictions = new FastVector();
-           		System.out.println("split length"+trainingSplits.length);
-           		// For each training-testing split pair, train and test the classifier
-           		for(int m = 0; m < trainingSplits.length; m++) {
-               	Evaluation validation = simpleClassify(models[j], trainingSplits[m], testingSplits[m]);
-               	predictions.appendElements(validation.predictions());
-               
-               	// Uncomment to see the summary for each training-testing pair.
-               	// System.out.println(models[j].toString());
-           		}
-           
-           		// Calculate overall accuracy of current classifier on all splits
-           		double accuracy = calculateAccuracy(predictions);
-           
-           		// Print current classifier's name and accuracy in a complicated, but nice-looking way.
-           		System.out.println(models[j].getClass().getSimpleName() + ": " + String.format("%.2f%%", accuracy) + "\n=====================");
-          		// System.out.println(validation);
-                */
+    			
     			}
        
     		}
@@ -433,7 +373,7 @@ public class AlgorithmRunner {
 	
 	public static void main(String[] args) throws Exception {
 		
-		String reportPath = "d:/work241/reportnew2.csv";
+		String reportPath = "d:/work241/reportnew4.csv";
 		String filePath = "./data/BinaryDatasets/";
 		Algorunner(filePath, reportPath);
 	}

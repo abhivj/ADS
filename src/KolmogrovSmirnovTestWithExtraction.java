@@ -294,8 +294,6 @@ public class KolmogrovSmirnovTestWithExtraction {
 		System.out.println("Done file printing at :"+filePath);
 	}
 	
-	
-	
 	public static void main(String[] args) {
 		int dataset=8;
 		int bin=16;
@@ -305,8 +303,6 @@ public class KolmogrovSmirnovTestWithExtraction {
 		double[][] runningTotal = runningTotal(normalizeMatrix);
 		double[][] similarityMatrix = similarityMatrix(runningTotal, dataset,getTotalCount);
 		printSimilar(similarityMatrix, "D:/work241/kolmogrovTestReject.txt");
-		
-		
 		
 		//Code for binary Separate classes
 		int[][] dataBinary = readCSVBinary("D:/work241/NumericalDataBinary6.csv", dataset, bin);
