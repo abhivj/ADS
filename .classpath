@@ -9,5 +9,13 @@
 	<classpathentry kind="lib" path="C:/Users/abhivj/workspace/Artificial Data Scientist/libs/weka.jar"/>
 	<classpathentry kind="lib" path="C:/Users/abhivj/workspace/Artificial Data Scientist/libs/weka-src.jar"/>
 	<classpathentry kind="lib" path="C:/Users/abhivj/workspace/Artificial Data Scientist/libs/wlsvm.jar"/>
+	<classpathentry kind="lib" path="C:/Users/abhivj/workspace/Artificial Data Scientist/libs/jahmm-0.6.1.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/C:/Users/abhivj/workspace/Artificial%20Data%20Scientist/external-docs/jahmm-0.6.1-javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/abhivj/workspace/Artificial Data Scientist/libs/matlabcontrol-4.1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/abhivj/workspace/Artificial Data Scientist/libs/jmi.jar"/>
+	<classpathentry kind="lib" path="C:/Users/abhivj/workspace/Artificial Data Scientist/libs/util.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

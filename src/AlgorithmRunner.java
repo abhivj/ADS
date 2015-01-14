@@ -227,7 +227,7 @@ public class AlgorithmRunner {
     	for (int i = 0; i < arffFiles.length; i++) 
     	{
     		BufferedReader datafile = readDataFile(arffFiles[i].getName().toString(),pathOfDataset);
-    		System.out.println("File Under Testing..... : "+arffFiles[i].getName().toString());
+    		System.out.println("File Under Testing..... : "+arffFiles[i].getName().toString()+"   File Count "+(i+1));
     		Instances data = new Instances(datafile);
     		data.setClassIndex(data.numAttributes() - 1);
        
@@ -433,8 +433,9 @@ public class AlgorithmRunner {
 	
 	public static void main(String[] args) throws Exception {
 		
-		String reportPath = "d:/work241/reportnew2.csv";
-		String filePath = "./data/BinaryDatasets/";
+		String reportPath = "d:/ss/BinaryDatasetReport.csv";
+	    //String filePath = "./data/BinaryDatasets/";
+		String filePath ="d:/ss/BinaryDataset/";
 		Algorunner(filePath, reportPath);
 	}
 
