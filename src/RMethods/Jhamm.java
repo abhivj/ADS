@@ -4,6 +4,7 @@ import be.ac.ulg.montefiore.run.jahmm.ObservationReal;
 import be.ac.ulg.montefiore.run.jahmm.ObservationVector;
 import be.ac.ulg.montefiore.run.jahmm.OpdfMultiGaussian;
 import matlabcontrol.*;
+import matlabcontrol.MatlabProxyFactory.RequestCallback;
 /**
  * This class uses jahmm model to estimate parameters of Multivariate Gaussion Distribution
  * @author abhivj
@@ -24,14 +25,15 @@ public class Jhamm {
 		ObservationReal obr = new ObservationReal(2.3);
 	//	omg1.
 		*/
-
-		
-		
-		
+		MatlabControl mc = new MatlabControl();
+		mc.eval("a=5");
+		/*
 	    MatlabProxyFactoryOptions opt = new MatlabProxyFactoryOptions.Builder().setUsePreviouslyControlledSession(true).setMatlabLocation("C:/Program Files/MATLAB/R2014a/bin").build();
-	    MatlabProxyFactory factory = new MatlabProxyFactory(opt);
-		//MatlabProxyFactory factory = new MatlabProxyFactory();
+	    //MatlabProxyFactory factory = new MatlabProxyFactory(opt);
+		MatlabProxyFactory factory = new MatlabProxyFactory();
 	    MatlabProxy proxy = factory.getProxy();
+	    MatlabProxyFactory.RequestCallback ppr =new MatlabProxyFactory.RequestCallback();
+	    proxy = factory.requestProxy();
 	    
 	    //Set a variable, add to it, retrieve it, and print the result
 	    proxy.setVariable("a", 5);
@@ -41,7 +43,7 @@ public class Jhamm {
 
 	    //Disconnect the proxy from MATLAB
 	    proxy.disconnect();
-		
+*/	
 		// TODO Auto-generated method stub
 
 	}

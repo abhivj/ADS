@@ -209,7 +209,8 @@ public class CompareBinaryClass {
 			bw.write(st.toString());
 			bw.close();
  
-		} catch (IOException e) {
+		} 
+		catch (IOException e) {
 			e.printStackTrace();
 		}
 	}

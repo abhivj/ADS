@@ -168,7 +168,6 @@ public class AlgorithmRunnerNewParameter {
 	     						};
 	     
 	  //Start writing about csv
-	  String csv;
 	  StringBuilder csvFile = new StringBuilder(",");
 	  for(int k=0;k<models.length;k++)
 	  {
@@ -333,7 +332,6 @@ public class AlgorithmRunnerNewParameter {
      
      
     			int sum=0;
-    			int total=0;
     			int series = models.length;
     			series = (series*(series+1))/2;
     			series = series*(arffFiles.length);

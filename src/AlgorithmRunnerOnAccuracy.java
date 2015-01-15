@@ -1,73 +1,32 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.lang.reflect.Array;
-import java.util.*;
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Random;
+import java.io.FileNotFoundException;
 
+//Weka Libraries Used
 import weka.classifiers.functions.MultilayerPerceptron;
-import weka.classifiers.*;
-import weka.filters.*;
-import weka.core.*;
 import weka.classifiers.Evaluation;
 import weka.classifiers.meta.Bagging;
 import weka.classifiers.trees.RandomForest;
 import weka.classifiers.trees.SimpleCart;
 import weka.core.Instances;
-import weka.filters.Filter;
-import weka.filters.unsupervised.attribute.ReplaceMissingValues;
-import weka.filters.unsupervised.attribute.Remove;
-import weka.attributeSelection.GainRatioAttributeEval;
-import weka.classifiers.Evaluation;
 import weka.classifiers.functions.Logistic;
-import weka.classifiers.meta.Bagging;
-import weka.classifiers.trees.BFTree;
 import weka.classifiers.trees.J48;
-import weka.classifiers.trees.RandomForest;
-import weka.classifiers.trees.j48.*;
-import weka.core.Debug;
-import weka.core.Instance;
-import weka.core.Instances;
-import weka.core.Utils;
-import weka.core.converters.ArffSaver;
-import weka.core.converters.CSVLoader;
-
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.BufferedReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Random;
-
-import weka.attributeSelection.RankSearch;
-import weka.filters.Filter;
-import weka.filters.unsupervised.attribute.Remove;
-import weka.filters.unsupervised.attribute.ReplaceMissingValues;
-import weka.attributeSelection.*;
-import weka.classifiers.evaluation.MarginCurve;
-
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-
 import weka.classifiers.Classifier;
-import weka.classifiers.Evaluation;
 import weka.classifiers.evaluation.NominalPrediction;
 import weka.classifiers.rules.DecisionTable;
-import weka.classifiers.rules.OneR;
 import weka.classifiers.rules.PART;
 import weka.classifiers.trees.DecisionStump;
-import weka.classifiers.trees.J48;
 import weka.core.FastVector;
-import weka.core.Instances;
 import weka.classifiers.lazy.IBk;
 import weka.classifiers.meta.AdaBoostM1;
-import weka.classifiers.meta.Bagging;
 import weka.classifiers.bayes.NaiveBayes;
-import weka.classifiers.functions.Logistic;
-import weka.classifiers.functions.VotedPerceptron;
 import wlsvm.WLSVM;
-public class AlgorithmRunner {
+public class AlgorithmRunnerOnAccuracy {
 
 	/**
 	 * Reads a filename at specific path and return a inputReader object
@@ -90,7 +49,11 @@ public class AlgorithmRunner {
         
         return inputReader;
     }
-	
+	/**
+	 * take a string and path and write csv report on that location
+	 * @param stringToWrite
+	 * @param path
+	 */
 	public static void writeCSVReport(String stringToWrite,String path)
 	{
 		String savePath = path;
@@ -114,6 +77,7 @@ public class AlgorithmRunner {
 				e.printStackTrace();
 			}
 	}
+	
 	public static Evaluation simpleClassify(Classifier model, Instances trainingSet, Instances testingSet) throws Exception
 	{
         Evaluation validation = new Evaluation(trainingSet);
@@ -121,6 +85,7 @@ public class AlgorithmRunner {
         validation.evaluateModel(model, testingSet);
         return validation;
     }
+	
 	public static double calculateAccuracy(FastVector predictions)
 	{
         double correct = 0;
@@ -134,6 +99,7 @@ public class AlgorithmRunner {
         }
         return 100 * correct / predictions.size();
     }
+	
 	public static Instances[][] crossValidationSplit(Instances data, int numberOfFolds) {
         Instances[][] split = new Instances[2][numberOfFolds];
         
@@ -208,8 +174,6 @@ public class AlgorithmRunner {
                 						new AdaBoostM1() //Ada boosting
 	     						};
 	     
-	  //Start writing about csv
-	  String csv;
 	  StringBuilder csvFile = new StringBuilder(",");
 	  for(int k=0;k<models.length;k++)
 	  {
@@ -257,27 +221,7 @@ public class AlgorithmRunner {
     			// System.out.println(models[j].getClass().getSimpleName() + ": " + String.format("%.2f%%", (1-errormid)*100) + "\n=====================");
        
     			Comparision[i][j]= accuracy;
-    			//
-    			/*
-           		// Collect every group of predictions for current model in a FastVector
-           		FastVector predictions = new FastVector();
-           		System.out.println("split length"+trainingSplits.length);
-           		// For each training-testing split pair, train and test the classifier
-           		for(int m = 0; m < trainingSplits.length; m++) {
-               	Evaluation validation = simpleClassify(models[j], trainingSplits[m], testingSplits[m]);
-               	predictions.appendElements(validation.predictions());
-               
-               	// Uncomment to see the summary for each training-testing pair.
-               	// System.out.println(models[j].toString());
-           		}
-           
-           		// Calculate overall accuracy of current classifier on all splits
-           		double accuracy = calculateAccuracy(predictions);
-           
-           		// Print current classifier's name and accuracy in a complicated, but nice-looking way.
-           		System.out.println(models[j].getClass().getSimpleName() + ": " + String.format("%.2f%%", accuracy) + "\n=====================");
-          		// System.out.println(validation);
-                */
+
     			}
        
     		}
@@ -301,17 +245,7 @@ public class AlgorithmRunner {
     				sample[0][l]=Comparision[k][l];
     				sample[1][l]=(l+1);
     			}
-    			//test for work... working :)
-    			/*
-     			for(int w=0;w<2;w++)
-     			{
-     				for(int q=0;q<models.length;q++)
-     				{
-         				System.out.print("    "+sample[w][q]);
-       				}
-     				System.out.println("*******");
-     			}
-     */
+    		
     			int n = models.length;
     			double swap1,swap2;
     			for (int c = 0; c < ( n - 1 ); c++) 
@@ -393,7 +327,7 @@ public class AlgorithmRunner {
      
      
     			int sum=0;
-    			int total=0;
+    		
     			int series = models.length;
     			series = (series*(series+1))/2;
     			series = series*(arffFiles.length);
@@ -408,23 +342,6 @@ public class AlgorithmRunner {
     				System.out.println();
      
     			}
-     
-				    			
-				     /*
-				     for(int w=0;w<2;w++)
-				     {
-				     	for(int q=0;q<models.length;q++)
-				     	{
-				         	System.out.print("    "+sample[w][q]);
-				       	}
-				     	System.out.println(" ");
-				     	System.out.println(" ");
-				     	System.out.println(" ");
-				     }
-				    }  
-			                     */
-			             
-    				//arffFiles.length][models.length];
     			System.out.println("Done");
     			writeCSVReport(csvFile.toString(),reportPath);
     			System.out.println(csvFile.toString());
