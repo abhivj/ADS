@@ -1,0 +1,5 @@
+dataA<-read.csv('AnovaTest.csv',header=F)
+attach(dataA)
+str(dataA)
+aoc<-aov(V2~V1)
+TukeyHSD(aoc)

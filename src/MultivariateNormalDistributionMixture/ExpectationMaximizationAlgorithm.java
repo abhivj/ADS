@@ -164,6 +164,7 @@ public static void getMeanOfGaussionsFromEM(String inputFolderPath, int numOfGau
 		BufferedReader datafile = EMA.readDataFile(arffFiles[i].getName().toString(),inputFolderPath);
 		System.out.println("Converting..... : "+arffFiles[i].getName().toString());
 		Instances data = new Instances(datafile);
+		
 		EM EMObject = new EM();
 		EMObject.setNumClusters(numOfGaussions);
 		EMObject.buildClusterer(data);

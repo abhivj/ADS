@@ -162,6 +162,277 @@ public class CompareHistogram {
 			e.printStackTrace();
 		}
 	}
+	/**
+	 * Create File To use by R in friedman test
+	 * @param fileName
+	 * @param numberOfFiles
+	 * @param resultFile
+	 */
+	public static void saveHistogramInFileFriedman(String fileName,int numberOfFiles,String resultFile)
+	{
+		BufferedReader br = null;
+		String line = "";
+		String cvsSplitBy = ",";
+		int actualFiles = numberOfFiles/2;
+		FileObjects[] fo = new FileObjects[actualFiles];
+		int i=0;
+		int objectCounter=0;
+		try
+		{
+			br = new BufferedReader(new FileReader(fileName));
+			while(i<numberOfFiles)
+			{
+			line = br.readLine();
+			String[] currentfilestoAll = line.split(cvsSplitBy);
+			String name = currentfilestoAll[0];
+			String classOfData = currentfilestoAll[1];
+			int[] values= new int[currentfilestoAll.length-2];
+			for(int j=2;j<currentfilestoAll.length;j++)
+			{
+				double d = Double.valueOf(currentfilestoAll[j]);
+				values[j-2]= (int)d; //Integer.valueOf();
+			}
+			int position = searchForObject(name, fo,objectCounter);
+			if(position==-1)
+			{
+				fo[objectCounter]=new FileObjects();
+				fo[objectCounter].setFileName(name);
+				fo[objectCounter].setHistogram(2, values.length);
+				fo[objectCounter].setHistogramValues(values, Integer.valueOf(classOfData));
+				objectCounter++;
+			}
+			else
+			{
+				fo[position].setHistogramValues(values, Integer.valueOf(classOfData));
+			}
+			i++;
+		}
+			
+		}
+		catch (FileNotFoundException e)
+		{
+			e.printStackTrace();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if (br != null)
+			{
+				try
+				{
+					br.close();
+				}
+				catch (IOException e)
+				{
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		StringBuilder sb = new StringBuilder();
+		
+		for(int k=0;k<fo.length;k++)
+		{
+			for(int l=0;l<fo[k].histogramBins.length;l++)
+			{
+				//sb.append(String.valueOf(l)+fo[k].getFileName());
+				for(int p=0;p<fo[k].histogramBins[l].length;p++)
+				{
+					if(p!=0)
+					sb.append(",");
+					sb.append(fo[k].histogramBins[l][p]);
+					
+				}
+	
+			   if(k!=fo.length-1 || l!=fo[k].histogramBins.length-1)
+				{
+					sb.append("\n");
+				}
+			}
+		}
+		
+		try 
+		{
+			File file = new File(resultFile);
+			// if file doesnt exists, then create it
+			if (!file.exists()) {
+				file.createNewFile();
+			}
+ 			FileWriter fw = new FileWriter(file.getAbsoluteFile());
+			BufferedWriter bw = new BufferedWriter(fw);
+			bw.write(sb.toString());
+			bw.close();
+			System.out.println("Done File @"+resultFile);
+ 
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	/**
+	 * Create File which used by R in ANOVA test
+	 * @param fileName
+	 * @param numberOfFiles
+	 * @param resultFile
+	 */
+	public static void saveHistogramInFileAnova(String fileName,int numberOfFiles,String resultFile)
+	{
+		BufferedReader br = null;
+		String line = "";
+		String cvsSplitBy = ",";
+		int actualFiles = numberOfFiles/2;
+		FileObjects[] fo = new FileObjects[actualFiles];
+		int i=0;
+		int objectCounter=0;
+		try
+		{
+			br = new BufferedReader(new FileReader(fileName));
+			while(i<numberOfFiles)
+			{
+			line = br.readLine();
+			String[] currentfilestoAll = line.split(cvsSplitBy);
+			String name = currentfilestoAll[0];
+			String classOfData = currentfilestoAll[1];
+			int[] values= new int[currentfilestoAll.length-2];
+			for(int j=2;j<currentfilestoAll.length;j++)
+			{
+				double d = Double.valueOf(currentfilestoAll[j]);
+				values[j-2]= (int)d; //Integer.valueOf();
+			}
+			int position = searchForObject(name, fo,objectCounter);
+			if(position==-1)
+			{
+				fo[objectCounter]=new FileObjects();
+				fo[objectCounter].setFileName(name);
+				fo[objectCounter].setHistogram(2, values.length);
+				fo[objectCounter].setHistogramValues(values, Integer.valueOf(classOfData));
+				objectCounter++;
+			}
+			else
+			{
+				fo[position].setHistogramValues(values, Integer.valueOf(classOfData));
+			}
+			i++;
+		}
+			
+		}
+		catch (FileNotFoundException e)
+		{
+			e.printStackTrace();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if (br != null)
+			{
+				try
+				{
+					br.close();
+				}
+				catch (IOException e)
+				{
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		StringBuilder sb = new StringBuilder();
+		/*
+		for(int k=0;k<fo.length;k++)
+		{
+			for(int l=0;l<fo[k].histogramBins.length;l++)
+			{
+				sb.append(String.valueOf(l)+fo[k].getFileName());
+				for(int p=0;p<fo[k].histogramBins[l].length;p++)
+				{
+					sb.append(",");
+					sb.append(fo[k].histogramBins[l][p]);
+					
+				}
+	
+			   if(k!=fo.length-1 || l!=fo[k].histogramBins.length-1)
+				{
+					sb.append("\n");
+				}
+			}
+		}
+		*/
+		
+		for(int k=0;k<fo.length;k++)
+		{
+			for(int l=0;l<fo[k].histogramBins.length;l++)
+			{
+				
+				for(int p=0;p<fo[k].histogramBins[l].length;p++)
+				{
+					sb.append("hist");
+					sb.append(p);
+					sb.append(",");
+					sb.append(fo[k].histogramBins[l][p]);
+					
+					if(k!=fo.length-1 || l!=fo[k].histogramBins.length-1 || p!=fo[k].histogramBins[l].length-1)
+					{
+						sb.append("\n");
+					}
+					
+				}
+	
+			   
+			}
+		}
+		
+		/*
+		for(int k=0;k<fo.length;k++)
+		{
+			for(int l=0;l<fo[k].histogramBins.length;l++)
+			{
+				//sb.append(String.valueOf(l)+fo[k].getFileName());
+				for(int p=0;p<fo[k].histogramBins[l].length;p++)
+				{
+					if(p!=0)
+					sb.append(",");
+					sb.append(fo[k].histogramBins[l][p]);
+					
+				}
+	
+			   if(k!=fo.length-1 || l!=fo[k].histogramBins.length-1)
+				{
+					sb.append("\n");
+				}
+			}
+		}
+		*/
+		try 
+		{
+			File file = new File(resultFile);
+			// if file doesnt exists, then create it
+			if (!file.exists()) {
+				file.createNewFile();
+			}
+ 			FileWriter fw = new FileWriter(file.getAbsoluteFile());
+			BufferedWriter bw = new BufferedWriter(fw);
+			bw.write(sb.toString());
+			bw.close();
+			System.out.println("Done File @"+resultFile);
+ 
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+		
+	}
+	
+	
+	
 	public static void BinaryClassComparision(String fileName,int numberOfFiles,String resultFile,int topk)
 	{
 		BufferedReader br = null;

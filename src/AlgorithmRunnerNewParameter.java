@@ -166,7 +166,8 @@ public class AlgorithmRunnerNewParameter {
                 						new MultilayerPerceptron(), //Neural Network
                 						new AdaBoostM1() //Ada boosting
 	     						};
-	     
+	     //
+	 
 	  //Start writing about csv
 	  StringBuilder csvFile = new StringBuilder(",");
 	  for(int k=0;k<models.length;k++)
