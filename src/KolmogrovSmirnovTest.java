@@ -32,7 +32,7 @@ public class KolmogrovSmirnovTest {
 		for(int i=1;i<x.length;i++)
 		{
 			x1[i] = x1[i-1]+x[i];
-			y[i] = y1[i-1]+y[i];
+			y1[i] = y1[i-1]+y[i];
 		}
 		
 		double max=0;

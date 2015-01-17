@@ -32,6 +32,49 @@ class FileObjects{
 
 public class CompareHistogram {
 
+	
+	public static double criticalDifference(double[] x,double[] y)
+	{
+		double max=0;
+		for(int i=0;i<x.length;i++)
+		{
+			double diff = Math.abs(x[i]-y[i]);
+			if(diff>max)
+			{
+				max=diff;
+			}
+		}
+		
+		return max;
+		
+	}
+	public static int runningDistanceAndCriticalDifference(int[] x,int[] y)
+	{
+		int[] x1 = new int[x.length];
+		x1[0] = x[0];
+		int[] y1 = new int[y.length];
+		y1[0] = y[0];
+		for(int i=1;i<x.length;i++)
+		{
+			x1[i] = x1[i-1]+x[i];
+			y1[i] = y1[i-1]+y[i];
+		}
+		
+		int max=0;
+		for(int i=0;i<x.length;i++)
+		{
+			int diff = Math.abs(x[i]-y[i]);
+			if(diff>max)
+			{
+				max=diff;
+			}
+		}
+		
+		return max;
+
+		
+	}
+	
 	public static int searchForObject(String name,FileObjects[] Files,int fileInIt)
 	{
 		for(int i=0;i<Files.length;i++)
@@ -68,7 +111,18 @@ public class CompareHistogram {
 		
 		return maxValue;
 	}
-	
+	public static int compareFileObjectsKolmogrov(FileObjects file1,FileObjects file2)
+	{
+		int[] file1class0 = file1.histogramBins[0];
+		int[] file1class1 = file1.histogramBins[1];
+		int[] file2class0 = file2.histogramBins[0];
+		int[] file2class1 = file2.histogramBins[1];
+		
+		int value1 = runningDistanceAndCriticalDifference(file1class0,file2class0)+runningDistanceAndCriticalDifference(file1class1,file2class1);
+		int value2 = runningDistanceAndCriticalDifference(file1class0,file2class1)+runningDistanceAndCriticalDifference(file1class1,file2class0);
+		
+		return Math.min(value1, value2);
+	}
 	public static int[][] compareMatrix(FileObjects[] files)
 	{
 		int[][] compareMat = new int[files.length][files.length];
@@ -82,6 +136,21 @@ public class CompareHistogram {
 		
 		return compareMat;
 	}
+	
+	public static int[][] compareMatrixKolmogrov(FileObjects[] files)
+	{
+		int[][] compareMat = new int[files.length][files.length];;
+		for(int i=0;i<files.length;i++)
+		{
+			for(int j=i+1;j<files.length;j++)
+			{
+				compareMat[i][j]=compareMat[j][i]=compareFileObjectsKolmogrov(files[i], files[j]);
+			}
+		}
+		
+		return compareMat;
+	}
+	
 	
 	public static int[][] calculateRankMatrix(int[][] corelationInput)
 	{
@@ -498,7 +567,8 @@ public class CompareHistogram {
 		}
 		
 		
-		int[][] matrix = compareMatrix(fo);
+		//int[][] matrix = compareMatrix(fo);
+		int[][] matrix = compareMatrixKolmogrov(fo);
 		int[][] rankmatrix = calculateRankMatrix(matrix);
 		printTopK(rankmatrix, topk,resultFile, fo);
 		System.out.println("Done");
