@@ -2,6 +2,7 @@ import DataCleaning.*;
 import MultivariateNormalDistributionMixture.*;
 import Histogram.*;
 import Stats.*;
+import Clustering.*;
 public class Main {
 
 	public static void main(String[] args) throws Exception {
@@ -16,7 +17,7 @@ public class Main {
 	
 	//	MakeHistogram.createBins("d:/st/st/st/", 0, 20, "d:/st/st/st/", "csvReport.csv");
 		//CompareHistogram.BinaryClassComparision("d:/st/st/st/csvReport.csv", 28, "d:/st/st/st/BinaryComparision.txt", 10);
-		CompareHistogram.BinaryClassComparision("d:/st/st/st/csvReport.csv", 28, "d:/st/st/st/BinaryComparisionKolmogrov.txt", 10);
+		//CompareHistogram.BinaryClassComparision("d:/st/st/st/csvReport.csv", 28, "d:/st/st/st/BinaryComparisionKolmogrov.txt", 10);
 		
 		
 		
@@ -24,6 +25,15 @@ public class Main {
 		//CompareHistogram.saveHistogramInFileFriedman("d:/st/st/st/csvReport.csv", 28, "d:/st/st/st/FriedManTest.csv");
 		//double dr = StatisticalSignificanceTest.AnovaPrValueForHistogramBin("d:/st/st/st/BinaryComparision.csv");
 		//System.out.println(dr);
+		
+		
+		//K Means Clustering
+		
+		KMeansClustering kmc = new KMeansClustering();
+		//kmc.kMeansCluster("0kc3.arff","d:/st/st/st/",4);
+		kmc.createFile("d:/st/st/st/", 4, "kMeansFeatureVector4.csv", 8);
+		
+		
 	}
 
 }
