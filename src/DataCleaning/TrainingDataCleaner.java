@@ -77,6 +77,7 @@ import weka.filters.unsupervised.attribute.PrincipalComponents;
 
 public class TrainingDataCleaner {
 
+	
 	public File[] readAllFiles(String inputFolder)
 	{
 		File folder = new File(inputFolder);
@@ -118,14 +119,16 @@ public class TrainingDataCleaner {
 	 * @param filename
 	 * @param path
 	 * @return
+	 * @throws Exception 
 	 */
-	public BufferedReader readDataFile(String filename,String pathOfFile)
+	public BufferedReader readDataFile(String filename,String pathOfFile) throws Exception
 	{
 		String pathToSave = pathOfFile;
         BufferedReader inputReader = null;
         try
         {
             inputReader = new BufferedReader(new FileReader(pathToSave+filename));
+           
         }
         catch (FileNotFoundException ex)
         {
@@ -208,6 +211,91 @@ public class TrainingDataCleaner {
 		
 	}
 	
+	
+	public void cleanAndModifyFile(String InputFolderPath,String fileName,String outputFolder,boolean convertNominal,boolean doPCA,boolean doNormalization,boolean doRejectIfLess,boolean rejectIfNotBinary, int dimOfPCA,int minimumInstance) throws Exception
+	{
+		TrainingDataCleaner dataObject = new TrainingDataCleaner();
+		File file = new File(InputFolderPath+fileName);
+		BufferedReader datafile = dataObject.readDataFile(fileName,InputFolderPath);
+		System.out.println("Cleaning and Modifying..... : "+fileName);
+		Instances data = new Instances(datafile);
+		data.setClassIndex(data.numAttributes() - 1);
+		
+		int numInstances = data.numInstances();
+		Instances ConvertedData = new Instances(data);
+		
+		boolean rejectFlag=false;
+		
+		for(int k=0;k<data.numAttributes()-1;k++)
+		{
+			Attribute atr = data.attribute(k);
+			if(atr.isString())
+			{
+			rejectFlag=true;
+			System.out.println("string attr : "+(k+1));
+			}
+		}
+		
+		
+		
+		
+		
+		if(rejectIfNotBinary==true)
+		{
+			if(ConvertedData.numClasses()!=2)
+			{
+				rejectFlag=true;
+				System.out.println("classes not 2");
+			}
+				
+		}
+		//Apply Nominal To Binary Filter
+		
+		if(convertNominal && !rejectFlag)
+		{
+			ConvertedData = dataObject.nominalToBinaryConverter(ConvertedData);
+		}
+		//Principal Component Analysis
+		if(doPCA && !rejectFlag)
+		{
+			try{
+			ConvertedData = dataObject.PCAConverter(ConvertedData, dimOfPCA);
+			}
+			catch(Exception e)
+			{
+				System.out.println(e.toString());
+			}
+		}
+		
+		//Normalize Data
+		
+		if(doNormalization && !rejectFlag)
+		{
+			ConvertedData = dataObject.NormalizeConverter(ConvertedData);
+		}
+		
+		int totalAttribute = ConvertedData.numAttributes()-1;
+		if(totalAttribute!=dimOfPCA)
+		{
+			rejectFlag = true;
+			System.out.println("attr not equal "+totalAttribute);
+		}
+		
+		
+		if(rejectFlag==false)		
+		{
+		System.out.println(fileName+" : Saved !! in training data cleaner module");
+		
+		dataObject.saveArffFromInstances(fileName,outputFolder,ConvertedData);
+		}
+		else
+		{
+		System.out.println(fileName+" : Rejected !! in training data cleaner module");
+		
+		}
+		
+	}
+	
 	public static int CleanAndModify(String inputFolder,String outputFolder,boolean convertNominal,boolean doPCA,boolean doNormalization,boolean doRejectIfLess,boolean rejectIfNotBinary, int dimOfPCA,int minimumInstance) throws Exception
 	{
 		int numberOfOutputFiles = 0;
@@ -228,8 +316,7 @@ public class TrainingDataCleaner {
 			int numInstances = data.numInstances();
 			Instances ConvertedData = new Instances(data);
 			
-			//Apply Nominal To Binary Filter
-			
+			//If data contains string attribute we are rejecting it because of no use for PCA and Normalization.
 			
 			boolean rejectFlag=false;
 			
@@ -244,6 +331,9 @@ public class TrainingDataCleaner {
 			}
 			
 			
+			
+			
+			
 			if(rejectIfNotBinary==true)
 			{
 				if(ConvertedData.numClasses()!=2)
@@ -253,11 +343,13 @@ public class TrainingDataCleaner {
 				}
 					
 			}
-			//Principal Component Analysis
+			//Apply Nominal To Binary Filter
+			
 			if(convertNominal && !rejectFlag)
 			{
 				ConvertedData = dataObject.nominalToBinaryConverter(ConvertedData);
 			}
+			//Principal Component Analysis
 			if(doPCA && !rejectFlag)
 			{
 				try{
@@ -284,11 +376,6 @@ public class TrainingDataCleaner {
 			}
 			
 			
-			//EM ecl = new EM();
-
-			//ConvertedData.deleteAttributeAt(ConvertedData.numAttributes() - 1);
-			//ecl.buildClusterer(ConvertedData);
-			//double[][][] attr = ecl.getClusterModelsNumericAtts();
 		
 			
 			if(rejectFlag==false)		

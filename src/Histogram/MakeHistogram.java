@@ -1,6 +1,7 @@
 package Histogram;
 
 import Stats.Statistics;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -93,14 +94,16 @@ public class MakeHistogram {
 	 * @param filename
 	 * @param path
 	 * @return
+	 * @throws Exception 
 	 */
-	public static BufferedReader readDataFile(String filename,String pathOfFile)
+	public static BufferedReader readDataFile(String filename,String pathOfFile) throws Exception
 	{
 		String pathToSave = pathOfFile;
         BufferedReader inputReader = null;
         try
         {
             inputReader = new BufferedReader(new FileReader(pathToSave+filename));
+           
         }
         catch (FileNotFoundException ex)
         {
@@ -172,6 +175,63 @@ public class MakeHistogram {
 			{
 				e.printStackTrace();
 			}
+	}
+	
+	public int[][] createBinFile(String inputFolder,int type,int numberOfBins,int numberOfClasses) throws Exception
+	{
+		int[][] bins=new int[numberOfClasses][numberOfBins];
+		File[] arffFiles = readAllFiles(inputFolder);
+		for(int i=0;i<arffFiles.length;i++)
+		{
+			BufferedReader datafile = readDataFile(arffFiles[i].getName().toString(),inputFolder);
+			System.out.println("Converting..... : "+arffFiles[i].getName().toString());
+			Instances data = new Instances(datafile);
+			String completeName = arffFiles[i].getName().toString();
+			//We are assuming that data are in a way that 0a1a.arff where 0 denote class and a1a.arff is name.
+			int classOfData =  Character.getNumericValue(completeName.charAt(0));
+
+			String fileName = completeName.substring(1, completeName.length());
+
+			int totalAttribute = data.numAttributes();
+			int bin[] = new int[numberOfBins];
+			double binSize = 1.0/(double)numberOfBins;
+			double values[][] = new double[totalAttribute][data.numInstances()];
+			for(int j=0;j<data.numInstances();j++)
+			{
+				Instance currentInstance = data.instance(j);
+				for(int k=0;k<totalAttribute;k++)
+				{
+					values[k][j]=currentInstance.value(k);
+				}
+			}
+			for(int j=0;j<totalAttribute;j++)
+			{
+			Statistics st = new Statistics(values[j]);
+			double getStat=0.0;
+			if(type==0)
+			{
+				getStat = st.getStdDev();
+			}
+			if(type==1)
+			{
+				getStat = st.getMean();
+			}
+			if(type==2)
+			{
+				getStat = st.median();
+			}
+			
+			int binToplace = (int)(getStat/binSize);
+			bin[binToplace]++;
+			
+			}
+			for(int j=0;j<numberOfClasses;j++)
+			{
+				bins[j]=bin;
+			}
+		}
+		
+		return bins;
 	}
 	public static void createBins(String fileFolderPath,int type,int numberOfBins,String saveFileFolderPath,String csvFileName) throws Exception
 	{

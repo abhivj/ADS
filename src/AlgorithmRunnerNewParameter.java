@@ -211,8 +211,11 @@ public class AlgorithmRunnerNewParameter {
     			//single data
     			eval.crossValidateModel(models[j], data,5, new Random(1));
     			double recall = eval.fMeasure(0)+eval.fMeasure(1);
-    			
-    			double accuracy = recall;
+    			//eval.areaUnderROC(arg0)
+    			double aoc = eval.areaUnderROC(0);
+    			aoc = eval.areaUnderROC(1);
+    		
+    			double accuracy = 1-eval.errorRate();
     			// System.out.println("SVM error rate : "+errormid*100);
     			// System.out.println(models[j].getClass().getSimpleName() + ": " + String.format("%.2f%%", (1-errormid)*100) + "\n=====================");
        
@@ -221,16 +224,19 @@ public class AlgorithmRunnerNewParameter {
     			}
        
     		}
+    		StringBuilder csv2 = new StringBuilder();
     		System.out.println();
     		System.out.println("Accuray of classifiers : Actual : ");
     		for(int k=0;k<arffFiles.length;k++)
     		{
     			for(int l=0;l<models.length;l++)
     			{
-    				System.out.print("    ||    "+Comparision[k][l]);
+    				//System.out.print("    ||    "+Comparision[k][l]);
+    				csv2.append(Comparision[k][l]+",");
     			}
-    			System.out.println();
-    			System.out.println("********************");
+    			csv2.append("\n");
+    			//System.out.println();
+    			//System.out.println("********************");
     		}
      
     		for(int k=0;k<arffFiles.length;k++)
@@ -366,14 +372,18 @@ public class AlgorithmRunnerNewParameter {
     				//arffFiles.length][models.length];
     			System.out.println("Done");
     			writeCSVReport(csvFile.toString(),reportPath);
+    			writeCSVReport(csv2.toString(), reportPath);
     			System.out.println(csvFile.toString());
 		   
 	}
 	
 	public static void main(String[] args) throws Exception {
 		
-		String reportPath = "d:/work241/reportnew4.csv";
-		String filePath = "./data/BinaryDatasets/";
+		//String reportPath = "d:/work241/reportnew4AOC.csv";
+		//String filePath = "./data/BinaryDatasets/";
+		//Algorunner(filePath, reportPath);
+		String reportPath = "d:/Experiment/reports/AlgorithmRunAndAccuracyResultAllP.csv";
+		String filePath ="d:/Experiment/exp1/";
 		Algorunner(filePath, reportPath);
 	}
 

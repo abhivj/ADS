@@ -205,10 +205,12 @@ public class CompareHistogram {
 			k=fo.length;
 		for(int i=0;i<rank.length;i++)
 		{
-			st.append("("+fo[i].getFileName()+")->");
+			//st.append("("+fo[i].getFileName()+")->");
+			st.append("("+(i+1)+")->");
 			for(int j=0;j<k;j++)
 			{
-				st.append(fo[rank[i][j]].getFileName());
+				//st.append(fo[rank[i][j]].getFileName());
+				st.append(searchForObject(fo[rank[i][j]].getFileName(),fo,fo.length)+1);
 				if(j!=(k-1))
 					st.append(",");
 				else

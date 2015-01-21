@@ -191,13 +191,20 @@ public class ComparisionBasedOnEuclidianDistance {
 	}
 	public static void main(String[] args) {
 	
-		String csvFileTranspose = "d:/work241/transposePCA.csv";
-		String initialResult = "d:/work241/EucInitialResult1.csv";
-		String allResult = "d:/work241/EucAllResult1.csv";
-		String topKResult = "d:/work241/EucTopKResult1.txt";
+		//String csvFileTranspose = "d:/work241/transposePCA.csv";
+		String csvFileTranspose = "d:/st/st/Ranks.csv";
+		//String initialResult = "d:/work241/EucInitialResult1.csv";
+		//String allResult = "d:/work241/EucAllResult1.csv";
+		//String topKResult = "d:/work241/EucTopKResult1.txt";
+
+		String initialResult = "d:/st/st/EucInitialResult1.csv";
+		String allResult = "d:/st/st/EucAllResult1.csv";
+		String topKResult = "d:/st/st/EucTopKResult1.txt";
+
+		
 		int numberOfBins=13;
-		int numberOfFiles=8;
-		int topk=5;
+		int numberOfFiles=14;
+		int topk=10;
 		compareDatasets(csvFileTranspose, initialResult, allResult, topKResult, numberOfBins, numberOfFiles, topk);
 		
 

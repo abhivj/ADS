@@ -350,9 +350,10 @@ public class AlgorithmRunnerOnAccuracy {
 	
 	public static void main(String[] args) throws Exception {
 		
-		String reportPath = "d:/ss/BinaryDatasetReport.csv";
+		//String reportPath = "d:/st/st/BinaryDatasetReport.csv";
 	    //String filePath = "./data/BinaryDatasets/";
-		String filePath ="d:/ss/BinaryDataset/";
+		String reportPath = "d:/Experiment/reports/AlgorithmRunAndAccuracyResult.csv";
+		String filePath ="d:/Experiment/exp1/";
 		Algorunner(filePath, reportPath);
 	}
 

@@ -16,11 +16,11 @@ public class CorelationBasedComparision {
 		
 		
 		
-		int[][] sample = readCSV("D:/work241/CorelationNeededF.csv", 8,13);
-		//System.out.println(calculateCorelation(sample[0],sample[1]));
+		//int[][] sample = readCSV("D:/work241/CorelationNeededF.csv", 8,13);
+		int[][] sample = readCSV("D:/st/st/CorelationMatrix.csv", 14,13);
 		double[][] result = calculateCorelationMatrix(sample);
 		int[][] rank = calculateRankMatrix(result);
-		printTopK(rank,5,"d:/work241/CorelationMatrixResult5.txt");
+		printTopK(rank,10,"d:/st/st/CorelationMatrixResult.txt");
 		System.out.println("Done!!");
 	}
 	

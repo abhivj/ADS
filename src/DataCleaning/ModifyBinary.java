@@ -115,13 +115,14 @@ public class ModifyBinary {
 	     }
 		return arffFiles;
 	}
-	public BufferedReader readDataFile(String filename,String pathOfFile)
+	public BufferedReader readDataFile(String filename,String pathOfFile) throws IOException
 	{
 		String pathToSave = pathOfFile;
         BufferedReader inputReader = null;
         try
         {
             inputReader = new BufferedReader(new FileReader(pathToSave+filename));
+           
         }
         catch (FileNotFoundException ex)
         {
@@ -130,12 +131,94 @@ public class ModifyBinary {
         
         return inputReader;
     }
-	public void saveArffFromInstances(String filename,String pathOfFile, Instances dataset,int k) throws Exception
+	public void saveArffFromInstances(String filename,String pathOfFile, Instances dataset) throws Exception
 	{
 		 BufferedWriter writer = new BufferedWriter(new FileWriter(pathOfFile+filename));
 		 writer.write(dataset.toString());
 		 writer.flush();
 		 writer.close();
+		 writer = null;
+		 System.gc();
+	}
+	
+	
+	public void modifyTo01File(String inputFolderPath,String fileName,String OutputFolderPath) throws Exception
+	{
+		ModifyBinary dataObject = new ModifyBinary();
+		File file = new File(inputFolderPath+fileName);
+		BufferedReader datafile = dataObject.readDataFile(fileName,inputFolderPath);
+		System.out.println("Modifing to {0 to N-1} class .... : "+fileName);
+		Instances data = new Instances(datafile);
+		data.setClassIndex(data.numAttributes() - 1);
+		Attribute atr = data.classAttribute();
+		String attributes[] = new String[data.numClasses()];
+		for(int j=0;j<data.numClasses();j++)
+		{
+			attributes[j]= atr.value(j);
+		}
+		Instances convertedByClass[] = new Instances[data.numClasses()];
+		int classIndex = data.classIndex();
+	
+		Instances modifiedData = new Instances(data);
+		int numberOfInstances = modifiedData.numInstances();
+		
+		for(int k=0;k<data.numClasses();k++)
+		{
+			convertedByClass[k]=new Instances(modifiedData);
+			convertedByClass[k].delete();
+		}
+		
+		
+		for(int j=0;j<modifiedData.numInstances();j++)
+		{
+			Instance currentInstance = modifiedData.instance(j);
+			for(int k=0;k<data.numClasses();k++)
+			{
+				if(currentInstance.stringValue(classIndex)==attributes[k])
+				{
+					convertedByClass[k].add(currentInstance);
+				}
+			}
+		}
+		for(int k=0;k<data.numClasses();k++)
+		{
+			Remove removeClass = new Remove();
+			removeClass.setAttributeIndicesArray(new int [] {convertedByClass[k].classIndex()});
+			removeClass.setInvertSelection(false);
+			removeClass.setInputFormat(convertedByClass[k]);
+			convertedByClass[k] = Filter.useFilter(convertedByClass[k], removeClass);
+		}
+		
+		//Sorting based on weights. More instance higher class.
+		int[] maxIndices = new int[data.numClasses()];
+		int[] totalInstances = new int[data.numClasses()];
+		for(int k=0;k<data.numClasses();k++)
+		{
+			totalInstances[k]=convertedByClass[k].numInstances();
+		}
+		for(int k=0;k<data.numClasses();k++)
+		{
+			int max = Integer.MIN_VALUE;
+			int maxi = -1;
+			for(int l=0;l<data.numClasses();l++)
+			{
+				if(max<totalInstances[l])
+				{
+					max = totalInstances[l];
+					maxi=l;
+				}
+			}
+			totalInstances[maxi] = Integer.MIN_VALUE;
+			maxIndices[k]=maxi;
+		}
+		//Maxindices is actual position based on number of instances.
+		
+		for(int k=0;k<data.numClasses();k++)
+		{
+			dataObject.saveArffFromInstances(String.valueOf(k)+fileName,OutputFolderPath,convertedByClass[maxIndices[k]]);
+		}
+	
+		
 	}
 	
 	public static void modifyTo01(String inputFolderPath,String OutputFolderPath) throws Exception
@@ -200,7 +283,7 @@ public class ModifyBinary {
 			
 			for(int k=0;k<data.numClasses();k++)
 			{
-				dataObject.saveArffFromInstances(String.valueOf(k)+arffFiles[i].getName().toString(),OutputFolderPath,convertedByClass[k],k);
+				dataObject.saveArffFromInstances(String.valueOf(k)+arffFiles[i].getName().toString(),OutputFolderPath,convertedByClass[k]);
 			}
 			
 		}

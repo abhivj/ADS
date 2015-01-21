@@ -75,29 +75,17 @@ import weka.filters.supervised.attribute.NominalToBinary;
 import weka.filters.unsupervised.attribute.Normalize;
 import weka.filters.unsupervised.attribute.PrincipalComponents;
 
-class Pairs{
-	String filename;
-	double meanValue[][];
-	
-	public Pairs(String name,double[][] dval)
-    {
-        this.filename = name;
-        meanValue = dval;
-    }
-
-    public String getFileName()   { return filename; }
-    public double[][] getMean() { return meanValue; }
-}
 
 public class ExpectationMaximizationAlgorithm {
 
-	public BufferedReader readDataFile(String filename,String pathOfFile)
+	public BufferedReader readDataFile(String filename,String pathOfFile) throws Exception
 	{
 		String pathToSave = pathOfFile;
         BufferedReader inputReader = null;
         try
         {
             inputReader = new BufferedReader(new FileReader(pathToSave+filename));
+           
         }
         catch (FileNotFoundException ex)
         {
@@ -149,7 +137,7 @@ public class ExpectationMaximizationAlgorithm {
  * @return
  * @throws Exception
  */
-public static void getMeanOfGaussionsFromEM(String inputFolderPath, int numOfGaussions) throws Exception
+public Pairs[] getMeanOfGaussionsFromEM(String inputFolderPath, int numOfGaussions) throws Exception
 {
 	double[][] mean = null;
 	ExpectationMaximizationAlgorithm EMA = new ExpectationMaximizationAlgorithm();
@@ -181,8 +169,32 @@ public static void getMeanOfGaussionsFromEM(String inputFolderPath, int numOfGau
 		
 	}
 	
-	//return pp;
+	return pp;
 }
+
+public Pairs getMeanOfGaussionsFromEMFile(String inputFolder,String fileName,int numOfGaussions) throws Exception
+{
+	double[][] mean = null;
+	Pairs pp;
+	BufferedReader datafile = readDataFile(fileName,inputFolder);
+	System.out.println("Gaussians from EM..... : "+fileName);
+	Instances data = new Instances(datafile);
 	
+	EM EMObject = new EM();
+	EMObject.setNumClusters(numOfGaussions);
+	EMObject.buildClusterer(data);
+	double[][][] attr = EMObject.getClusterModelsNumericAtts();
+	mean = new double[data.numAttributes()][numOfGaussions];
+	for(int j=0;j<numOfGaussions;j++)
+	{
+		for(int k=0;k<data.numAttributes();k++)
+		{
+			mean[k][j]=attr[j][k][0];
+		}
+	}
+	pp = new Pairs(fileName, mean);
+	
+	return pp;
+}
 	
 }

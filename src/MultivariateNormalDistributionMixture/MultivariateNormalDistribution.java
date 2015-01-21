@@ -112,18 +112,19 @@ public class MultivariateNormalDistribution {
 	{
 		return mean;
 	}
-	public double[][] covariances()
+	public double[][] getCovariances()
 	{
 		return covariances;
 	}
 
-	public BufferedReader readDataFile(String filename,String pathOfFile)
+	public BufferedReader readDataFile(String filename,String pathOfFile) throws Exception
 	{
 		String pathToSave = pathOfFile;
         BufferedReader inputReader = null;
         try
         {
             inputReader = new BufferedReader(new FileReader(pathToSave+filename));
+           
         }
         catch (FileNotFoundException ex)
         {
@@ -197,7 +198,7 @@ public class MultivariateNormalDistribution {
 	 * @param fileToSave 
 	 * @throws Exception
 	 */
-	public static void runModelOverFolderForMean(String FileFolderPath ,String fileToSave) throws Exception
+	public void runModelOverFolderForMean(String FileFolderPath ,String fileToSave) throws Exception
 	{
 		MultivariateNormalDistribution mvn = new MultivariateNormalDistribution();
 		//Read all arff files available in inputFolder
@@ -206,14 +207,14 @@ public class MultivariateNormalDistribution {
 		for(int i=0;i<arffFiles.length;i++)
 		{
 			allObjects[i] = new MultivariateNormalDistribution();
-			BufferedReader datafile = mvn.readDataFile(arffFiles[i].getName().toString(),FileFolderPath);
+			BufferedReader datafile = readDataFile(arffFiles[i].getName().toString(),FileFolderPath);
 			System.out.println("Converting..... : "+arffFiles[i].getName().toString());
 			Instances data = new Instances(datafile);
 			allObjects[i] = fitModel(data);
 			allObjects[i].setFileName(arffFiles[i].getName().toString());
 			
 		}
-		mvn.saveAllObjectToCsv(FileFolderPath+fileToSave,allObjects);
+		saveAllObjectToCsv(FileFolderPath+fileToSave,allObjects);
 		
 		//double [] mean = {2., 4.};
 		//double [][] covariance = { {3., 2}, {2., 4.} };
@@ -243,7 +244,7 @@ public class MultivariateNormalDistribution {
 		}
 		writeCSVReport(prePare.toString(),filePath);
 	}
-	public static MultivariateNormalDistribution fitModel(Instances data)
+	public MultivariateNormalDistribution fitModel(Instances data)
 	{
 		MultivariateNormalDistribution mvn = new MultivariateNormalDistribution();
 		int totalInstances = data.numInstances();
