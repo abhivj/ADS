@@ -80,34 +80,42 @@ public class Regressor {
 			ModifyBinary MB = new ModifyBinary();
 			MB.modifyTo01File(tempFolder1,fileName, tempFolder2);
 			
+			
+			//Creating Filename array
+			String[] st = new String[numberOfClasses];
+			for(int j=0;j<st.length;j++)
+			{
+				st[j] = String.valueOf(j)+fileName;
+			}
+			
 			//Creating bin of Histogram
 			MakeHistogram MH = new MakeHistogram();
 			RT[i].histogramBins = new int[numberOfClasses][numberOfBins];
-			RT[i].histogramBins = MH.createBinFile(tempFolder2, type, numberOfBins, numberOfClasses);
+			RT[i].histogramBins = MH.createBinFile(tempFolder2, type, numberOfBins, numberOfClasses,st);
 			
 			//KMeans Clustering
 			File[] splittedFiles = readAllFiles(tempFolder2);
 			RT[i].co = new ClusterObject[splittedFiles.length];
-			for(int j=0;j<splittedFiles.length;j++)
+			for(int j=0;j<st.length;j++)
 			{
 				KMeansClustering KMS = new KMeansClustering();
-				RT[i].co[j] =  KMS.kMeansCluster(splittedFiles[j].getName().toString(), tempFolder2, numberOfClaster);
+				RT[i].co[j] =  KMS.kMeansCluster(st[j], tempFolder2, numberOfClaster);
 			}
 			
 			//Expectation Maximization algorithm
 			RT[i].pp = new Pairs[splittedFiles.length];
-			for(int j=0;j<splittedFiles.length;j++)
+			for(int j=0;j<st.length;j++)
 			{
 				ExpectationMaximizationAlgorithm EMA =new ExpectationMaximizationAlgorithm();
-				RT[i].pp[j] = EMA.getMeanOfGaussionsFromEMFile(tempFolder2, splittedFiles[j].getName().toString(), numOfGaussionsInEM);
+				RT[i].pp[j] = EMA.getMeanOfGaussionsFromEMFile(tempFolder2, st[j], numOfGaussionsInEM);
 			}
 			
 			//Multivariate Normal Distribution
 			RT[i].mnd = new MultivariateNormalDistribution[splittedFiles.length];
-			for(int j=0;j<splittedFiles.length;j++)
+			for(int j=0;j<st.length;j++)
 			{
 				MultivariateNormalDistribution mndr = new MultivariateNormalDistribution();
-				BufferedReader datafile = mndr.readDataFile(splittedFiles[j].getName().toString(),tempFolder2);
+				BufferedReader datafile = mndr.readDataFile(st[j],tempFolder2);
 				Instances data = new Instances(datafile);
 				RT[i].mnd[j] = mndr.fitModel(data);
 			}
@@ -128,8 +136,8 @@ public class Regressor {
 	               }
 			}
 			*/
-			File dir = new File(tempFolder2);
-			FileUtils.cleanDirectory(dir);
+		//	File dir = new File(tempFolder2);
+		//	FileUtils.cleanDirectory(dir);
 			/*
 			for(int j=0;j<splittedFiles.length;j++)
 			{

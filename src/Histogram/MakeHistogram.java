@@ -177,16 +177,17 @@ public class MakeHistogram {
 			}
 	}
 	
-	public int[][] createBinFile(String inputFolder,int type,int numberOfBins,int numberOfClasses) throws Exception
+	public int[][] createBinFile(String inputFolder,int type,int numberOfBins,int numberOfClasses,String[] fileArray) throws Exception
 	{
 		int[][] bins=new int[numberOfClasses][numberOfBins];
-		File[] arffFiles = readAllFiles(inputFolder);
-		for(int i=0;i<arffFiles.length;i++)
+		//File[] arffFiles = readAllFiles(inputFolder);
+		
+		for(int i=0;i<fileArray.length;i++)
 		{
-			BufferedReader datafile = readDataFile(arffFiles[i].getName().toString(),inputFolder);
-			System.out.println("Converting..... : "+arffFiles[i].getName().toString());
+			BufferedReader datafile = readDataFile(fileArray[i],inputFolder);
+			System.out.println("Converting..... : "+fileArray[i]);
 			Instances data = new Instances(datafile);
-			String completeName = arffFiles[i].getName().toString();
+			String completeName = fileArray[i];
 			//We are assuming that data are in a way that 0a1a.arff where 0 denote class and a1a.arff is name.
 			int classOfData =  Character.getNumericValue(completeName.charAt(0));
 

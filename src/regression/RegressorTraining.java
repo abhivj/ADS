@@ -44,7 +44,7 @@ public class RegressorTraining {
 				e.printStackTrace();
 			}
 	}
-	public void printInFeatureVector(String outputFolder,String csvFile,RegressorTraining[] RT)
+	public void printInFeatureVector(String outputFolder,String csvFile,RegressorTraining[] RT,int classes)
 	{
 		StringBuilder sb = new StringBuilder();
 		for(int i=0;i<RT.length;i++)
@@ -55,50 +55,52 @@ public class RegressorTraining {
 			pp = RT[i].pp;
 			mnd = RT[i].mnd;
 			sb.append(fileName+",");
-			for(int j=0;j<histogramBins.length;j++)
+			for(int j=0;j<classes;j++)
 			{
-				for(int k=0;k<histogramBins[j].length;k++)
+				for(int k=0;k<(histogramBins[j]).length;k++)
 				{
 					sb.append(histogramBins[j][k]+",");
 				}
 			}
-			for(int j=0;j<co.length;j++)
+			//System.out.println(RT[i].co.length);
+			for(int j=0;j<classes;j++)
 			{
-				for(int k=0;k<co[j].getClusterInstances().length;k++)
+			//	System.out.println((co[j].getClusterInstances()).length);
+				for(int k=0;k<(co[j].getClusterInstances()).length;k++)
 				{
 					sb.append(co[j].getClusterInstances()[k]+",");
 				}
-				for(int k=0;k<co[j].getClusterInstances().length;k++)
+				for(int k=0;k<(co[j].getClusterInstances()).length;k++)
 				{
 					sb.append(co[j].getClusterValues()[k]+",");
 				}
-				for(int k=0;k<co[j].getDistance().length;k++)
+				for(int k=0;k<(co[j].getDistance()).length;k++)
 				{
-					for(int l=0;l<co[j].getDistance()[k].length;l++)
+					for(int l=0;l<(co[j].getDistance()[k]).length;l++)
 					{
 						sb.append(co[j].getDistance()[k][l]+",");
 					}
 				}
 			}
-			for(int j=0;j<pp.length;j++)
+			for(int j=0;j<classes;j++)
 			{
-				for(int k=0;k<pp[j].getMean().length;k++)
+				for(int k=0;k<(pp[j].getMean()).length;k++)
 				{
-					for(int l=0;l<pp[j].getMean()[k].length;l++)
+					for(int l=0;l<(pp[j].getMean()[k]).length;l++)
 					{
 						sb.append(pp[j].getMean()[k][l]+",");
 					}
 				}
 			}
-			for(int j=0;j<mnd.length;j++)
+			for(int j=0;j<classes;j++)
 			{
-				for(int k=0;k<mnd[j].getMean().length;k++)
+				for(int k=0;k<(mnd[j].getMean()).length;k++)
 				{
 					sb.append(mnd[j].getMean()[k]+",");
 				}
-				for(int k=0;k<mnd[j].getCovariances().length;k++)
+				for(int k=0;k<(mnd[j].getCovariances()).length;k++)
 				{
-					for(int l=0;l<mnd[j].getCovariances()[k].length;l++)
+					for(int l=0;l<(mnd[j].getCovariances()[k]).length;l++)
 					{
 						sb.append(mnd[j].getCovariances()[k][l]+",");
 					}

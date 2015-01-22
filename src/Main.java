@@ -47,7 +47,7 @@ public class Main {
 		RegressorTraining[] RT = reg.createTrainingData("d:/Experiment/exp3/", "d:/Experiment/exp3/temp1/", "d:/Experiment/exp3/temp2/", true, true, true, true, true, 8, 100, 0, 20, 2, 2, 4);
 		
 		RegressorTraining print = new RegressorTraining();
-		print.printInFeatureVector("d:/Experiment/exp3/reports", "Feature.csv", RT);
+		print.printInFeatureVector("d:/Experiment/exp3/reports/", "Feature.csv", RT,2);
 		
 		
 	}
