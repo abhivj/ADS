@@ -56,7 +56,8 @@ public class Main {
 		*/
 		
 		MultiLayerPerceptronNetwork MPN = new MultiLayerPerceptronNetwork();
-		MPN.createModel("d:/Experiment/exp3/reports/reportsTry.csv", "d:/Experiment/exp3/reports/RegressionReportsMPC500Ranomization.csv", 10, 80);
+		//MPN.createModel("d:/Experiment/exp3/reports/reportsTry.csv", "d:/Experiment/exp3/reports/RegressionReportsMPC500Ranomization.csv", 10, 80);
+		MPN.createModel("d:/Experiment/exp3/reports/reportsTry.csv","d:/Experiment/exp3/reports/RegressionReportsMPCHidden.csv","d:/Experiment/exp3/reports/RegressionReportsMPCTraining.csv","d:/Experiment/exp3/reports/RegressionReportsMPCBoth.csv");
 		
 		
 	}

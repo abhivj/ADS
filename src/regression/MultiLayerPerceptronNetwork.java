@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Random;
 
+import weka.classifiers.Evaluation;
 import weka.classifiers.functions.MultilayerPerceptron;
 import weka.core.Instance;
 import weka.core.Instances;
@@ -54,7 +55,125 @@ public class MultiLayerPerceptronNetwork {
 				e.printStackTrace();
 			}
 	}
-	
+	public void createModel(String csvFile,String savePathHidden, String savePathTraining,String savePathBoth) throws Exception
+	{
+		File file = new File(csvFile);
+		BufferedReader datafile = readDataFile(csvFile);
+		System.out.println("DataFile .... : "+csvFile);
+		DataSource source = new DataSource(csvFile);
+		Instances data = source.getDataSet();
+		Instances modifiedData = new Instances(data);
+		data.setClassIndex(data.numAttributes() - 1);
+		
+		//LinearRegression LR = new LinearRegression();
+		MultilayerPerceptron LR = new MultilayerPerceptron();
+		
+		double actualValue[] = new double[data.numInstances()];
+		double predictedValue[] = new double[data.numInstances()];
+		double hiddenLayers[] = new double[100];
+		for(int i=1;i<=100;i++)
+		{
+			for(int j=0;j<data.numInstances();j++)
+			{
+				Instance currentInstance = data.instance(j);
+				actualValue[j] = currentInstance.value(data.classIndex());
+				modifiedData = new Instances(data);
+				modifiedData.delete(j);
+				LR = new MultilayerPerceptron();
+				//delete it
+				//LR.setTrainingTime(50);
+				String hiddenLayer = String.valueOf(i);
+				LR.setHiddenLayers(hiddenLayer);
+				LR.buildClassifier(modifiedData);	
+				predictedValue[j] = LR.classifyInstance(currentInstance);
+			}
+			double absE=0;
+			for(int j=0;j<data.numInstances();j++)
+			{
+				absE+=Math.abs((actualValue[j]-predictedValue[j]));
+			}
+			absE = absE/data.numInstances();
+			hiddenLayers[i] = absE;
+			System.out.println("No of Layer "+i+" Error :"+absE);
+		}
+		StringBuilder sb = new StringBuilder();
+		sb.append("Hidden Layer, Error Rate\n");
+		for(int i=1;i<data.numInstances();i++)
+		{
+			sb.append(i+","+hiddenLayers[i]+"\n");
+		}
+		sb.deleteCharAt(sb.length()-1);
+		writeCSVReport(sb.toString(), savePathHidden);
+		double trainingTime[] = new double[100];
+		for(int i=1;i<100;i++)
+		{
+			for(int j=0;j<data.numInstances();j++)
+			{
+				Instance currentInstance = data.instance(j);
+				actualValue[j] = currentInstance.value(data.classIndex());
+				modifiedData = new Instances(data);
+				modifiedData.delete(j);
+				LR = new MultilayerPerceptron();
+				//delete it
+				LR.setTrainingTime(i*20);
+				//LR.setHiddenLayers("4");
+				
+				LR.buildClassifier(modifiedData);	
+				predictedValue[j] = LR.classifyInstance(currentInstance);
+			}
+			double absE=0;
+			for(int j=0;j<data.numInstances();j++)
+			{
+				absE+=Math.abs((actualValue[j]-predictedValue[j]));
+			}
+			absE = absE/data.numInstances();
+			trainingTime[i] = absE;
+			System.out.println("TrainingTime "+i*20+" Error :"+absE);
+		}
+		sb.delete(0, sb.length()-1);
+		sb.append("Training Time, Error Rate\n");
+		for(int i=1;i<data.numInstances();i++)
+		{
+			sb.append(i+","+trainingTime[i]+"\n");
+		}
+		sb.deleteCharAt(sb.length()-1);
+		writeCSVReport(sb.toString(), savePathTraining);
+		
+		sb.delete(0, sb.length()-1);
+		sb.append("Hidden Layers,Training Time,Error Rate\n");
+		for(int i=1;i<=100;i++)
+		{
+			for(int k=1;k<=100;k++)
+			{
+				for(int j=0;j<data.numInstances();j++)
+				{
+					Instance currentInstance = data.instance(j);
+					actualValue[j] = currentInstance.value(data.classIndex());
+					modifiedData = new Instances(data);
+					modifiedData.delete(j);
+					LR = new MultilayerPerceptron();
+					//delete it
+					String hiddenLayer = String.valueOf(k);
+					LR.setTrainingTime(i*20);
+					LR.setHiddenLayers(hiddenLayer);
+					LR.buildClassifier(modifiedData);	
+					predictedValue[j] = LR.classifyInstance(currentInstance);
+				}
+				double absE=0;
+				for(int j=0;j<data.numInstances();j++)
+				{
+					absE+=Math.abs((actualValue[j]-predictedValue[j]));
+				}
+				absE = absE/data.numInstances();
+				trainingTime[i] = absE;
+				System.out.println("Hiddden Layer :"+k+" TrainingTime "+i*20+" Error :"+absE);
+				sb.append(k+","+i*20+","+absE+"\n");
+			}
+		}
+		sb.deleteCharAt(sb.length()-1);
+		writeCSVReport(sb.toString(), savePathBoth);
+		
+	}
 	public void createModel(String csvFile,String savePath,int numberOfBags,int percentageTraining) throws Exception
 	{
 		
