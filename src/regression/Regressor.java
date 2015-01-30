@@ -62,7 +62,17 @@ public class Regressor {
 	{
 		
 		//We got all files in arffFile array. 
-		File[] arffFiles = readAllFiles(inputFolder);
+		File[] allFiles = readAllFiles(inputFolder);
+		
+		for(int i=0;i<allFiles.length;i++)
+		{
+			String fileName = allFiles[i].getName().toString();
+			TrainingDataCleaner TDC = new TrainingDataCleaner();
+			boolean isFile = TDC.cleanAndModifyFile(inputFolder, fileName, tempFolder1, convertNominal, doPCA, doNormalization, doRejectIfLess, rejectIfNotBinary, dimOfPCA, minimumInstance);
+			
+		}
+		
+		File[] arffFiles = readAllFiles(tempFolder1);
 		RegressorTraining[] RT = new RegressorTraining[arffFiles.length];
 		for(int i=0;i<arffFiles.length;i++)
 		{
@@ -70,11 +80,8 @@ public class Regressor {
 			String fileName = arffFiles[i].getName().toString();
 			RT[i].fileName = fileName;
 			//Cleaning Traning data
-			TrainingDataCleaner TDC = new TrainingDataCleaner();
-			TDC.cleanAndModifyFile(inputFolder, fileName, tempFolder1, convertNominal, doPCA, doNormalization, doRejectIfLess, rejectIfNotBinary, dimOfPCA, minimumInstance);
 			
 			//Delete all previous
-			
 			
 			//Modifying to {0 to N-1} classes and separating it
 			ModifyBinary MB = new ModifyBinary();
@@ -148,8 +155,7 @@ public class Regressor {
                	System.out.println("rejected");
 			
 			}
-			*/
-			
+			*/	
 			/*
 			File dir = new File(tempFolder2);
 			//File dir = new File(tempFolder2);
@@ -158,7 +164,6 @@ public class Regressor {
 			//for(File file: splittedFiles) file.delete(); 
 		*/
 		}
-
 		return RT;
 	}
 	

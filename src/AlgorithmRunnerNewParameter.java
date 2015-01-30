@@ -169,14 +169,15 @@ public class AlgorithmRunnerNewParameter {
 	     //
 	 
 	  //Start writing about csv
+	     StringBuilder csv2 = new StringBuilder(",");	     
 	  StringBuilder csvFile = new StringBuilder(",");
 	  for(int k=0;k<models.length;k++)
 	  {
-		  csvFile.append(models[k].getClass().getSimpleName());
+		  csv2.append(models[k].getClass().getSimpleName());
 		  if(k!=models.length-1)
-			  csvFile.append(",");
+			  csv2.append(",");
 		  else
-			  csvFile.append("\n");
+			  csv2.append("\n");
 	   }
 	   System.out.println(csvFile.toString());
 
@@ -224,14 +225,17 @@ public class AlgorithmRunnerNewParameter {
     			}
        
     		}
-    		StringBuilder csv2 = new StringBuilder();
+    		
     		System.out.println();
     		System.out.println("Accuray of classifiers : Actual : ");
     		for(int k=0;k<arffFiles.length;k++)
     		{
+    			csv2.append(arffFiles[k].getName().toString());
+    			csv2.append(",");
     			for(int l=0;l<models.length;l++)
     			{
     				//System.out.print("    ||    "+Comparision[k][l]);
+    				
     				csv2.append(Comparision[k][l]+",");
     			}
     			csv2.append("\n");
@@ -382,9 +386,10 @@ public class AlgorithmRunnerNewParameter {
 		//String reportPath = "d:/work241/reportnew4AOC.csv";
 		//String filePath = "./data/BinaryDatasets/";
 		//Algorunner(filePath, reportPath);
-		String reportPath = "d:/Experiment/reports/AlgorithmRunAndAccuracyResultAllP.csv";
+		String reportPath = "d:/Experiment/reports/AllResultInAccuracyFormat.csv";
 		String filePath ="d:/Experiment/exp1/";
 		Algorunner(filePath, reportPath);
+	
 	}
 
 }

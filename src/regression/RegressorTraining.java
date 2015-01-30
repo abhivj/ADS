@@ -47,6 +47,9 @@ public class RegressorTraining {
 	public void printInFeatureVector(String outputFolder,String csvFile,RegressorTraining[] RT,int classes)
 	{
 		StringBuilder sb = new StringBuilder();
+		StringBuilder header = new StringBuilder();
+		int coloumnCounter=0;
+		boolean flag = false;
 		for(int i=0;i<RT.length;i++)
 		{
 			fileName = RT[i].fileName;
@@ -55,11 +58,13 @@ public class RegressorTraining {
 			pp = RT[i].pp;
 			mnd = RT[i].mnd;
 			sb.append(fileName+",");
+			coloumnCounter++;
 			for(int j=0;j<classes;j++)
 			{
-				for(int k=0;k<(histogramBins[j]).length;k++)
+				for(int k=0;k<(histogramBins[j]).length/2;k++)
 				{
 					sb.append(histogramBins[j][k]+",");
+					coloumnCounter++;
 				}
 			}
 			//System.out.println(RT[i].co.length);
@@ -69,16 +74,19 @@ public class RegressorTraining {
 				for(int k=0;k<(co[j].getClusterInstances()).length;k++)
 				{
 					sb.append(co[j].getClusterInstances()[k]+",");
+					coloumnCounter++;
 				}
 				for(int k=0;k<(co[j].getClusterInstances()).length;k++)
 				{
 					sb.append(co[j].getClusterValues()[k]+",");
+					coloumnCounter++;
 				}
 				for(int k=0;k<(co[j].getDistance()).length;k++)
 				{
 					for(int l=0;l<(co[j].getDistance()[k]).length;l++)
 					{
 						sb.append(co[j].getDistance()[k][l]+",");
+						coloumnCounter++;
 					}
 				}
 			}
@@ -89,28 +97,48 @@ public class RegressorTraining {
 					for(int l=0;l<(pp[j].getMean()[k]).length;l++)
 					{
 						sb.append(pp[j].getMean()[k][l]+",");
+						coloumnCounter++;
 					}
 				}
 			}
+			
 			for(int j=0;j<classes;j++)
 			{
 				for(int k=0;k<(mnd[j].getMean()).length;k++)
 				{
 					sb.append(mnd[j].getMean()[k]+",");
+					coloumnCounter++;
 				}
+				
 				for(int k=0;k<(mnd[j].getCovariances()).length;k++)
 				{
 					for(int l=0;l<(mnd[j].getCovariances()[k]).length;l++)
 					{
 						sb.append(mnd[j].getCovariances()[k][l]+",");
+						coloumnCounter++;
 					}
 				}
+				
 			}
 			sb.deleteCharAt(sb.length()-1);
 			sb.append("\n");
+			if(flag==false)
+			{
+				flag=true;
+				for(int k=0;k<coloumnCounter;k++)
+				{
+					header.append("Attr"+(k+1)+",");
+				}
+				if(header.length()>0)
+					header.deleteCharAt(header.length()-1);
+				header.append("\n");
+				
+			}
 			
 		}
+		if(sb.length()>0)
 		sb.deleteCharAt(sb.length()-1);
-		writeCSVReport(sb.toString(),outputFolder+csvFile);
+		header.append(sb.toString());
+		writeCSVReport(header.toString(),outputFolder+csvFile);
 	}
 }

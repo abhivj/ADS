@@ -212,7 +212,7 @@ public class TrainingDataCleaner {
 	}
 	
 	
-	public void cleanAndModifyFile(String InputFolderPath,String fileName,String outputFolder,boolean convertNominal,boolean doPCA,boolean doNormalization,boolean doRejectIfLess,boolean rejectIfNotBinary, int dimOfPCA,int minimumInstance) throws Exception
+	public boolean cleanAndModifyFile(String InputFolderPath,String fileName,String outputFolder,boolean convertNominal,boolean doPCA,boolean doNormalization,boolean doRejectIfLess,boolean rejectIfNotBinary, int dimOfPCA,int minimumInstance) throws Exception
 	{
 		TrainingDataCleaner dataObject = new TrainingDataCleaner();
 		File file = new File(InputFolderPath+fileName);
@@ -287,11 +287,12 @@ public class TrainingDataCleaner {
 		System.out.println(fileName+" : Saved !! in training data cleaner module");
 		
 		dataObject.saveArffFromInstances(fileName,outputFolder,ConvertedData);
+		return true;
 		}
 		else
 		{
 		System.out.println(fileName+" : Rejected !! in training data cleaner module");
-		
+		return false;
 		}
 		
 	}

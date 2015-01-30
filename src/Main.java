@@ -42,12 +42,21 @@ public class Main {
 		//ModifyBinary.modifyTo01("d:/Experiment/exp1/", "d:/Experiment/exp2/");
 		
 		//rg.createTrainingData("d:/Experiment/exp3/", "d:/Experiment/exp3/temp1/", "d:/Experiment/exp3/temp2/", 20, true, true, true, true, true, 8, 100);
-		
+		/*
 		Regressor reg = new Regressor();
-		RegressorTraining[] RT = reg.createTrainingData("d:/Experiment/exp3/", "d:/Experiment/exp3/temp1/", "d:/Experiment/exp3/temp2/", true, true, true, true, true, 8, 100, 0, 20, 2, 2, 4);
+		RegressorTraining[] RT = reg.createTrainingData("d:/Experiment/exp3/", "d:/Experiment/exp3/temp1/", "d:/Experiment/exp3/temp2/", true, true, true, true, true, 8, 100, 0, 20, 2, 2, 2);
 		
 		RegressorTraining print = new RegressorTraining();
-		print.printInFeatureVector("d:/Experiment/exp3/reports/", "Feature.csv", RT,2);
+		print.printInFeatureVector("d:/Experiment/exp3/reports/", "FeatureWithHeadersAllDatasets.csv", RT,2);
+		*/
+		
+		/*
+		Regression regi = new Regression();
+		regi.createModel("d:/Experiment/exp3/reports/reportsTry.csv","d:/Experiment/exp3/reports/RegressionReportsMPC5000.csv");
+		*/
+		
+		MultiLayerPerceptronNetwork MPN = new MultiLayerPerceptronNetwork();
+		MPN.createModel("d:/Experiment/exp3/reports/reportsTry.csv", "d:/Experiment/exp3/reports/RegressionReportsMPC500Ranomization.csv", 10, 80);
 		
 		
 	}

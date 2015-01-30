@@ -18,5 +18,10 @@
 	<classpathentry kind="lib" path="C:/Users/abhivj/workspace/Artificial Data Scientist/libs/jmi.jar"/>
 	<classpathentry kind="lib" path="C:/Users/abhivj/workspace/Artificial Data Scientist/libs/util.jar"/>
 	<classpathentry kind="lib" path="C:/Users/abhivj/workspace/Artificial Data Scientist/libs/commons-io-2.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/abhivj/workspace/Artificial Data Scientist/libs/JavaPlot.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/C:/Users/abhivj/workspace/Artificial%20Data%20Scientist/doc/Javaplot%20docs/javadoc/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
