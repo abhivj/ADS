@@ -23,5 +23,6 @@
 			<attribute name="javadoc_location" value="file:/C:/Users/abhivj/workspace/Artificial%20Data%20Scientist/doc/Javaplot%20docs/javadoc/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/abhivj/workspace/Artificial Data Scientist/libs/opencsv-3.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -215,12 +215,15 @@ public class AlgorithmRunnerNewParameter {
     			//eval.areaUnderROC(arg0)
     			double aoc = eval.areaUnderROC(0);
     			aoc = eval.areaUnderROC(1);
-    		
+    			
     			double accuracy = 1-eval.errorRate();
     			// System.out.println("SVM error rate : "+errormid*100);
     			// System.out.println(models[j].getClass().getSimpleName() + ": " + String.format("%.2f%%", (1-errormid)*100) + "\n=====================");
-       
-    			Comparision[i][j]= accuracy;
+    		
+    			
+    			//double param2 = eval.fMeasure(1);
+    			
+    			Comparision[i][j]= eval.weightedFalsePositiveRate();
     			
     			}
        
@@ -237,12 +240,14 @@ public class AlgorithmRunnerNewParameter {
     				//System.out.print("    ||    "+Comparision[k][l]);
     				
     				csv2.append(Comparision[k][l]+",");
+    				
     			}
+    			csv2.deleteCharAt(csv2.length()-1);
     			csv2.append("\n");
     			//System.out.println();
     			//System.out.println("********************");
     		}
-     
+    		csv2.deleteCharAt(csv2.length()-1);
     		for(int k=0;k<arffFiles.length;k++)
     		{
     			double[][] sample = new double[2][models.length];
@@ -386,7 +391,8 @@ public class AlgorithmRunnerNewParameter {
 		//String reportPath = "d:/work241/reportnew4AOC.csv";
 		//String filePath = "./data/BinaryDatasets/";
 		//Algorunner(filePath, reportPath);
-		String reportPath = "d:/Experiment/reports/AllResultInAccuracyFormat.csv";
+		//String reportPath = "d:/Experiment/reports/AllResultInAccuracyFormat.csv";
+		String reportPath = "d:/Experiment/exp4/performanceMeasures/FPRate.csv";
 		String filePath ="d:/Experiment/exp1/";
 		Algorunner(filePath, reportPath);
 	

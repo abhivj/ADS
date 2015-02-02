@@ -70,8 +70,9 @@ public class MultiLayerPerceptronNetwork {
 		
 		double actualValue[] = new double[data.numInstances()];
 		double predictedValue[] = new double[data.numInstances()];
-		double hiddenLayers[] = new double[100];
-		for(int i=1;i<=100;i++)
+		
+		double hiddenLayers[] = new double[10];
+		for(int i=1;i<=10;i++)
 		{
 			for(int j=0;j<data.numInstances();j++)
 			{
@@ -93,19 +94,30 @@ public class MultiLayerPerceptronNetwork {
 				absE+=Math.abs((actualValue[j]-predictedValue[j]));
 			}
 			absE = absE/data.numInstances();
-			hiddenLayers[i] = absE;
+			hiddenLayers[i-1] = absE;
 			System.out.println("No of Layer "+i+" Error :"+absE);
 		}
+		double min = Double.MAX_VALUE;
+		int minIndex = -1;
 		StringBuilder sb = new StringBuilder();
 		sb.append("Hidden Layer, Error Rate\n");
-		for(int i=1;i<data.numInstances();i++)
+		for(int i=1;i<=10;i++)
 		{
-			sb.append(i+","+hiddenLayers[i]+"\n");
+			sb.append(i+","+hiddenLayers[i-1]+"\n");
+			if(hiddenLayers[i-1]<min)
+			{
+				min = hiddenLayers[i-1];
+				minIndex = i;
+			}
 		}
-		sb.deleteCharAt(sb.length()-1);
+		//sb.deleteCharAt(sb.length()-1);
+		sb.append("Minimum Error Hidden Layer "+minIndex);
 		writeCSVReport(sb.toString(), savePathHidden);
-		double trainingTime[] = new double[100];
-		for(int i=1;i<100;i++)
+		System.out.println("Minimum Error Hidden Layer "+minIndex);
+		
+		
+		double trainingTime[] = new double[200];
+		for(int i=1;i<=200;i++)
 		{
 			for(int j=0;j<data.numInstances();j++)
 			{
@@ -127,20 +139,32 @@ public class MultiLayerPerceptronNetwork {
 				absE+=Math.abs((actualValue[j]-predictedValue[j]));
 			}
 			absE = absE/data.numInstances();
-			trainingTime[i] = absE;
+			trainingTime[i-1] = absE;
 			System.out.println("TrainingTime "+i*20+" Error :"+absE);
 		}
 		sb.delete(0, sb.length()-1);
+		min = Double.MAX_VALUE;
+		minIndex = -1;
 		sb.append("Training Time, Error Rate\n");
-		for(int i=1;i<data.numInstances();i++)
+		for(int i=1;i<=200;i++)
 		{
-			sb.append(i+","+trainingTime[i]+"\n");
+			sb.append(i+","+trainingTime[i-1]+"\n");
+			if(trainingTime[i-1]<min)
+			{
+				min = trainingTime[i-1];
+				minIndex = i;
+			}
 		}
-		sb.deleteCharAt(sb.length()-1);
+		sb.append("Minimum Error Training Time "+minIndex*20);
+		System.out.println("Minimum Error Training Time "+minIndex*20+" error : "+min);
 		writeCSVReport(sb.toString(), savePathTraining);
 		
+		/*
 		sb.delete(0, sb.length()-1);
 		sb.append("Hidden Layers,Training Time,Error Rate\n");
+		int minI=-1;
+		int minK=-1;
+		min = Double.MAX_VALUE;
 		for(int i=1;i<=100;i++)
 		{
 			for(int k=1;k<=100;k++)
@@ -165,15 +189,33 @@ public class MultiLayerPerceptronNetwork {
 					absE+=Math.abs((actualValue[j]-predictedValue[j]));
 				}
 				absE = absE/data.numInstances();
-				trainingTime[i] = absE;
+				if(min>absE)
+				{
+					absE = min;
+					minI = i;
+					minK = k;
+				}
+				
 				System.out.println("Hiddden Layer :"+k+" TrainingTime "+i*20+" Error :"+absE);
 				sb.append(k+","+i*20+","+absE+"\n");
 			}
 		}
-		sb.deleteCharAt(sb.length()-1);
+		sb.append("Training Time : "+min*20+" Hidden Layer :"+minK);
+		//sb.deleteCharAt(sb.length()-1);
 		writeCSVReport(sb.toString(), savePathBoth);
+		*/
 		
 	}
+	
+	public void findOptimalHiddenLayer(String csvFile,String savePath,int trainingTime,int lowRange,int highRange,int step)
+	{
+		
+	}
+	public void findOptimalTrainingTime(String csvFile,String savePath,int hiddenLayers,int lowRange,int highRange,int step)
+	{
+		
+	}
+	
 	public void createModel(String csvFile,String savePath,int numberOfBags,int percentageTraining) throws Exception
 	{
 		

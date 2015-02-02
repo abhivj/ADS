@@ -4,6 +4,7 @@ import Histogram.*;
 import Stats.*;
 import Clustering.*;
 import regression.*;
+import plots.*;
 public class Main {
 
 	public static void main(String[] args) throws Exception {
@@ -54,11 +55,40 @@ public class Main {
 		Regression regi = new Regression();
 		regi.createModel("d:/Experiment/exp3/reports/reportsTry.csv","d:/Experiment/exp3/reports/RegressionReportsMPC5000.csv");
 		*/
-		
+		/*
 		MultiLayerPerceptronNetwork MPN = new MultiLayerPerceptronNetwork();
-		//MPN.createModel("d:/Experiment/exp3/reports/reportsTry.csv", "d:/Experiment/exp3/reports/RegressionReportsMPC500Ranomization.csv", 10, 80);
-		MPN.createModel("d:/Experiment/exp3/reports/reportsTry.csv","d:/Experiment/exp3/reports/RegressionReportsMPCHidden.csv","d:/Experiment/exp3/reports/RegressionReportsMPCTraining.csv","d:/Experiment/exp3/reports/RegressionReportsMPCBoth.csv");
+		MPN.createModel("d:/Experiment/exp4/regressionTrainingFiles/Accuracy/MultilayerPerceptron.csv",
+				"d:/Experiment/exp4/baggingResults/bag-Accuracy-MultilayerPerceptron-50-80.csv", 50, 80);
+		*/
 		
+		/*
+		MPN.createModel("d:/Experiment/exp3/reports/reportsTry.csv",
+				"d:/Experiment/exp3/reports/RegressionReportsMPCHidden2.csv",
+				"d:/Experiment/exp3/reports/RegressionReportsMPCTraining2.csv",
+				"d:/Experiment/exp3/reports/RegressionReportsMPCBoth1.csv");
+		*/
+		//Plots p = new Plots();
+		//p.plotting();
+		
+		//GenerateRegressionData GRD = new GenerateRegressionData();
+		//GRD.generateFiles("d:/Experiment/exp4/AllAttributes.csv", "d:/Experiment/exp4/performanceMeasures/TNRate.csv", "d:/Experiment/exp4/regressionTrainingFiles/TNRate/");
+		
+		
+		//RegressionAndRanking RAR = new RegressionAndRanking();
+		//RAR.createModel("d:/Experiment/exp4/regressionTrainingFiles/Precision/", "d:/Experiment/exp4/regressionResultsFromExperiment/Precision.csv", "d:/Experiment/exp4/performanceMeasures/Precision.csv", 1080, 99);
+		
+		/*
+		GenerateRanks GR = new GenerateRanks();
+		//GR.generateRankFile("d:/Experiment/exp4/resultFromAllAlgorithms.csv", "d:/Experiment/exp4/resultRank/Ranks.csv", "d:/Experiment/exp4/resultRank/topK.txt", "d:/Experiment/exp4/resultRank/topKNames.txt", 5);
+		GR.generateRankFile("d:/Experiment/exp4/performanceMeasures/TNRate.csv", 
+				"d:/Experiment/exp4/performanceMeasures/topResults/TNRate-Experiment.csv", 
+				"d:/Experiment/exp4/performanceMeasures/topResults/TNRate-ExperimentTopK.txt", 
+				"d:/Experiment/exp4/performanceMeasures/topResults/TNRate-ExperimenttopKNames1.txt", 10);
+		*/
+		
+		//Class called for converting multiclass to binary
+		ConvertToBinary ctb = new ConvertToBinary();
+		ctb.convertBinary("d:/Experiment/AllDatasets/", "d:/Experiment/convertedToBinary/");
 		
 	}
 
