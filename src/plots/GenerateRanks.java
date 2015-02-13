@@ -82,8 +82,8 @@ public class GenerateRanks {
     	sb.append("\n");
 	    while (((algorithms = inputFile.readNext()) != null)) {
 		    sb.append(algorithms[0]+",");
-		    
-		    topk.append(algorithms[0]+" -> ");
+		   
+		   // topk.append(algorithms[0]+" -> ");
 		    topNames.append(algorithms[0]+" -> ");
 		    
 	    	double array[] = new double[algorithms.length-1];

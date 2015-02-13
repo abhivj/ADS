@@ -87,8 +87,98 @@ public class Main {
 		*/
 		
 		//Class called for converting multiclass to binary
-		ConvertToBinary ctb = new ConvertToBinary();
-		ctb.convertBinary("d:/Experiment/AllDatasets/", "d:/Experiment/convertedToBinary/");
+		//ConvertToBinary ctb = new ConvertToBinary();
+		//ctb.convertBinary("d:/Experiment/AllDatasets/", "d:/Experiment/convertedToBinary/");
+		
+		
+		//Step 1
+		//ConvertToBinary ctb = new ConvertToBinary();
+		//ctb.convertBinary("d:/Experiment/AllDatasets/", "d:/Experiment/convertedToBinary/");
+		
+		//Step 2
+		//TrainingDataCleaner.CleanAndModify("d:/Experiment/ExperimentFeb/AllDatasetsConverted/", "d:/Experiment/ExperimentFeb/BinaryDatasetLarge/", true, true, true,true,true,8,100);
+		
+		//Step 3
+		//ModifyBinary.modifyTo01("d:/Experiment/ExperimentFeb/3BinrayDatasetLargeDeleted/", "d:/Experiment/ExperimentFeb/4BinarySeparatedDatasets/");
+				
+		//Step4
+		//MakeHistogram.createBins("d:/Experiment/ExperimentFeb/4BinarySeparatedDatasets/", 0, 20, "d:/Experiment/ExperimentFeb/reports/", "HistogramBinReport.csv");
+		
+		//Step 5 (optional)
+		/*
+		CompareHistogram.BinaryClassComparision("d:/Experiment/ExperimentFeb/reports/HistogramBinReport.csv",
+				146, 
+				"d:/Experiment/ExperimentFeb/reports/BinaryComparision-HistogramBin-Kolmogrov.txt", 
+				10);
+		*/
+		
+		//Fresh Start Independent process
+	/*
+		Regressor reg = new Regressor();
+		RegressorTraining[] RT = reg.createTrainingData("d:/Experiment/ExperimentFeb/1AllDatasetsConverted/", "d:/Experiment/ExperimentFeb/temp1/", "d:/Experiment/ExperimentFeb/temp2/", true, true, true, true, true, 8, 100, 0, 20, 2, 2, 2);
+		
+		RegressorTraining print = new RegressorTraining();
+		print.printInFeatureVector("d:/Experiment/ExperimentFeb/reports/", "AttributeFile.csv", RT,2);
+		*/
+		
+		/*
+		GenerateRegressionData GRD = new GenerateRegressionData();
+		GRD.generateFiles("d:/Experiment/ExperimentFeb/reports/AttributeFile.csv",
+				"d:/Experiment/ExperimentFeb/reports/LargeDatasets-Accuracy.csv", 
+				"d:/Experiment/ExperimentFeb/reports/AccuracyReg/");
+	*/
+		/*
+		RegressionAndRanking RAR = new RegressionAndRanking();
+		RAR.createModel("d:/Experiment/ExperimentFeb/reports/AccuracyReg/",
+				"d:/Experiment/ExperimentFeb/reports/Accuracy-AllModel.csv",
+				"d:/Experiment/ExperimentFeb/reports/LargeDatasets-Accuracy.csv", 1480, 141);
+		*/
+	/*	
+		GenerateRanks GR = new GenerateRanks();
+		GR.generateRankFile("d:/Experiment/ExperimentFeb/reports/Accuracy-AllModel.csv", 
+				"d:/Experiment/ExperimentFeb/reports/Accuracy-AllModel-Experiment-Ranking.csv", 
+				"d:/Experiment/ExperimentFeb/reports/Accuracy-AllModel-Experiment-Ranking-TopK.txt", 
+				"d:/Experiment/ExperimentFeb/reports/Accuracy-AllModel-Experiment-Ranking-topKNames1.txt", 10);
+		*/
+		/*
+		GenerateRanks GR = new GenerateRanks();
+		GR.generateRankFile("d:/Experiment/ExperimentFeb/reports/LargeDatasets-Accuracy.csv", 
+				"d:/Experiment/ExperimentFeb/reports/Accuracy-AllModel-Experiment-Ranking-Temp.csv", 
+				"d:/Experiment/ExperimentFeb/reports/Accuracy-AllModel-Experiment-Ranking-TopK-Modified-temp.txt", 
+				"d:/Experiment/ExperimentFeb/reports/Accuracy-AllModel-Experiment-Ranking-topKNames1-temp.txt", 10);
+		*/
+		/*
+		TopMatching TM = new TopMatching();
+		TM.compareTwoFile("d:/Experiment/ExperimentFeb/testForTop7/actual.txt",
+				"d:/Experiment/ExperimentFeb/testForTop7/predicted.txt",
+				7,"d:/Experiment/ExperimentFeb/testForTop7/TopK-result.csv");
+		*/
+		/*
+		GenerateRanks GR = new GenerateRanks();
+		GR.generateRankFile("d:/Experiment/ExperimentFeb/testForTop7-44datasets/Accuracy-Base.csv", 
+				"d:/Experiment/ExperimentFeb/testForTop7-44datasets/temp.txt", 
+				"d:/Experiment/ExperimentFeb/testForTop7-44datasets/actual.txt", 
+				"d:/Experiment/ExperimentFeb/testForTop7-44datasets/temp.txt", 13);
+		
+		GR.generateRankFile("d:/Experiment/ExperimentFeb/testForTop7-44datasets/Accuracy-Experiment.csv", 
+				"d:/Experiment/ExperimentFeb/testForTop7-44datasets/temp.txt", 
+				"d:/Experiment/ExperimentFeb/testForTop7-44datasets/predicted.txt", 
+				"d:/Experiment/ExperimentFeb/testForTop7-44datasets/temp.txt", 13);
+		
+		*/
+		RandomRankGenerator RRG = new RandomRankGenerator();
+		RRG.fileGenerator("d:/Experiment/ExperimentFeb/reports/Accuracy-AllModel.csv", "d:/Experiment/ExperimentFeb/testForTop7-44datasets/random2.txt", 13);
+		
+		
+		TopMatching TM = new TopMatching();
+		TM.compareTwoFile("d:/Experiment/ExperimentFeb/testForTop7-44datasets/actual.txt",
+				"d:/Experiment/ExperimentFeb/testForTop7-44datasets/random2.txt",
+				7,"d:/Experiment/ExperimentFeb/testForTop7-44datasets/TopK-result-with-Random2.csv");
+		/*
+		TM.compareTwoFile("d:/Experiment/ExperimentFeb/testForTop7-44datasets/actual.txt",
+				"d:/Experiment/ExperimentFeb/testForTop7-44datasets/predicted.txt",
+				7,"d:/Experiment/ExperimentFeb/testForTop7-44datasets/TopK-result-with-predicted.csv");
+		*/
 		
 	}
 

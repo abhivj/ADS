@@ -223,7 +223,7 @@ public class AlgorithmRunnerNewParameter {
     			
     			//double param2 = eval.fMeasure(1);
     			
-    			Comparision[i][j]= eval.weightedFalsePositiveRate();
+    			Comparision[i][j]= 1-eval.errorRate();
     			
     			}
        
@@ -392,8 +392,8 @@ public class AlgorithmRunnerNewParameter {
 		//String filePath = "./data/BinaryDatasets/";
 		//Algorunner(filePath, reportPath);
 		//String reportPath = "d:/Experiment/reports/AllResultInAccuracyFormat.csv";
-		String reportPath = "d:/Experiment/exp4/performanceMeasures/FPRate.csv";
-		String filePath ="d:/Experiment/exp1/";
+		String reportPath = "d:/Experiment/ExperimentFeb/reports/LargeDatasets-Accuracy.csv";
+		String filePath ="d:/Experiment/ExperimentFeb/temp1/";
 		Algorunner(filePath, reportPath);
 	
 	}
