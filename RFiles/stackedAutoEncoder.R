@@ -1,3 +1,48 @@
+stackedAutoEncoder <- function(a,inputFile,outputFile){
+  csvData <- read.csv(inputFile,header=TRUE)
+  fileNames <- as.matrix(csvData[1],header=FALSE)
+  fileNames <- matrix(fileNames, ncol = ncol(fileNames), dimnames = NULL) #converting filename 
+  mat <- as.matrix(csvData[2:dim(csvData)[2]]) #Excluding filenames
+ 
+  library(autoencoder)
+  nl=3 ## number of layers (default is 3: input, hidden, output)
+  unit.type = "logistic" ## specify the network unit type, i.e., the unit's
+  ## activation function ("logistic" or "tanh")
+  N.input = dim(mat)[2] ## number of units (neurons) in the input layer (one unit per pixel)
+ 
+  N.hidden = 100 ## number of units in the hidden layer
+  lambda = 0.0002 ## weight decay parameter
+  beta = 6 ## weight of sparsity penalty term
+  rho = 0.01 ## desired sparsity parameter
+  epsilon <- 0.001 ## a small parameter for initialization of weights
+  
+  ## as small gaussian random numbers sampled from N(0,epsilon^2)
+  max.iterations = 2000 ## number of iterations in optimizer
+  loopMatrix <- mat
+  for(i in 1:length(a)){
+    
+    N.input = dim(loopMatrix)[2]
+    N.hidden = a[i]
+    autoencoder.object <- autoencode(X.train=mat,nl=nl,N.hidden=N.hidden,
+                                     unit.type=unit.type,lambda=lambda,beta=beta,rho=rho,epsilon=epsilon,
+                                     optim.method="BFGS",max.iterations=max.iterations,
+                                     rescale.flag=FALSE,rescaling.offset=0.001)
+    
+    ## Extract weights W and biases b from autoencoder.object:
+    W <- autoencoder.object$W
+    b <- autoencoder.object$b
+    
+    layer<-feedforward.pass.matrix(W,b,mat)$a[[2]]
+    #combines names with output matrix
+    loopMatrix <- layer
+    
+  }
+  combinedWithHidden <- cbind(fileNames,loopMatrix)
+  write.csv(combinedWithHidden,outputFile,row.names=FALSE)
+  
+}
+
+
 activation <- function(z){#activation (output) of neurons
   if (unit.type=="logistic") return(1/(1+exp(-z)))
   if (unit.type=="tanh") return(tanh(z))
@@ -54,46 +99,9 @@ rescale.back <- function(X.in,X.in.min,X.in.max,unit.type,offset){#revert the sc
   return(list("X.rescaled"=X.in))
 }
 
-csvData <- read.csv('D:\\Experiment\\exp4\\AllAttributes.csv',header=TRUE)
-fileNames <- as.matrix(csvData[1],header=FALSE)
-fileNames <- matrix(fileNames, ncol = ncol(fileNames), dimnames = NULL) #converting filename 
-mat <- as.matrix(csvData[2:dim(csvData)[2]]) #Excluding filenames
 
-library(autoencoder)
-nl=3 ## number of layers (default is 3: input, hidden, output)
-unit.type = "logistic" ## specify the network unit type, i.e., the unit's
 
-## activation function ("logistic" or "tanh")
-N.input = dim(mat)[2] ## number of units (neurons) in the input layer (one unit per pixel)
-N.hidden = 100 ## number of units in the hidden layer
-lambda = 0.0002 ## weight decay parameter
-beta = 6 ## weight of sparsity penalty term
-rho = 0.01 ## desired sparsity parameter
-epsilon <- 0.001 ## a small parameter for initialization of weights
-
-## as small gaussian random numbers sampled from N(0,epsilon^2)
-max.iterations = 3000 ## number of iterations in optimizer
-
-## Train the autoencoder on training.matrix using BFGS optimization method
-autoencoder.object <- autoencode(X.train=mat,nl=nl,N.hidden=N.hidden,
-                                 unit.type=unit.type,lambda=lambda,beta=beta,rho=rho,epsilon=epsilon,
-                                 optim.method="BFGS",max.iterations=max.iterations,
-                                 rescale.flag=FALSE,rescaling.offset=0.001)
-
-## Extract weights W and biases b from autoencoder.object:
-W <- autoencoder.object$W
-b <- autoencoder.object$b
-
-## Visualize hidden units' learned features:
-X.output <- predict(autoencoder.object, X.input=mat, hidden.output=FALSE)$X.output
-
-layer<-feedforward.pass.matrix(W,b,mat)$a[[2]]
-
-#combines names with output matrix
-combined <- cbind(fileNames,X.output)
-combinedWithHidden <- cbind(fileNames,layer)
-#write csv file with actual number of attributes
-write.csv(combined,'D:\\Experiment\\exp4\\AttributeFile-AfterAutoEncoder-Full-Dimension-150-neurons.csv',row.names=FALSE)
-
-#write csv file with reduced attributes
-write.csv(combinedWithHidden,'D:\\Experiment\\exp4\\AttributeFile-AfterAutoEncoder-150-Dimension-150-neurons.csv',row.names=FALSE)
+input <- 'D:\\Experiment\\exp4\\AllAttributes.csv'
+output <- 'D:\\Experiment\\exp4\\stacked-Autoencoder.csv'
+neuronList <- c(100,90,75,60,50)
+stackedAutoEncoder(neuronList,input,output)

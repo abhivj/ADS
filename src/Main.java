@@ -166,6 +166,7 @@ public class Main {
 				"d:/Experiment/ExperimentFeb/testForTop7-44datasets/temp.txt", 13);
 		
 		*/
+		/*
 		RandomRankGenerator RRG = new RandomRankGenerator();
 		RRG.fileGenerator("d:/Experiment/ExperimentFeb/reports/Accuracy-AllModel.csv", "d:/Experiment/ExperimentFeb/testForTop7-44datasets/random2.txt", 13);
 		
@@ -179,7 +180,65 @@ public class Main {
 				"d:/Experiment/ExperimentFeb/testForTop7-44datasets/predicted.txt",
 				7,"d:/Experiment/ExperimentFeb/testForTop7-44datasets/TopK-result-with-predicted.csv");
 		*/
+		//Experiment after autoencoder started
+		/*
+		GenerateRegressionData GRD = new GenerateRegressionData();
+		GRD.generateFiles("D:/Experiment/exp4/AttributeFile-AfterAutoEncoder-150-Dimension-150-neurons.csv",
+				"D:/Experiment/exp4/AllResultInAccuracyFormat1.csv", 
+				"D:/Experiment/exp4/AccuracyReg-150/");
 		
+		RegressionAndRanking RAR = new RegressionAndRanking();
+		RAR.createModel("D:/Experiment/exp4/AccuracyReg-150/",
+				"D:/Experiment/exp4/Accuracy-150-Dimension-150.csv",
+				"D:/Experiment/exp4/AllResultInAccuracyFormat1.csv", 1480, 141);
+		
+		
+		GenerateRanks GR = new GenerateRanks();
+		GR.generateRankFile("D:/Experiment/exp4/AllResultInAccuracyFormat1.csv", 
+				"D:/Experiment/exp4/temp.txt", 
+				"D:/Experiment/exp4/actual-150-150.txt", 
+				"D:/Experiment/exp4/temp.txt", 13);
+		
+		GR.generateRankFile("D:/Experiment/exp4/Accuracy-Full-Dimension-50.csv", 
+				"D:/Experiment/exp4/temp.txt", 
+				"D:/Experiment/exp4/predicted-150-150.txt", 
+				"D:/Experiment/exp4/temp.txt", 13);
+		
+		TopMatching TM = new TopMatching();
+		TM.compareTwoFile("D:/Experiment/exp4/actual-150-150.txt",
+				"D:/Experiment/exp4/predicted-150-150.txt",7,
+				"D:/Experiment/exp4/TopK-result-with-predicted-150-150.csv");
+		
+		//Experiment after autoencoder ended
+		*/
+		
+		//Starting Grouping algorithms in sets
+		
+		GenerateSets GS = new GenerateSets();
+		
+		CompareSets CS = new CompareSets();
+		double ranks[] = new double[10];
+		for(int i = 1;i<=10;i++)
+		{
+		//double range = (double)i/100;
+		int range=i;
+		GS.generateSets("d:/Experiment/ExperimentFeb/testForTop7-44datasets/Accuracy-Base.csv", range, "d:/Experiment/ExperimentFeb/testForTop7-44datasets/Accuracy-Base-SETS.csv");
+		GS.generateSets("d:/Experiment/exp4/Accuracy-AfterAutoEncoder-Full-Dimension.csv", range, "d:/Experiment/ExperimentFeb/testForTop7-44datasets/Accuracy-Experiment-SETS.csv");
+		ranks[i-1] = CS.CompareContainsInTop("d:/Experiment/ExperimentFeb/testForTop7-44datasets/Accuracy-Base-SETS.csv", "d:/Experiment/ExperimentFeb/testForTop7-44datasets/Accuracy-Experiment-SETS.csv");
+		}
+		for(int i=0;i<ranks.length;i++)
+		{
+			System.out.println(ranks[i]);
+		}
+		
+		/*
+		GS.generateSets("d:/Experiment/exp4/Accuracy-AfterAutoEncoder-Full-Dimension.csv", 3, "d:/Experiment/ExperimentFeb/testForTop7-44datasets/Accuracy-Auto-SETS-0.02.csv");
+		GS.generateSets("d:/Experiment/exp4/Accuracy-AfterAutoEncoder-Full-Dimension.csv", 3, "d:/Experiment/ExperimentFeb/testForTop7-44datasets/Accuracy-Auto-SETS-0.03.csv");
+		GS.generateSets("d:/Experiment/ExperimentFeb/testForTop7-44datasets/Accuracy-Base.csv", 3, "d:/Experiment/ExperimentFeb/testForTop7-44datasets/Accuracy-Base-SETS-0.02.csv");
+		GS.generateSets("d:/Experiment/ExperimentFeb/testForTop7-44datasets/Accuracy-Base.csv", 3, "d:/Experiment/ExperimentFeb/testForTop7-44datasets/Accuracy-Base-SETS-0.03.csv");
+		GS.generateSets("d:/Experiment/ExperimentFeb/testForTop7-44datasets/Accuracy-Experiment.csv", 3, "d:/Experiment/ExperimentFeb/testForTop7-44datasets/Accuracy-Experiment-SETS-0.02.csv");
+		GS.generateSets("d:/Experiment/ExperimentFeb/testForTop7-44datasets/Accuracy-Experiment.csv", 3, "d:/Experiment/ExperimentFeb/testForTop7-44datasets/Accuracy-Experiment-SETS-0.03.csv");
+		*/
 	}
 
 }
