@@ -99,8 +99,6 @@ rescale.back <- function(X.in,X.in.min,X.in.max,unit.type,offset){#revert the sc
   return(list("X.rescaled"=X.in))
 }
 
-
-
 input <- 'D:\\Experiment\\exp4\\AllAttributes.csv'
 output <- 'D:\\Experiment\\exp4\\stacked-Autoencoder.csv'
 neuronList <- c(100,90,75,60,50)
