@@ -24,5 +24,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/Users/abhivj/workspace/Artificial Data Scientist/libs/opencsv-3.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/abhivj/workspace/Artificial Data Scientist/libs/J48Consolidated.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -72,7 +72,7 @@ rho = 0.01 ## desired sparsity parameter
 epsilon <- 0.001 ## a small parameter for initialization of weights
 
 ## as small gaussian random numbers sampled from N(0,epsilon^2)
-max.iterations = 3000 ## number of iterations in optimizer
+max.iterations = 5000 ## number of iterations in optimizer
 
 ## Train the autoencoder on training.matrix using BFGS optimization method
 autoencoder.object <- autoencode(X.train=mat,nl=nl,N.hidden=N.hidden,
