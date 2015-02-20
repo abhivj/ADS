@@ -183,34 +183,34 @@ public class Main {
 		//Experiment after autoencoder started
 		/*
 		GenerateRegressionData GRD = new GenerateRegressionData();
-		GRD.generateFiles("D:/Experiment/exp4/AttributeFile-AfterAutoEncoder-150-Dimension-150-neurons.csv",
+		GRD.generateFiles("D:/Experiment/exp4/stacked-Autoencoder.csv",
 				"D:/Experiment/exp4/AllResultInAccuracyFormat1.csv", 
 				"D:/Experiment/exp4/AccuracyReg-150/");
 		
 		RegressionAndRanking RAR = new RegressionAndRanking();
 		RAR.createModel("D:/Experiment/exp4/AccuracyReg-150/",
-				"D:/Experiment/exp4/Accuracy-150-Dimension-150.csv",
+				"D:/Experiment/exp4/Accuracy-stacked-Autoencoder.csv",
 				"D:/Experiment/exp4/AllResultInAccuracyFormat1.csv", 1480, 141);
 		
 		
 		GenerateRanks GR = new GenerateRanks();
 		GR.generateRankFile("D:/Experiment/exp4/AllResultInAccuracyFormat1.csv", 
 				"D:/Experiment/exp4/temp.txt", 
-				"D:/Experiment/exp4/actual-150-150.txt", 
+				"D:/Experiment/exp4/actual.txt", 
 				"D:/Experiment/exp4/temp.txt", 13);
 		
-		GR.generateRankFile("D:/Experiment/exp4/Accuracy-Full-Dimension-50.csv", 
+		GR.generateRankFile("D:/Experiment/exp4/Accuracy-stacked-Autoencoder.csv", 
 				"D:/Experiment/exp4/temp.txt", 
-				"D:/Experiment/exp4/predicted-150-150.txt", 
+				"D:/Experiment/exp4/predicted.txt", 
 				"D:/Experiment/exp4/temp.txt", 13);
 		
 		TopMatching TM = new TopMatching();
-		TM.compareTwoFile("D:/Experiment/exp4/actual-150-150.txt",
-				"D:/Experiment/exp4/predicted-150-150.txt",7,
-				"D:/Experiment/exp4/TopK-result-with-predicted-150-150.csv");
-		
-		//Experiment after autoencoder ended
+		TM.compareTwoFile("D:/Experiment/exp4/actual.txt",
+				"D:/Experiment/exp4/predicted.txt",7,
+				"D:/Experiment/exp4/TopK-result-with-stacked-Autoencoder.csv");
 		*/
+		//Experiment after autoencoder ended
+		
 		
 		//Starting Grouping algorithms in sets
 		
@@ -223,10 +223,10 @@ public class Main {
 		//double range = (double)i/100;
 		int range=i;
 		GS.generateSets("d:/Experiment/ExperimentFeb/testForTop7-44datasets/Accuracy-Base.csv", range, "d:/Experiment/ExperimentFeb/testForTop7-44datasets/Accuracy-Base-SETS.csv");
-		GS.generateSets("d:/Experiment/exp4/Accuracy-AfterAutoEncoder-Full-Dimension.csv", range, "d:/Experiment/ExperimentFeb/testForTop7-44datasets/Accuracy-Experiment-SETS.csv");
-		ranks[i-1] = CS.CompareContainsInTop("d:/Experiment/ExperimentFeb/testForTop7-44datasets/Accuracy-Base-SETS.csv", "d:/Experiment/ExperimentFeb/testForTop7-44datasets/Accuracy-Experiment-SETS.csv");
+		GS.generateSets("d:/Experiment/ExperimentFeb/testForTop7-44datasets/Accuracy-AfterAutoEncoder-Full-Dimension.csv", range, "d:/Experiment/ExperimentFeb/testForTop7-44datasets/Accuracy-AfterAutoEncoder-Full-Dimension-SETS.csv");
+		ranks[i-1] = CS.CompareContainsInTop("d:/Experiment/ExperimentFeb/testForTop7-44datasets/Accuracy-Base-SETS.csv", "d:/Experiment/ExperimentFeb/testForTop7-44datasets/Accuracy-AfterAutoEncoder-Full-Dimension-SETS.csv");
 		}
-		for(int i=0;i<ranks.length;i++)
+		for(int i=ranks.length-1;i>=0;i--)
 		{
 			System.out.println(ranks[i]);
 		}
