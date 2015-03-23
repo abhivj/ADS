@@ -7,10 +7,12 @@ import java.io.IOException;
 import java.util.Random;
 import java.io.FileNotFoundException;
 
+
 //Weka Libraries Used
 import weka.classifiers.functions.MultilayerPerceptron;
 import weka.classifiers.Evaluation;
 import weka.classifiers.meta.Bagging;
+import weka.classifiers.trees.J48Consolidated;
 import weka.classifiers.trees.RandomForest;
 import weka.classifiers.trees.SimpleCart;
 import weka.core.Instances;
@@ -158,6 +160,9 @@ public class AlgorithmRunnerOnAccuracy {
 	    		 System.out.println((i+1)+") "+arffFiles[i].getName());
 	    	 }
 	     }
+	     
+	    
+	   
 	    
 	     Classifier[] models = {     	new J48(),
                 						new PART(),

@@ -1,9 +1,11 @@
 import DataCleaning.*;
+import autoEncoder.*;
 import MultivariateNormalDistributionMixture.*;
 import Histogram.*;
 import Stats.*;
 import Clustering.*;
 import regression.*;
+import weka.filters.unsupervised.attribute.MLPAutoencoder;
 import plots.*;
 public class Main {
 
@@ -183,37 +185,37 @@ public class Main {
 		//Experiment after autoencoder started
 		/*
 		GenerateRegressionData GRD = new GenerateRegressionData();
-		GRD.generateFiles("D:/Experiment/exp4/stacked-Autoencoder.csv",
-				"D:/Experiment/exp4/AllResultInAccuracyFormat1.csv", 
-				"D:/Experiment/exp4/AccuracyReg-150/");
+		GRD.generateFiles("D:/Experiment/exp5/PCA/AllAttributesPCA.csv",
+				"D:/Experiment/exp5/PCA/AllResultInAccuracyFormat1.csv", 
+				"D:/Experiment/exp5/PCA/AccuracyReg/");
 		
 		RegressionAndRanking RAR = new RegressionAndRanking();
-		RAR.createModel("D:/Experiment/exp4/AccuracyReg-150/",
-				"D:/Experiment/exp4/Accuracy-stacked-Autoencoder.csv",
-				"D:/Experiment/exp4/AllResultInAccuracyFormat1.csv", 1480, 141);
+		RAR.createModel("D:/Experiment/exp5/PCA/AccuracyReg/",
+				"D:/Experiment/exp5/PCA/Accuracy-auto-encoded.csv",
+				"D:/Experiment/exp5/PCA/AllResultInAccuracyFormat1.csv", 1480, 141);
 		
 		
 		GenerateRanks GR = new GenerateRanks();
-		GR.generateRankFile("D:/Experiment/exp4/AllResultInAccuracyFormat1.csv", 
-				"D:/Experiment/exp4/temp.txt", 
-				"D:/Experiment/exp4/actual.txt", 
-				"D:/Experiment/exp4/temp.txt", 13);
+		GR.generateRankFile("D:/Experiment/exp5/PCA/AllResultInAccuracyFormat1.csv",
+				"D:/Experiment/exp5/PCA/temp.txt", 
+				"D:/Experiment/exp5/PCA/actual.txt", 
+				"D:/Experiment/exp5/PCA/temp.txt", 13);
 		
-		GR.generateRankFile("D:/Experiment/exp4/Accuracy-stacked-Autoencoder.csv", 
-				"D:/Experiment/exp4/temp.txt", 
-				"D:/Experiment/exp4/predicted.txt", 
-				"D:/Experiment/exp4/temp.txt", 13);
+		GR.generateRankFile("D:/Experiment/exp5/PCA/Accuracy-auto-encoded.csv",
+				"D:/Experiment/exp5/PCA/temp.txt", 
+				"D:/Experiment/exp5/PCA/predicted.txt", 
+				"D:/Experiment/exp5/PCA/temp.txt", 13);
 		
 		TopMatching TM = new TopMatching();
-		TM.compareTwoFile("D:/Experiment/exp4/actual.txt",
-				"D:/Experiment/exp4/predicted.txt",7,
-				"D:/Experiment/exp4/TopK-result-with-stacked-Autoencoder.csv");
+		TM.compareTwoFile("D:/Experiment/exp5/PCA/actual.txt",
+				"D:/Experiment/exp5/PCA/predicted.txt",7,
+				"D:/Experiment/exp5/PCA/TopK-result-with-Autoencoder.csv");
 		*/
 		//Experiment after autoencoder ended
 		
 		
 		//Starting Grouping algorithms in sets
-		
+		/*
 		GenerateSets GS = new GenerateSets();
 		
 		CompareSets CS = new CompareSets();
@@ -230,7 +232,7 @@ public class Main {
 		{
 			System.out.println(ranks[i]);
 		}
-		
+		*/
 		/*
 		GS.generateSets("d:/Experiment/exp4/Accuracy-AfterAutoEncoder-Full-Dimension.csv", 3, "d:/Experiment/ExperimentFeb/testForTop7-44datasets/Accuracy-Auto-SETS-0.02.csv");
 		GS.generateSets("d:/Experiment/exp4/Accuracy-AfterAutoEncoder-Full-Dimension.csv", 3, "d:/Experiment/ExperimentFeb/testForTop7-44datasets/Accuracy-Auto-SETS-0.03.csv");
@@ -239,6 +241,51 @@ public class Main {
 		GS.generateSets("d:/Experiment/ExperimentFeb/testForTop7-44datasets/Accuracy-Experiment.csv", 3, "d:/Experiment/ExperimentFeb/testForTop7-44datasets/Accuracy-Experiment-SETS-0.02.csv");
 		GS.generateSets("d:/Experiment/ExperimentFeb/testForTop7-44datasets/Accuracy-Experiment.csv", 3, "d:/Experiment/ExperimentFeb/testForTop7-44datasets/Accuracy-Experiment-SETS-0.03.csv");
 		*/
+	
+		/*
+		AutoencoderWeka AW = new AutoencoderWeka();
+		AW.runAutoEncoder("d:/Experiment/exp5/AdaBoostM1.arff", "d:/Experiment/exp5/auto-encoded-file.csv", 10);
+		*/
+		
+		//Less Features
+		// started on 24 march 2015
+		
+		/*
+		Regressor reg = new Regressor();
+		RegressorTraining[] RT = reg.createTrainingData("d:/Experiment/ExperimentFeb/dataset44/", "d:/Experiment/ExperimentFeb/temp1/", "d:/Experiment/ExperimentFeb/temp2/", true, true, true, true, true, 8, 100, 0, 20, 2, 2, 2);
+		
+		RegressorTraining print = new RegressorTraining();
+		print.printInFeatureVector("d:/Experiment/ExperimentFeb/reports/", "AttributeFileExcludingCovariances44.csv", RT,2);
+		*/
+		
+		/*
+		GenerateRegressionData GRD = new GenerateRegressionData();
+		GRD.generateFiles("d:/Experiment/ExperimentFeb/march24/AttributeFileExcludingCovariances44.csv",
+				"d:/Experiment/ExperimentFeb/march24/Accuracy-Base.csv", 
+				"d:/Experiment/ExperimentFeb/march24/AccuracyReg/");
+	*/
+		
+		RegressionAndRanking RAR = new RegressionAndRanking();
+		RAR.createModel("d:/Experiment/ExperimentFeb/march24/AccuracyReg/",
+				"d:/Experiment/ExperimentFeb/march24/Accuracy-Experiment.csv",
+				"d:/Experiment/ExperimentFeb/march24/Accuracy-Base.csv", 1480, 141);
+		
+		GenerateRanks GR = new GenerateRanks();
+		GR.generateRankFile("d:/Experiment/ExperimentFeb/march24/Accuracy-Base.csv",
+				"D:/Experiment/ExperimentFeb/march24/temp.txt", 
+				"D:/Experiment/ExperimentFeb/march24/actual.txt", 
+				"D:/Experiment/ExperimentFeb/march24/temp.txt",  13);
+		
+		GR.generateRankFile("D:/Experiment/exp5/PCA/Accuracy-auto-encoded.csv",
+				"D:/Experiment/ExperimentFeb/march24/temp.txt", 
+				"D:/Experiment/ExperimentFeb/march24/predicted.txt", 
+				"D:/Experiment/ExperimentFeb/march24/temp.txt",  13);
+		
+		TopMatching TM = new TopMatching();
+		TM.compareTwoFile("D:/Experiment/ExperimentFeb/march24/actual.txt",
+						  "D:/Experiment/ExperimentFeb/march24/predicted.txt",7,
+				"D:/Experiment/ExperimentFeb/march24/TopK-result.csv");
+		
 	}
 
 }

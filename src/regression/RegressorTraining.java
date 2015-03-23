@@ -109,7 +109,7 @@ public class RegressorTraining {
 					sb.append(mnd[j].getMean()[k]+",");
 					coloumnCounter++;
 				}
-				
+				/*
 				for(int k=0;k<(mnd[j].getCovariances()).length;k++)
 				{
 					for(int l=0;l<(mnd[j].getCovariances()[k]).length;l++)
@@ -118,7 +118,7 @@ public class RegressorTraining {
 						coloumnCounter++;
 					}
 				}
-				
+				*/
 			}
 			sb.deleteCharAt(sb.length()-1);
 			sb.append("\n");

@@ -100,6 +100,6 @@ rescale.back <- function(X.in,X.in.min,X.in.max,unit.type,offset){#revert the sc
 }
 
 input <- 'D:\\Experiment\\exp4\\AllAttributes.csv'
-output <- 'D:\\Experiment\\exp4\\stacked-Autoencoder.csv'
-neuronList <- c(100,90,75,60,50)
+output <- 'D:\\Experiment\\exp4\\stacked-Autoencoder-c(100,90,75).csv'
+neuronList <- c(100,90,75)
 stackedAutoEncoder(neuronList,input,output)
