@@ -17,6 +17,9 @@ public class RegressorTraining {
 	Pairs[] pp;
 	MultivariateNormalDistribution[] mnd;
 	double[][] diagonalOfCovarianceMatrix;
+	double[][] secondOrderMoment;
+	double[][] thirdOrderMoment;
+	double[][] forthOrderMoment;
 	/**
 	 * take a string and path and write csv report on that location
 	 * @param stringToWrite
@@ -58,9 +61,13 @@ public class RegressorTraining {
 			pp = RT[i].pp;
 			mnd = RT[i].mnd;
 			diagonalOfCovarianceMatrix = RT[i].diagonalOfCovarianceMatrix;
+			secondOrderMoment = RT[i].secondOrderMoment;
+			thirdOrderMoment = RT[i].thirdOrderMoment;
+			forthOrderMoment = RT[i].forthOrderMoment;
 			
 			sb.append(fileName+",");
 			coloumnCounter++;
+			/*
 			for(int j=0;j<classes;j++)
 			{
 				for(int k=0;k<(histogramBins[j]).length/2;k++)
@@ -128,7 +135,7 @@ public class RegressorTraining {
 						coloumnCounter++;
 					}
 				}
-				*/
+				
 				//Instead of adding complete covariance matrix we can get vector of diagonal matrix and add it.
 				for(int k=0;k<diagonalOfCovarianceMatrix[j].length;k++)
 				{
@@ -138,6 +145,34 @@ public class RegressorTraining {
 				
 				
 			}
+			*/
+			//Adding second, third and forth order moments
+			for(int j=0;j<classes;j++)
+			{
+				for(int k=0;k<(secondOrderMoment[j]).length;k++)
+				{
+					sb.append(secondOrderMoment[j][k]+",");
+					coloumnCounter++;
+				}
+			}
+			for(int j=0;j<classes;j++)
+			{
+				for(int k=0;k<(thirdOrderMoment[j]).length;k++)
+				{
+					sb.append(thirdOrderMoment[j][k]+",");
+					coloumnCounter++;
+				}
+			}
+			for(int j=0;j<classes;j++)
+			{
+				for(int k=0;k<(forthOrderMoment[j]).length;k++)
+				{
+					sb.append(forthOrderMoment[j][k]+",");
+					coloumnCounter++;
+				}
+			}
+			
+			
 			sb.deleteCharAt(sb.length()-1);
 			sb.append("\n");
 			if(flag==false)

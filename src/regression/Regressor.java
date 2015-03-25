@@ -134,7 +134,17 @@ public class Regressor {
 			{
 				SVD sv = new SVD();
 				RT[i].diagonalOfCovarianceMatrix[j] = sv.getSigma(RT[i].mnd[j].getCovariances());
-			}/*
+			}
+			
+			//Second, Third and Forth Order Moments
+		
+				Moments mn = new Moments();
+				RT[i].secondOrderMoment = mn.secondOrderMoments(tempFolder2, numberOfClasses, st, dimOfPCA);
+				RT[i].thirdOrderMoment = mn.thirdOrderMoments(tempFolder2, numberOfClasses, st, dimOfPCA);
+				RT[i].forthOrderMoment = mn.forthOrderMoments(tempFolder2, numberOfClasses, st, dimOfPCA);
+			
+				
+			/*
 			File dir = new File(tempFolder2);
 			String[] myFiles;
 			if(dir.isDirectory())

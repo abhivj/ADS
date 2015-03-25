@@ -250,12 +250,12 @@ public class Main {
 		//Less Features
 		// started on 24 march 2015
 		
-		
+		//Delete all files in tempfolders before start
 		Regressor reg = new Regressor();
 		RegressorTraining[] RT = reg.createTrainingData("d:/Experiment/ExperimentFeb/dataset44/", "d:/Experiment/ExperimentFeb/temp1/", "d:/Experiment/ExperimentFeb/temp2/", true, true, true, true, true, 8, 100, 0, 20, 2, 2, 2);
 		
 		RegressorTraining print = new RegressorTraining();
-		print.printInFeatureVector("d:/Experiment/ExperimentFeb/march24/", "AttributeFileDiagonalMatrixVarianceClusters.csv", RT,2);
+		print.printInFeatureVector("d:/Experiment/ExperimentFeb/march24/", "AttributeFileMoments.csv", RT,2);
 		
 		
 		/*

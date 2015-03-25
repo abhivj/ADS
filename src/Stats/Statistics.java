@@ -1,7 +1,8 @@
 package Stats;
 
 import java.util.Arrays;
-
+import org.apache.commons.math3.stat.descriptive.moment.Skewness;
+import org.apache.commons.math3.stat.descriptive.moment.Kurtosis;
 public class Statistics {
 
 	double[] data;
@@ -49,5 +50,16 @@ public class Statistics {
        {
           return b[b.length / 2];
        }
+    }
+    public double getSkewness()
+    {
+    	Skewness skw = new Skewness();
+    	return skw.evaluate(data);
+    	
+    }
+    public double getKurtosis()
+    {
+    	Kurtosis krt = new Kurtosis();
+    	return krt.evaluate(data);
     }
 }
