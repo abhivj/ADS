@@ -158,6 +158,7 @@ public Pairs[] getMeanOfGaussionsFromEM(String inputFolderPath, int numOfGaussio
 		EMObject.buildClusterer(data);
 		double[][][] attr = EMObject.getClusterModelsNumericAtts();
 		mean = new double[data.numAttributes()][numOfGaussions];
+		double[][] variance = new double[data.numAttributes()][numOfGaussions];
 		for(int j=0;j<numOfGaussions;j++)
 		{
 			for(int k=0;k<data.numAttributes();k++)
@@ -165,7 +166,14 @@ public Pairs[] getMeanOfGaussionsFromEM(String inputFolderPath, int numOfGaussio
 				mean[k][j]=attr[j][k][0];
 			}
 		}
-		pp[i] = new Pairs(arffFiles[i].getName().toString(), mean);
+		for(int j=0;j<numOfGaussions;j++)
+		{
+			for(int k=0;k<data.numAttributes();k++)
+			{
+				variance[k][j]=attr[j][k][1];
+			}
+		}
+		pp[i] = new Pairs(arffFiles[i].getName().toString(), mean,variance);
 		
 	}
 	
@@ -175,6 +183,7 @@ public Pairs[] getMeanOfGaussionsFromEM(String inputFolderPath, int numOfGaussio
 public Pairs getMeanOfGaussionsFromEMFile(String inputFolder,String fileName,int numOfGaussions) throws Exception
 {
 	double[][] mean = null;
+	double[][] variance = null;
 	Pairs pp;
 	BufferedReader datafile = readDataFile(fileName,inputFolder);
 	System.out.println("Gaussians from EM..... : "+fileName);
@@ -184,7 +193,23 @@ public Pairs getMeanOfGaussionsFromEMFile(String inputFolder,String fileName,int
 	EMObject.setNumClusters(numOfGaussions);
 	EMObject.buildClusterer(data);
 	double[][][] attr = EMObject.getClusterModelsNumericAtts();
+	/*
+	for(int aa=0;aa<attr.length;aa++)
+	{
+		for(int bb=0;bb<attr[0].length;bb++)
+		{
+			for(int cc=0;cc<attr[0][0].length;cc++)
+			{
+				System.out.print(attr[aa][bb][cc] +" ");
+			}
+			System.out.print(",,,");
+		}
+		System.out.println();
+	}
+	*/
+	//System.out.println(attr.length + " "+attr[0].length+ " "+attr[0][0].length);
 	mean = new double[data.numAttributes()][numOfGaussions];
+	variance = new double[data.numAttributes()][numOfGaussions];
 	for(int j=0;j<numOfGaussions;j++)
 	{
 		for(int k=0;k<data.numAttributes();k++)
@@ -192,7 +217,14 @@ public Pairs getMeanOfGaussionsFromEMFile(String inputFolder,String fileName,int
 			mean[k][j]=attr[j][k][0];
 		}
 	}
-	pp = new Pairs(fileName, mean);
+	for(int j=0;j<numOfGaussions;j++)
+	{
+		for(int k=0;k<data.numAttributes();k++)
+		{
+			variance[k][j]=attr[j][k][1];
+		}
+	}
+	pp = new Pairs(fileName, mean,variance);
 	
 	return pp;
 }

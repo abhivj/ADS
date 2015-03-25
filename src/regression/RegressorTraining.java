@@ -102,6 +102,14 @@ public class RegressorTraining {
 						coloumnCounter++;
 					}
 				}
+				for(int k=0;k<(pp[j].getVariance()).length;k++)
+				{
+					for(int l=0;l<(pp[j].getVariance()[k]).length;l++)
+					{
+						sb.append(pp[j].getVariance()[k][l]+",");
+						coloumnCounter++;
+					}
+				}
 			}
 			
 			for(int j=0;j<classes;j++)

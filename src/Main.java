@@ -255,7 +255,7 @@ public class Main {
 		RegressorTraining[] RT = reg.createTrainingData("d:/Experiment/ExperimentFeb/dataset44/", "d:/Experiment/ExperimentFeb/temp1/", "d:/Experiment/ExperimentFeb/temp2/", true, true, true, true, true, 8, 100, 0, 20, 2, 2, 2);
 		
 		RegressorTraining print = new RegressorTraining();
-		print.printInFeatureVector("d:/Experiment/ExperimentFeb/march24/", "AttributeFileDiagonalMatrix.csv", RT,2);
+		print.printInFeatureVector("d:/Experiment/ExperimentFeb/march24/", "AttributeFileDiagonalMatrixVarianceClusters.csv", RT,2);
 		
 		
 		/*
@@ -286,6 +286,8 @@ public class Main {
 						  "D:/Experiment/ExperimentFeb/march24/predicted.txt",7,
 				"D:/Experiment/ExperimentFeb/march24/TopK-result-100.csv");
 		*/
+		//ExpectationMaximizationAlgorithm ema = new ExpectationMaximizationAlgorithm();
+		//ema.getMeanOfGaussionsFromEMFile("D:/Experiment/ExperimentFeb/dataset441/", "a1a.arff",2);
 	}
 
 }
