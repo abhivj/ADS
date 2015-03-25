@@ -11,6 +11,7 @@ import MultivariateNormalDistributionMixture.*;
 import Histogram.*;
 import Stats.*;
 import Clustering.*;
+import statMeasures.*;
 
 class Data
 {
@@ -127,7 +128,13 @@ public class Regressor {
 				RT[i].mnd[j] = mndr.fitModel(data);
 			}
 			
-			/*
+			//Diagonal Matrix Vector of above Covariance Matrix
+			RT[i].diagonalOfCovarianceMatrix = new double[st.length][RT[i].mnd[0].getCovariances().length];
+			for(int j=0;j<st.length;j++)
+			{
+				SVD sv = new SVD();
+				RT[i].diagonalOfCovarianceMatrix[j] = sv.getSigma(RT[i].mnd[j].getCovariances());
+			}/*
 			File dir = new File(tempFolder2);
 			String[] myFiles;
 			if(dir.isDirectory())

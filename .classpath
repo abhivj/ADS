@@ -26,5 +26,10 @@
 	<classpathentry kind="lib" path="C:/Users/abhivj/workspace/Artificial Data Scientist/libs/opencsv-3.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/abhivj/workspace/Artificial Data Scientist/libs/J48Consolidated.jar"/>
 	<classpathentry kind="lib" path="C:/Users/abhivj/workspace/Artificial Data Scientist/libs/multiLayerPerceptrons.jar"/>
+	<classpathentry kind="lib" path="C:/Users/abhivj/workspace/Artificial Data Scientist/libs/commons-math3-3.4.1.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/abhivj/workspace/Artificial%20Data%20Scientist/doc/commons-math3-3.4.1-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
