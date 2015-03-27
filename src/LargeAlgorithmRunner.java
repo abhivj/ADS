@@ -1,35 +1,46 @@
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Random;
-import java.io.FileNotFoundException;
 
-
-//Weka Libraries Used
-import weka.classifiers.functions.MultilayerPerceptron;
-import weka.classifiers.Evaluation;
-import weka.classifiers.meta.Bagging;
-import weka.classifiers.trees.J48Consolidated;
-import weka.classifiers.trees.RandomForest;
-import weka.classifiers.trees.SimpleCart;
-import weka.core.Instances;
-import weka.classifiers.functions.Logistic;
-import weka.classifiers.trees.J48;
 import weka.classifiers.Classifier;
+import weka.classifiers.Evaluation;
+import weka.classifiers.bayes.NaiveBayes;
 import weka.classifiers.evaluation.NominalPrediction;
+import weka.classifiers.functions.Logistic;
+
+import weka.classifiers.functions.MultilayerPerceptron;
+import weka.classifiers.lazy.IBk;
+import weka.classifiers.meta.AdaBoostM1;
+import weka.classifiers.meta.Bagging;
 import weka.classifiers.rules.DecisionTable;
 import weka.classifiers.rules.PART;
 import weka.classifiers.trees.DecisionStump;
+import weka.classifiers.trees.J48;
+import weka.classifiers.trees.RandomForest;
+import weka.classifiers.trees.SimpleCart;
 import weka.core.FastVector;
-import weka.classifiers.lazy.IBk;
-import weka.classifiers.meta.AdaBoostM1;
-import weka.classifiers.bayes.NaiveBayes;
+import weka.core.Instances;
 import wlsvm.WLSVM;
-public class AlgorithmRunnerOnAccuracy {
+//New Algorithms
+import weka.classifiers.functions.SimpleLogistic;
+import weka.classifiers.functions.SMO;
+import weka.classifiers.functions.MLPClassifier;
+import weka.classifiers.functions.VotedPerceptron;
+import weka.classifiers.bayes.ComplementNaiveBayes;
+import weka.classifiers.clojure.ClojureClassifier;
+import weka.classifiers.functions.KernelLogisticRegression;
+import weka.classifiers.functions.LibLINEAR;
+import weka.classifiers.functions.RBFClassifier;
+import weka.classifiers.functions.RBFNetwork;
+import weka.classifiers.functions.VotedPerceptron;;
 
+
+public class LargeAlgorithmRunner {
 	/**
 	 * Reads a filename at specific path and return a inputReader object
 	 * @param filename
@@ -164,20 +175,19 @@ public class AlgorithmRunnerOnAccuracy {
 	    
 	   
 	    
-	     Classifier[] models = {     	new J48(),
-                						new PART(),
-                						new DecisionTable(),
-                						new DecisionStump(),
-                						new SimpleCart(),
-                						new NaiveBayes(), // Naive Bayes Classifier
-                						new Logistic(),
-                						new Bagging(),
-                						new WLSVM(),	// SVM 
-                						new RandomForest(),	// Random Forest
-                						new IBk(), 	// K- nearest neighbour	
-                						new MultilayerPerceptron(), //Neural Network
-                						new AdaBoostM1() //Ada boosting
-	     
+	     Classifier[] models = {     	
+	    		 						new SMO(),
+	    		 						new SimpleLogistic(),
+	    		 						new VotedPerceptron(),
+	    		 						//new MLPClassifier()  // Problem in adding
+	    		 						new ComplementNaiveBayes(),
+	    		 						//new ClojureClassifier(),   //Error in Classifier
+	    		 						//new KernelLogisticRegression(),  //problem in adding
+	    		 						new LibLINEAR(),
+	    		 						new RBFClassifier(),
+	    		 						new RBFNetwork(),
+	    		 						new VotedPerceptron()
+	    		 
 	     						};
 	     
 	  StringBuilder csvFile = new StringBuilder(",");
@@ -285,7 +295,7 @@ public class AlgorithmRunnerOnAccuracy {
     			for(int l=0;l<models.length;l++)
     			{
     				System.out.print("  ||  "+weight[k][l]);
-    				csvFile.append(weight[k][l]);
+    				csvFile.append(Comparision[k][l]);
     				if(l!=models.length-1)
     					csvFile.append(",");
     				else
@@ -358,9 +368,8 @@ public class AlgorithmRunnerOnAccuracy {
 		
 		//String reportPath = "d:/st/st/BinaryDatasetReport.csv";
 	    //String filePath = "./data/BinaryDatasets/";
-		String reportPath = "d:/Experiment/reports/AlgorithmRunAndAccuracyResult.csv";
-		String filePath ="d:/Experiment/exp1/";
+		String reportPath = "d:/Experiment/march27/AlgorithmRunAndAccuracyResult.csv";
+		String filePath ="d:/Experiment/march27/dataset/";
 		Algorunner(filePath, reportPath);
 	}
-
 }

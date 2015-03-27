@@ -67,6 +67,7 @@ public class RegressorTraining {
 			
 			sb.append(fileName+",");
 			coloumnCounter++;
+			
 			/*
 			for(int j=0;j<classes;j++)
 			{
@@ -76,7 +77,10 @@ public class RegressorTraining {
 					coloumnCounter++;
 				}
 			}
+			*/
+			
 			//System.out.println(RT[i].co.length);
+			/*
 			for(int j=0;j<classes;j++)
 			{
 			//	System.out.println((co[j].getClusterInstances()).length);
@@ -99,6 +103,8 @@ public class RegressorTraining {
 					}
 				}
 			}
+			*/
+			/*
 			for(int j=0;j<classes;j++)
 			{
 				for(int k=0;k<(pp[j].getMean()).length;k++)
@@ -118,15 +124,17 @@ public class RegressorTraining {
 					}
 				}
 			}
+			*/
 			
 			for(int j=0;j<classes;j++)
 			{
+				/*
 				for(int k=0;k<(mnd[j].getMean()).length;k++)
 				{
 					sb.append(mnd[j].getMean()[k]+",");
 					coloumnCounter++;
 				}
-				/*
+				
 				for(int k=0;k<(mnd[j].getCovariances()).length;k++)
 				{
 					for(int l=0;l<(mnd[j].getCovariances()[k]).length;l++)
@@ -135,7 +143,8 @@ public class RegressorTraining {
 						coloumnCounter++;
 					}
 				}
-				
+				*/
+			
 				//Instead of adding complete covariance matrix we can get vector of diagonal matrix and add it.
 				for(int k=0;k<diagonalOfCovarianceMatrix[j].length;k++)
 				{
@@ -145,7 +154,7 @@ public class RegressorTraining {
 				
 				
 			}
-			*/
+			/*
 			//Adding second, third and forth order moments
 			for(int j=0;j<classes;j++)
 			{
@@ -155,6 +164,7 @@ public class RegressorTraining {
 					coloumnCounter++;
 				}
 			}
+			
 			for(int j=0;j<classes;j++)
 			{
 				for(int k=0;k<(thirdOrderMoment[j]).length;k++)
@@ -171,7 +181,7 @@ public class RegressorTraining {
 					coloumnCounter++;
 				}
 			}
-			
+		*/
 			
 			sb.deleteCharAt(sb.length()-1);
 			sb.append("\n");

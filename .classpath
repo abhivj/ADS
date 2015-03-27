@@ -31,5 +31,11 @@
 			<attribute name="javadoc_location" value="jar:file:/C:/Users/abhivj/workspace/Artificial%20Data%20Scientist/doc/commons-math3-3.4.1-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/abhivj/workspace/Artificial Data Scientist/libs/newAlgorithms/clojureClassifier.jar"/>
+	<classpathentry kind="lib" path="C:/Users/abhivj/workspace/Artificial Data Scientist/libs/newAlgorithms/complementNaiveBayes.jar"/>
+	<classpathentry kind="lib" path="C:/Users/abhivj/workspace/Artificial Data Scientist/libs/newAlgorithms/kernelLogisticRegression.jar"/>
+	<classpathentry kind="lib" path="C:/Users/abhivj/workspace/Artificial Data Scientist/libs/newAlgorithms/LibLINEAR.jar"/>
+	<classpathentry kind="lib" path="C:/Users/abhivj/workspace/Artificial Data Scientist/libs/newAlgorithms/RBFNetwork.jar"/>
+	<classpathentry kind="lib" path="C:/Users/abhivj/workspace/Artificial Data Scientist/libs/newAlgorithms/SPegasos.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
