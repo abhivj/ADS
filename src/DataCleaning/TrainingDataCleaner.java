@@ -2,6 +2,7 @@ package DataCleaning;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.lang.reflect.Array;
+import java.nio.file.Files;
 import java.util.*;
 import java.io.*;
 
@@ -52,6 +53,8 @@ import weka.classifiers.evaluation.MarginCurve;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+
+import org.apache.commons.io.FileUtils;
 
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
@@ -297,7 +300,7 @@ public class TrainingDataCleaner {
 		
 	}
 	
-	public static int CleanAndModify(String inputFolder,String outputFolder,boolean convertNominal,boolean doPCA,boolean doNormalization,boolean doRejectIfLess,boolean rejectIfNotBinary, int dimOfPCA,int minimumInstance) throws Exception
+	public static int CleanAndModify(String inputFolder,String outputFolder,String saveFilesFolder,boolean convertNominal,boolean doPCA,boolean doNormalization,boolean doRejectIfLess,boolean rejectIfNotBinary, int dimOfPCA,int minimumInstance) throws Exception
 	{
 		int numberOfOutputFiles = 0;
 		TrainingDataCleaner dataObject = new TrainingDataCleaner();
@@ -383,6 +386,9 @@ public class TrainingDataCleaner {
 			{
 			System.out.println(arffFiles[i].getName().toString()+" : Saved !!");
 			System.out.println();
+			File srcFile = new File(inputFolder+arffFiles[i].getName().toString());
+			File destFile = new File(saveFilesFolder+arffFiles[i].getName().toString());
+			FileUtils.copyFile(srcFile, destFile);
 			numberOfOutputFiles++;
 			dataObject.saveArffFromInstances(arffFiles[i].getName().toString(),outputFolder,ConvertedData);
 			}

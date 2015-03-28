@@ -1,17 +1,21 @@
-dataGenerator <- function(){
+dataGenerator <- function(FileName,noOfFiles,instanceLower,instanceUpper,attrLower,attrUpper,meanLower,meanUpper,covLower,covUpper){
   library(MASS)
-  fileName <- readline(prompt = "Enter File Name: ")
-  numberOfRecords <- readline(prompt = "Enter No of Instances: ")
+  for(fl in 1:noOfFiles)
+  {
+  fileName <- paste(FileName,fl,sep="")
+  fileName <- paste(fileName,".csv",sep="")
+  
+  numberOfRecords <- ceiling(runif(1,min=instanceLower,max=instanceUpper))
   numberOfRecords <- as.numeric(numberOfRecords)
   if(is.na(numberOfRecords)){ 
     stop("The value provided is not valid. Please provide a number.")}
   
-  numberOfClass <- readline(prompt = "Enter No of classes: ")
+  numberOfClass <- 2
   numberOfClass <- as.numeric(numberOfClass)
   if(is.na(numberOfClass)){ 
     stop("The value provided is not valid. Please provide a number.")}
   
-  numberOfAttribute <- readline(prompt = "Enter No of attribute: ")
+  numberOfAttribute <-ceiling(runif(1,min=attrLower,max=attrUpper))
   numberOfAttribute <- as.numeric(numberOfAttribute)
   if(is.na(numberOfAttribute)){ 
     stop("The value provided is not valid. Please provide a number.")}
@@ -23,7 +27,7 @@ dataGenerator <- function(){
   data <- NULL
   for(i in 1:numberOfClass){
     if(i!=numberOfClass){
-      reduced <- readline(prompt = paste("Enter no of Instances of class (",as.character(i),") out of ",as.character(numberOfRecords)," remaining ",as.character(total),' : '))
+      reduced <- ceiling(runif(1,min=1,max=numberOfRecords))
       reduced <- as.numeric(reduced) 
       total <- total - reduced
     }
@@ -31,28 +35,21 @@ dataGenerator <- function(){
       reduced <- total
     }
     mat <- NULL
-    cat(paste('Enter data for class ',as.numeric(i)))
+
     choice = NULL
-    lowRange <- readline(prompt = paste(" lower range for mean of attribute : "))
-    upperRange <- readline(prompt = paste(" upper range for mean of attribute : "))
-    lowRange <- as.numeric(lowRange)
-    upperRange <- as.numeric(upperRange)
+  
+
     for(p in 1:numberOfAttribute){
       
-     
-      
-      choice[p] <- runif(1,min=lowRange,max=upperRange)
+      choice[p] <- runif(1,min=meanLower,max=meanUpper)
       choice[p] <- as.numeric(choice[p])
     }
     choice <- as.numeric(choice)
     cov <- NULL;
-    lowRange <- readline(prompt = paste(" lower range for covariance of attribute : "))
-    upperRange <- readline(prompt = paste(" upper range for covariance of attribute : "))
-    lowRange <- as.numeric(lowRange)
-    upperRange <- as.numeric(upperRange)
+   
     for(p in 1:numberOfAttribute){
       for(j in 1:numberOfAttribute){
-        cov[(p-1)*numberOfAttribute+j] <- runif(1,min=lowRange,max=upperRange)
+        cov[(p-1)*numberOfAttribute+j] <- runif(1,min=covLower,max=covUpper)
         if(is.na( cov[(p-1)*numberOfAttribute+j])){ 
           cov[(p-1)*numberOfAttribute+j] <- 1
         }
@@ -75,5 +72,5 @@ dataGenerator <- function(){
   data <- data[sample(nrow(data)),]
   write.csv(data,paste('D:\\Experiment\\artificialData\\',fileName,sep=""),row.names=FALSE)
   cat(paste('Done Printing at : D:\\Experiment\\artificialData\\',fileName))
-  
+  }
 }

@@ -168,7 +168,7 @@ public class AlgorithmRunnerOnAccuracy {
                 						new PART(),
                 						new DecisionTable(),
                 						new DecisionStump(),
-                						new SimpleCart(),
+                						//new SimpleCart(),
                 						new NaiveBayes(), // Naive Bayes Classifier
                 						new Logistic(),
                 						new Bagging(),
@@ -297,9 +297,9 @@ public class AlgorithmRunnerOnAccuracy {
     			System.out.println();
      
     		}
-    			csvFile.append("\n");
-    			csvFile.append("Sum of Ranks (Lower is Better)");
-    			csvFile.append(",");
+    			//csvFile.append("\n");
+    			//csvFile.append("Sum of Ranks (Lower is Better)");
+    		//	csvFile.append(",");
      
     			StringBuilder rank = new StringBuilder();
      
@@ -311,24 +311,24 @@ public class AlgorithmRunnerOnAccuracy {
     					sum+=weight[k][l];
     				}
     					rank.append((double)sum/(double)arffFiles.length);
-    					csvFile.append(sum);
+    					//csvFile.append(sum);
     					if(l!=models.length-1)
     					{
-    						csvFile.append(",");
+    					//	csvFile.append(",");
     						rank.append(",");
     					}
     					else
     					{
     						//if(k!=arffFiles.length-1)
-    						csvFile.append("\n");
+    						//csvFile.append("\n");
     						rank.append("\n");
     					} 
     			}
    	  
-    			csvFile.append("\n");
-    			csvFile.append("Avrage Ranks");
-    			csvFile.append(",");
-    			csvFile.append(rank.toString());
+    			//csvFile.append("\n");
+    		//	csvFile.append("Avrage Ranks");
+    		//	csvFile.append(",");
+    		//	csvFile.append(rank.toString());
     			//Ranks of algorithms
      
      
@@ -358,8 +358,8 @@ public class AlgorithmRunnerOnAccuracy {
 		
 		//String reportPath = "d:/st/st/BinaryDatasetReport.csv";
 	    //String filePath = "./data/BinaryDatasets/";
-		String reportPath = "d:/Experiment/reports/AlgorithmRunAndAccuracyResult.csv";
-		String filePath ="d:/Experiment/exp1/";
+		String reportPath = "d:/Experiment/large/report/AlgorithmsAccuracyFor13Base.csv";
+		String filePath ="d:/Experiment/large/dataset/selectedFiles/";
 		Algorunner(filePath, reportPath);
 	}
 

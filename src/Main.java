@@ -252,7 +252,7 @@ public class Main {
 		
 		//Delete all files in tempfolders before start
 		
-		
+		/*
 		String filePrefix="11";
 		Regressor reg = new Regressor();
 		RegressorTraining[] RT = reg.createTrainingData("d:/Experiment/ExperimentFeb/dataset44/", "d:/Experiment/ExperimentFeb/temp1/", "d:/Experiment/ExperimentFeb/temp2/", true, true, true, true, true, 8, 100, 0, 20, 2, 2, 2);
@@ -291,9 +291,18 @@ public class Main {
 		TM.compareTwoFile("D:/Experiment/ExperimentFeb/march24/actual.txt",
 						  "D:/Experiment/ExperimentFeb/march24/predicted.txt",7,
 				"D:/Experiment/ExperimentFeb/march24/TopK-result-"+filePrefix+".csv");					//Top K file showing percentage match
-		
+		*/
 		//ExpectationMaximizationAlgorithm ema = new ExpectationMaximizationAlgorithm();
 		//ema.getMeanOfGaussionsFromEMFile("D:/Experiment/ExperimentFeb/dataset441/", "a1a.arff",2);
+	
+
+		//Artificial CSV to arff Converter
+		//CSVToArff ARF = new CSVToArff();
+		//ARF.cleanAndModify("D:/Experiment/large/dataset/allDatasets/", "D:/Experiment/large/dataset/arffConvertedDataset/");
+	
+		
+		//Clean Data
+		TrainingDataCleaner.CleanAndModify("D:/Experiment/large/dataset/arffConvertedDataset/", "D:/Experiment/large/dataset/arffConvertedDatasetConverted/","D:/Experiment/large/dataset/selectedFiles/", true, true, true,true,true,8,100);
 	}
 
 }

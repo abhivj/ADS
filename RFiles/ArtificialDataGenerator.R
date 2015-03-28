@@ -202,8 +202,8 @@ Enter 13 for Categorical Data")
     data <- rbind(data,mat)
   }
   data <- data[sample(nrow(data)),]
-  write.csv(data,paste('D:\\Experiment\\exp5\\',fileName),row.names=FALSE)
-  cat(paste('Done Printing at : D:\\Experiment\\exp5\\',fileName))
+  write.csv(data,paste('D:\\Experiment\\artificialData\\',fileName,sep=""),row.names=FALSE)
+  cat(paste('Done Printing at : D:\\Experiment\\artificialData\\',fileName))
   
 }
 
