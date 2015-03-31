@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Random;
 
 import DataCleaning.TrainingDataCleaner;
 import weka.classifiers.functions.MultilayerPerceptron;
@@ -120,7 +121,7 @@ public class RegressionAndRanking {
 				e.printStackTrace();
 			}
 	}
-	public void createModel(String FolderPath,String savePath,String performanceFile,int trainingTime,int hiddenLayer) throws Exception
+	public void createModel(String FolderPath,String savePath,String performanceFile,int trainingTime,int hiddenLayer,boolean baggingFlag,int bagSize) throws Exception
 	{
 		File[] arffFiles = readAllFiles(FolderPath);
 		DataSource sampleSource = new DataSource(FolderPath+arffFiles[0].getName().toString());
@@ -146,7 +147,62 @@ public class RegressionAndRanking {
 		    }
 
 	    //
-    
+		   // boolean baggingFlag = false;
+		   // int bagSize = 20;
+		    if(baggingFlag==true)
+		    {
+		    	for(int i=1;i<algorithms.length;i++)
+				{
+					System.out.println("Applying Regression on : "+algorithms[i]);
+					DataSource source = new DataSource(FolderPath+algorithms[i]+".csv");
+					Instances data = source.getDataSet();
+					Instances modifiedData = new Instances(data);
+					data.setClassIndex(data.numAttributes() - 1);
+					
+					MultilayerPerceptron LR = new MultilayerPerceptron();
+					
+					infoMatrix[i][0] = algorithms[i];
+					for(int j=0;j<(int)Math.ceil((double)data.numInstances()/bagSize);j++)
+					{
+						System.out.println("Total Iteration : "+(int)Math.ceil((double)data.numInstances()/bagSize)+" Working on :"+j);
+						
+						Instance currentInstances[] = new Instance[bagSize];
+						for(int p=0;p<bagSize && (j*bagSize+p)<data.numInstances();p++)
+						{
+							currentInstances[p] = data.instance(j*bagSize+p);
+						}
+						for(int p=0;p<bagSize && (j*bagSize+p)<data.numInstances();p++)
+						{
+							//System.out.println(currentInstances[p]);
+						}
+						System.out.println();
+						//Instance currentInstance = data.instance(j);
+						
+						modifiedData = new Instances(data);
+						
+						for(int p=0;p<bagSize && (j*bagSize+p)<data.numInstances();p++)
+						{
+							modifiedData.delete(j*bagSize);
+						}
+						
+						LR = new MultilayerPerceptron();
+						LR.setTrainingTime(trainingTime);
+						LR.setHiddenLayers(String.valueOf(hiddenLayer));
+						LR.buildClassifier(modifiedData);
+						for(int p=0;p<bagSize && (j*bagSize+p)<data.numInstances();p++)
+						{
+							//System.out.println(currentInstances[p].toString());
+							infoMatrix[i][j*bagSize+1+p]= String.valueOf(LR.classifyInstance(currentInstances[p]));
+						}
+						
+					}
+					
+				
+				
+				}
+		    }
+		    
+		    else{
 		for(int i=1;i<algorithms.length;i++)
 		{
 			System.out.println("Applying Regression on : "+algorithms[i]);
@@ -158,8 +214,12 @@ public class RegressionAndRanking {
 			MultilayerPerceptron LR = new MultilayerPerceptron();
 			
 			infoMatrix[i][0] = algorithms[i];
+			
+			
+			
 			for(int j=0;j<data.numInstances();j++)
 			{
+				System.out.println("Ttoal Instance : "+data.numInstances()+" Working on :"+j);
 				Instance currentInstance = data.instance(j);
 				
 				modifiedData = new Instances(data);
@@ -171,9 +231,11 @@ public class RegressionAndRanking {
 				
 				infoMatrix[i][j+1]= String.valueOf(LR.classifyInstance(currentInstance));
 			}
+			
+		
 		
 		}
-		
+		    }
 		String[][] str = transpose(infoMatrix);
 		StringBuilder sb = stringPrep(str);
 		writeCSVReport(sb.toString(),savePath);

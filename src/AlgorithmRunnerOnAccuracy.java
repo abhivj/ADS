@@ -285,7 +285,7 @@ public class AlgorithmRunnerOnAccuracy {
     			for(int l=0;l<models.length;l++)
     			{
     				System.out.print("  ||  "+weight[k][l]);
-    				csvFile.append(weight[k][l]);
+    				csvFile.append(Comparision[k][l]);
     				if(l!=models.length-1)
     					csvFile.append(",");
     				else
@@ -358,8 +358,9 @@ public class AlgorithmRunnerOnAccuracy {
 		
 		//String reportPath = "d:/st/st/BinaryDatasetReport.csv";
 	    //String filePath = "./data/BinaryDatasets/";
-		String reportPath = "d:/Experiment/large/report/AlgorithmsAccuracyFor13Base.csv";
-		String filePath ="d:/Experiment/large/dataset/selectedFiles/";
+		//dataset-algo-dimofPCA
+		String reportPath = "d:/Experiment/large/report/AlgoAccuracy-484-12-8.csv";
+		String filePath ="d:/Experiment/large/dataset/expDarff/";
 		Algorunner(filePath, reportPath);
 	}
 

@@ -5,7 +5,6 @@ import Histogram.*;
 import Stats.*;
 import Clustering.*;
 import regression.*;
-import weka.filters.unsupervised.attribute.MLPAutoencoder;
 import plots.*;
 public class Main {
 
@@ -252,37 +251,37 @@ public class Main {
 		
 		//Delete all files in tempfolders before start
 		
+		
 		/*
-		String filePrefix="11";
 		Regressor reg = new Regressor();
-		RegressorTraining[] RT = reg.createTrainingData("d:/Experiment/ExperimentFeb/dataset44/", "d:/Experiment/ExperimentFeb/temp1/", "d:/Experiment/ExperimentFeb/temp2/", true, true, true, true, true, 8, 100, 0, 20, 2, 2, 2);
+		RegressorTraining[] RT = reg.createTrainingData("d:/Experiment/large/dataset/dataset44/", "d:/Experiment/large/dataset/dataset44/temp11/", "d:/Experiment/large/dataset/dataset44/temp22/", true, true, true, true, true, 8, 100, 0, 20, 2, 2, 2);
 		
 		RegressorTraining print = new RegressorTraining();
-		print.printInFeatureVector("d:/Experiment/ExperimentFeb/march24/result/", "AttributeFile-"+filePrefix+".csv", RT,2);
+		print.printInFeatureVector("d:/Experiment/large/dataset/dataset44/report1/", "AttributeFile.csv", RT,2);
 		
 		
 		
 		GenerateRegressionData GRD = new GenerateRegressionData();
 		
-		GRD.generateFiles("d:/Experiment/ExperimentFeb/march24/result/AttributeFile-"+filePrefix+".csv",	//Attribute File from above step
-				"d:/Experiment/ExperimentFeb/march24/Accuracy-Base.csv", 								//Performance File
-				"d:/Experiment/ExperimentFeb/march24/AccuracyReg"+filePrefix+"/");									//TargetFolder
+		GRD.generateFiles("d:/Experiment/large/dataset/dataset44/report1/AttributeFile.csv",	//Attribute File from above step
+				"d:/Experiment/large/dataset/dataset44/report1/Accuracy-Base.csv", 								//Performance File
+				"d:/Experiment/large/dataset/dataset44/regression/algo70/");									//TargetFolder
 	
 		
 		RegressionAndRanking RAR = new RegressionAndRanking();
-		RAR.createModel("d:/Experiment/ExperimentFeb/march24/AccuracyReg"+filePrefix+"/",									//Folder which contains all regression files
-				"d:/Experiment/ExperimentFeb/march24/result/Accuracy-Experiment-"+filePrefix+".csv",			//SavePath
+		RAR.createModel("d:/Experiment/large/dataset/dataset44/regression/algo70/",									//Folder which contains all regression files
+				"d:/Experiment/large/dataset/dataset44/report1/Accuracy-Experiment.csv",		//SavePath
 				"d:/Experiment/ExperimentFeb/march24/Accuracy-Base.csv",									//Performance File
 				1480, 
-				141);				
+				141,false,10);				
 		
 		GenerateRanks GR = new GenerateRanks();
-		GR.generateRankFile("d:/Experiment/ExperimentFeb/march24/Accuracy-Base.csv",						//Base File which Contains true result
+		GR.generateRankFile("d:/Experiment/large/dataset/dataset44/report1/Accuracy-Base.csv", 					//Base File which Contains true result
 				"D:/Experiment/ExperimentFeb/march24/temp.txt", 
 				"D:/Experiment/ExperimentFeb/march24/actual.txt", 
 				"D:/Experiment/ExperimentFeb/march24/temp.txt",  13);
 		
-		GR.generateRankFile("d:/Experiment/ExperimentFeb/march24/result/Accuracy-Experiment-"+filePrefix+".csv", 	//Prediction From Experiment
+		GR.generateRankFile("d:/Experiment/large/dataset/dataset44/report1/Accuracy-Experiment.csv",	//Prediction From Experiment
 				"D:/Experiment/ExperimentFeb/march24/temp.txt", 
 				"D:/Experiment/ExperimentFeb/march24/predicted.txt", 
 				"D:/Experiment/ExperimentFeb/march24/temp.txt",  13);
@@ -290,7 +289,7 @@ public class Main {
 		TopMatching TM = new TopMatching();
 		TM.compareTwoFile("D:/Experiment/ExperimentFeb/march24/actual.txt",
 						  "D:/Experiment/ExperimentFeb/march24/predicted.txt",7,
-				"D:/Experiment/ExperimentFeb/march24/TopK-result-"+filePrefix+".csv");					//Top K file showing percentage match
+						  "d:/Experiment/large/dataset/dataset44/report1/Top-k-result.csv");					//Top K file showing percentage match
 		*/
 		//ExpectationMaximizationAlgorithm ema = new ExpectationMaximizationAlgorithm();
 		//ema.getMeanOfGaussionsFromEMFile("D:/Experiment/ExperimentFeb/dataset441/", "a1a.arff",2);
@@ -298,11 +297,56 @@ public class Main {
 
 		//Artificial CSV to arff Converter
 		//CSVToArff ARF = new CSVToArff();
-		//ARF.cleanAndModify("D:/Experiment/large/dataset/allDatasets/", "D:/Experiment/large/dataset/arffConvertedDataset/");
+		//ARF.cleanAndModify("D:/Experiment/large/dataset/expD/", "D:/Experiment/large/dataset/expD/");
 	
 		
 		//Clean Data
-		TrainingDataCleaner.CleanAndModify("D:/Experiment/large/dataset/arffConvertedDataset/", "D:/Experiment/large/dataset/arffConvertedDatasetConverted/","D:/Experiment/large/dataset/selectedFiles/", true, true, true,true,true,8,100);
+		//TrainingDataCleaner.CleanAndModify("D:/Experiment/large/dataset/expD/", "D:/Experiment/large/dataset/expDarff/","D:/Experiment/large/dataset/expDselected/", true, true, true,true,true,8,100);
+		
+		/*
+		Regressor reg = new Regressor();
+		RegressorTraining[] RT = reg.createTrainingData("D:/Experiment/large/dataset/dataset44/", "D:/Experiment/large/dataset/dataset44/temp1/","D:/Experiment/large/dataset/dataset44/temp2/", true, true, true, true, true, 8, 100, 0, 20, 2, 2, 2);
+		
+		RegressorTraining print = new RegressorTraining();
+		print.printInFeatureVector("D:/Experiment/large/dataset/dataset44/report/", "AttributeFile.csv", RT,2);
+		
+		*/
+		/*
+		GenerateRegressionData GRD = new GenerateRegressionData();
+		
+		GRD.generateFiles("d:/Experiment/large/dataset/expDarff/report/AttributeFile.csv",	//Attribute File from above step
+				"d:/Experiment/large/dataset/expDarff/report/AlgoAccuracy-484-70-8.csv", 								//Performance File
+				"d:/Experiment/large/dataset/expDarff/regression/algo70/");									//TargetFolder
+	
+		
+		RegressionAndRanking RAR = new RegressionAndRanking();
+		RAR.createModel("d:/Experiment/large/dataset/expDarff/regression/algo70/",									//Folder which contains all regression files
+				"d:/Experiment/large/dataset/expDarff/report/ExperimentAccuracy-484-70-8.csv",		//SavePath
+				"d:/Experiment/large/dataset/expDarff/report/AlgoAccuracy-484-70-8.csv",									//Performance File
+				740, 
+				130,
+				true,40);				
+		
+		GenerateRanks GR = new GenerateRanks();
+		GR.generateRankFile("d:/Experiment/large/dataset/expDarff/report/AlgoAccuracy-484-12-8.csv",						//Base File which Contains true result
+				"D:/Experiment/ExperimentFeb/march24/temp.txt", 
+				"D:/Experiment/ExperimentFeb/march24/actual1.txt", 
+				"D:/Experiment/ExperimentFeb/march24/temp.txt",  70);
+		
+		GR.generateRankFile("d:/Experiment/large/dataset/expDarff/report/ExperimentAccuracy-484-12-8.csv", 	//Prediction From Experiment
+				"D:/Experiment/ExperimentFeb/march24/temp.txt", 
+				"D:/Experiment/ExperimentFeb/march24/predicted1.txt", 
+				"D:/Experiment/ExperimentFeb/march24/temp.txt",  70);
+		
+		TopMatching TM = new TopMatching();
+		TM.compareTwoFile("D:/Experiment/ExperimentFeb/march24/actual1.txt",
+						  "D:/Experiment/ExperimentFeb/march24/predicted1.txt",70,
+						  "d:/Experiment/large/dataset/expDarff/report/TopK-result-70-bag40.csv");		
+		*/
+		
+		RandomProbabilityCalculator rbc = new RandomProbabilityCalculator();
+		rbc.printProbability("d:/Experiment/large/dataset/dataset44/report1/Top-k-result-prob.csv",13);
 	}
+	
 
 }
