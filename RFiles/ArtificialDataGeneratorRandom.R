@@ -11,9 +11,9 @@ distribution <- function(choice,numberOfInstances){
   }
   if(choice==2){
     cat("Uniform Distribution ")
-    min <- runif(1,min=1,max=90)
+    min <- runif(1,min=1,max=10)
     min <- as.numeric(min)
-    max <- runif(1,min=min,max=100)
+    max <- runif(1,min=min,max=12)
     max <- as.numeric(max)
     dist <- runif(numberOfInstances,min=min,max=max)
     return(dist)
@@ -136,8 +136,8 @@ dataGenerator <- function(FileName,noOfFiles,instanceLower,instanceUpper,attrLow
     data <- rbind(data,mat)
   }
   data <- data[sample(nrow(data)),]
-  write.csv(data,paste('D:\\Experiment\\artificialData\\distributionData\\',fileName,sep=""),row.names=FALSE)
-  cat(paste('Done Printing at : D:\\Experiment\\artificialData\\distributionData\\',fileName))
+  write.csv(data,paste('D:\\Experiment\\large\\dataset\\multivariateDatasets\\',fileName,sep=""),row.names=FALSE)
+  cat(paste('Done Printing at : D:\\Experiment\\large\\dataset\\multivariateDatasets\\',fileName))
   }
 }
 

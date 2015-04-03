@@ -10,7 +10,6 @@ distribution <- function(numberOfInstances){
     return(dist)
   
 
-}
 
 }
 

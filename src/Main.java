@@ -1,3 +1,5 @@
+import java.io.File;
+
 import DataCleaning.*;
 import autoEncoder.*;
 import MultivariateNormalDistributionMixture.*;
@@ -8,6 +10,45 @@ import regression.*;
 import plots.*;
 public class Main {
 
+	
+	public static File[] readAllFiles(String inputFolder)
+	{
+		File folder = new File(inputFolder);
+		File[] listOfFiles = folder.listFiles();
+		String files;
+	    
+		int fileCounter=0;
+	    for (int i = 0; i < listOfFiles.length; i++) 
+	     {
+	    	 if (listOfFiles[i].isFile()) 
+	    	 {
+	    		 files = listOfFiles[i].getName();
+	    		 if (files.endsWith(".csv"))
+	    		 {
+	    			 fileCounter++;
+	    		 }
+	    	 }
+	     }
+	     File[] arffFiles = new File[fileCounter];
+	     fileCounter=0;
+	     for (int i = 0; i < listOfFiles.length; i++) 
+	     {
+	 
+	    	 if (listOfFiles[i].isFile()) 
+	    	 {
+	    		 files = listOfFiles[i].getName();
+	    		 if (files.endsWith(".csv"))
+	    		 {
+	    			 arffFiles[fileCounter] = listOfFiles[i];
+	    			 fileCounter++;
+	          
+	    		 }
+	    	 }
+	     }
+		return arffFiles;
+	}
+	
+	
 	public static void main(String[] args) throws Exception {
 		
 		//TrainingDataCleaner.CleanAndModify("./data/BinaryDatasetRaw/", "./data/BinaryDatasetRaw/ss/", true, true, true,true,true,8,100);
@@ -344,8 +385,53 @@ public class Main {
 						  "d:/Experiment/large/dataset/expDarff/report/TopK-result-70-bag40.csv");		
 		*/
 		
-		RandomProbabilityCalculator rbc = new RandomProbabilityCalculator();
-		rbc.printProbability("d:/Experiment/large/dataset/dataset44/report1/Top-k-result-prob.csv",13);
+		/*
+		GenerateRanks GR = new GenerateRanks();
+		GR.generateRankFile("d:/Experiment/large/dataset/expDarff/report/AlgoAccuracy-484-12-8.csv", 					//Base File which Contains true result
+				"D:/Experiment/ExperimentFeb/march24/temp.txt", 
+				"D:/Experiment/ExperimentFeb/march24/actual.txt", 
+				"D:/Experiment/ExperimentFeb/march24/temp.txt",70);
+		
+		GR.generateRankFile("d:/Experiment/large/dataset/dataset44/report/ExperimentAccuracy.csv",	//Prediction From Experiment
+				"D:/Experiment/ExperimentFeb/march24/temp.txt", 
+				"D:/Experiment/ExperimentFeb/march24/predicted.txt", 
+				"D:/Experiment/ExperimentFeb/march24/temp.txt",70);
+		
+		TopMatching TM = new TopMatching();
+		TM.compareTwoFile("D:/Experiment/ExperimentFeb/march24/actual.txt",
+						  "D:/Experiment/ExperimentFeb/march24/predicted.txt",70,
+						  "d:/Experiment/large/dataset/dataset44/report/Top-k-result-70.csv");	
+		*/
+		//RandomProbabilityCalculator rbc = new RandomProbabilityCalculator();
+		//rbc.printProbability("d:/Experiment/large/dataset/expDarff/report/Top-k-result-prob-70.csv",70);
+		
+		File[] arffFiles = readAllFiles("d:/Experiment/large/dataset/dataset44/report1/allRegT");
+		
+		for(int i=0;i<arffFiles.length;i++)
+		{
+		GenerateRanks GR = new GenerateRanks();
+		GR.generateRankFile("d:/Experiment/large/dataset/dataset44/report1/AlgorithmRunAndAccuracyResult.csv",						//Base File which Contains true result
+				"D:/Experiment/ExperimentFeb/march24/temp.txt", 
+				"D:/Experiment/ExperimentFeb/march24/actual1.txt", 
+				"D:/Experiment/ExperimentFeb/march24/temp.txt",  13);
+		
+		GR.generateRankFile("d:/Experiment/large/dataset/dataset44/report1/allRegT/"+arffFiles[i].getName().toString(),		//Prediction From Experiment
+				"D:/Experiment/ExperimentFeb/march24/temp.txt", 
+				"D:/Experiment/ExperimentFeb/march24/predicted"+String.valueOf(i)+".txt", 
+				"D:/Experiment/ExperimentFeb/march24/temp.txt",  13);
+		
+		TopMatching TM = new TopMatching();
+		TM.compareTwoFile("D:/Experiment/ExperimentFeb/march24/actual1.txt",
+				"D:/Experiment/ExperimentFeb/march24/predicted"+String.valueOf(i)+".txt", 13,
+						  "d:/Experiment/large/dataset/dataset44/report1/topkT/"+arffFiles[i].getName().toString());	
+		
+		}
+		
+		
+		TopMatching TM = new TopMatching();
+		TM.allResult("d:/Experiment/large/dataset/dataset44/report1/topkT/", "d:/Experiment/large/dataset/dataset44/report1/All_Result_13_trail.csv",13);
+		
+		
 	}
 	
 

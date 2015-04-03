@@ -70,7 +70,7 @@ dataGenerator <- function(FileName,noOfFiles,instanceLower,instanceUpper,attrLow
     data <- rbind(data,mat)
   }
   data <- data[sample(nrow(data)),]
-  write.csv(data,paste('D:\\Experiment\\artificialData\\',fileName,sep=""),row.names=FALSE)
-  cat(paste('Done Printing at : D:\\Experiment\\artificialData\\',fileName))
+  write.csv(data,paste('D:\\Experiment\\large\\dataset\\multivariateDatasets\\',fileName,sep=""),row.names=FALSE)
+  cat(paste('Done Printing at : D:\\Experiment\\large\\dataset\\multivariateDatasets\\',fileName))
   }
 }

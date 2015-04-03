@@ -127,8 +127,6 @@ public class RegressionAndRanking {
 		DataSource sampleSource = new DataSource(FolderPath+arffFiles[0].getName().toString());
 		int numberOfInstances = sampleSource.getDataSet().numInstances();
 		
-		
-		
 		CSVReader Perreader = new CSVReader(new FileReader(performanceFile));
 	    String[] algorithms = Perreader.readNext();
 		
@@ -202,7 +200,8 @@ public class RegressionAndRanking {
 				}
 		    }
 		    
-		    else{
+		else
+		{
 		for(int i=1;i<algorithms.length;i++)
 		{
 			System.out.println("Applying Regression on : "+algorithms[i]);
@@ -231,15 +230,15 @@ public class RegressionAndRanking {
 				
 				infoMatrix[i][j+1]= String.valueOf(LR.classifyInstance(currentInstance));
 			}
-			
-		
-		
 		}
-		    }
+	}
 		String[][] str = transpose(infoMatrix);
 		StringBuilder sb = stringPrep(str);
 		writeCSVReport(sb.toString(),savePath);
-		
+	}
+	
+	public void createNModel(String FolderPath,String savePath,String performanceFile,int trainingTime,int hiddenLayer,boolean baggingFlag,int bagSize)
+	{
 		
 	}
 	
