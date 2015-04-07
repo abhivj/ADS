@@ -80,7 +80,7 @@ public class ComparisionBasedOnEuclidianDistance {
 		StringBuilder st = new StringBuilder();
 		for(int i=0;i<numberOfFiles;i++)
 		{
-			st.append("("+(i+1)+") - > ");
+			//st.append("("+(i+1)+") - > ");
 			for(int j=0;j<topk;j++)
 			{
 				if(topList[i][j]!=0)
@@ -192,19 +192,19 @@ public class ComparisionBasedOnEuclidianDistance {
 	public static void main(String[] args) {
 	
 		//String csvFileTranspose = "d:/work241/transposePCA.csv";
-		String csvFileTranspose = "d:/st/st/Ranks.csv";
+		String csvFileTranspose = "D:/Experiment/large/Experiments/Transpose.csv";
 		//String initialResult = "d:/work241/EucInitialResult1.csv";
 		//String allResult = "d:/work241/EucAllResult1.csv";
 		//String topKResult = "d:/work241/EucTopKResult1.txt";
 
-		String initialResult = "d:/st/st/EucInitialResult1.csv";
-		String allResult = "d:/st/st/EucAllResult1.csv";
-		String topKResult = "d:/st/st/EucTopKResult1.txt";
+		String initialResult = "D:/Experiment/large/Experiments/EucInitialResult.csv";
+		String allResult = "D:/Experiment/large/Experiments/EucAllResult.csv";
+		String topKResult = "D:/Experiment/large/Experiments/EucTopk.csv";
 
 		
-		int numberOfBins=13;
-		int numberOfFiles=14;
-		int topk=10;
+		int numberOfBins=70;
+		int numberOfFiles=44;
+		int topk=44;
 		compareDatasets(csvFileTranspose, initialResult, allResult, topKResult, numberOfBins, numberOfFiles, topk);
 		
 

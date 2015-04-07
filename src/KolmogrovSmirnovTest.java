@@ -294,7 +294,7 @@ public class KolmogrovSmirnovTest {
 		StringBuilder st = new StringBuilder(str);
 		for(int i=0;i<rank.length;i++)
 		{
-			st.append("("+(i+1)+")->");
+			//st.append("("+(i+1)+")->");
 			for(int j=0;j<k;j++)
 			{
 				st.append(rank[i][j]);
@@ -324,21 +324,22 @@ public class KolmogrovSmirnovTest {
 	
 	
 	public static void main(String[] args) {
-		int dataset=8;
-		int bin=16;
-		int[][] data = readCSV("D:/work241/PCAClassData.csv", dataset, bin);
+		int dataset=44;
+		int bin=20;
+		int topk = 44;
+		int[][] data = readCSV("D:/Experiment/large/Experiments/Correlation.csv", dataset, bin);
 		double[][] normalizeMatrix = normalizeHistogram(data);
 		double[][] runningTotal = runningTotal(normalizeMatrix);
 		double[][] similarityMatrix = similarityMatrix(runningTotal, dataset);
 		int[][] rankMatrix = calculateRankMatrix(similarityMatrix);
-		printTopK(rankMatrix, 5, "D:/work241/kolmogrovTest.txt");
+		printTopK(rankMatrix, topk, "D:/Experiment/large/Experiments/KolMogrovTopk.csv");
 		
 		
 		//Code for binary Separate classes
-		int[][] dataBinary = readCSVBinary("D:/work241/NumericalDataBinary6.csv", dataset, bin);
+		int[][] dataBinary = readCSVBinary("D:/Experiment/large/Experiments/BinTranspose.csv", dataset, bin);
 		double[][] similarityMatrixBinary = similarityMatrixBinary(dataBinary, dataset, bin);
 		int[][] rankMatrixBinary = calculateRankMatrix(similarityMatrixBinary);
-		printTopK(rankMatrixBinary, 5, "D:/work241/kolmogrovTestBinary.txt");
+		printTopK(rankMatrixBinary, topk, "D:/Experiment/large/Experiments/KolMogrovBinarySepTopk.csv");
 	}
 
 }

@@ -14,16 +14,17 @@ public class CompareBinaryClass {
 
 	public static void main(String[] args) {
 	
-		int datasets = 8;
-		int bins = 16;
-		int topk=5;
-		double[][] dataMatrix = readCSV("D:/work241/NumericalDataBinary6.csv",datasets,bins);
+		int datasets = 44;
+		int bins = 20;
+		int topk=44;
+		double[][] dataMatrix = readCSV("D:/Experiment/large/Experiments/BinTranspose.csv",datasets,bins);
 		double[][] valueMatrix = generateCompareMatrix(dataMatrix,datasets,bins);
 		int[][] rankMatrix = calculateRankMatrix(valueMatrix);
-		printTopK(rankMatrix, topk, "D:/work241/BinaryClassTopk6.txt");
+		printTopK(rankMatrix, topk, "D:/Experiment/large/Experiments/EuclidianHistCompareTopk.csv");
 		System.out.println("Done");
 
 	}
+
 	/**
 	 *  
 	 * @param path path of csv file
@@ -187,7 +188,7 @@ public class CompareBinaryClass {
 		StringBuilder st = new StringBuilder(str);
 		for(int i=0;i<rank.length;i++)
 		{
-			st.append("("+(i+1)+")->");
+			//st.append("("+(i+1)+")->");
 			for(int j=0;j<k;j++)
 			{
 				st.append(rank[i][j]);

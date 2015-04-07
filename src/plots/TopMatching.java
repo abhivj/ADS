@@ -16,7 +16,21 @@ import weka.core.converters.ConverterUtils.DataSource;
 import com.opencsv.CSVReader;
 
 public class TopMatching {
-
+	public int match(String[] a, String[] b, int k)
+	{
+		int ans=0;
+		for(int i=0;i<k;i++)
+		{
+			for(int j=0;j<k;j++)
+			{
+				if(a[i].equals(b[j]))
+					ans++;
+					//return true;
+			}
+		}
+		
+		return ans;
+	}
 	public void writeCSVReport(String stringToWrite,String path)
 	{
 		String savePath = path;
@@ -213,6 +227,42 @@ public class TopMatching {
 		StringBuilder sb = stringPrep(printableMatrix);
 		writeCSVReport(sb.toString(), savePath);
 		
+	}
+	
+	public void compareExpectation(String baseFile,String ExperimentFile,int algorithms,int start,int stepSize,String resultFile) throws Exception
+	{
+		File bsFile = new File(baseFile);
+		File exFile = new File(ExperimentFile);
+		
+		int resultArraySize = algorithms/stepSize;
+		double res[] = new double[resultArraySize];
+		StringBuilder sb = new StringBuilder();
+		String bsStr = "";
+		String exStr="";
+		BufferedReader br = new BufferedReader(new FileReader(bsFile));
+		BufferedReader be = new BufferedReader(new FileReader(ExperimentFile));
+        int i = 0;
+		while (((bsStr = br.readLine()) != null) && ((exStr = be.readLine())!=null) && i<algorithms) {
+            String[] split1 = bsStr.split(",");
+            String[] split2 = exStr.split(",");
+            
+            for(int k=stepSize;k<=algorithms;k=k+stepSize)
+            {
+            	
+            		 res[(k/stepSize) - 1 ] += match(split1,split2,k);
+            	 
+            		
+            }
+           i++;
+         }
+		for(int k=0;k<resultArraySize;k++)
+		{
+			sb.append((k+1)*stepSize);
+			sb.append(",");
+			res[k] = (double)res[k]/algorithms;
+			sb.append(res[k]+"\n");
+		}
+		writeCSVReport(sb.toString(), resultFile);
 	}
 
 }

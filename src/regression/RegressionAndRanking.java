@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.Random;
 
 import DataCleaning.TrainingDataCleaner;
+import weka.classifiers.functions.GaussianProcesses;
 import weka.classifiers.functions.MultilayerPerceptron;
 import weka.core.Attribute;
 import weka.core.Instance;
@@ -123,6 +124,7 @@ public class RegressionAndRanking {
 	}
 	public void createModel(String FolderPath,String savePath,String performanceFile,int trainingTime,int hiddenLayer,boolean baggingFlag,int bagSize) throws Exception
 	{
+		System.out.println(FolderPath);
 		File[] arffFiles = readAllFiles(FolderPath);
 		DataSource sampleSource = new DataSource(FolderPath+arffFiles[0].getName().toString());
 		int numberOfInstances = sampleSource.getDataSet().numInstances();
@@ -157,7 +159,7 @@ public class RegressionAndRanking {
 					Instances modifiedData = new Instances(data);
 					data.setClassIndex(data.numAttributes() - 1);
 					
-					MultilayerPerceptron LR = new MultilayerPerceptron();
+					GaussianProcesses LR = new GaussianProcesses();
 					
 					infoMatrix[i][0] = algorithms[i];
 					for(int j=0;j<(int)Math.ceil((double)data.numInstances()/bagSize);j++)
@@ -183,9 +185,9 @@ public class RegressionAndRanking {
 							modifiedData.delete(j*bagSize);
 						}
 						
-						LR = new MultilayerPerceptron();
-						LR.setTrainingTime(trainingTime);
-						LR.setHiddenLayers(String.valueOf(hiddenLayer));
+						LR = new GaussianProcesses();
+						//LR.setTrainingTime(trainingTime);
+						//LR.setHiddenLayers(String.valueOf(hiddenLayer));
 						LR.buildClassifier(modifiedData);
 						for(int p=0;p<bagSize && (j*bagSize+p)<data.numInstances();p++)
 						{
@@ -210,7 +212,7 @@ public class RegressionAndRanking {
 			Instances modifiedData = new Instances(data);
 			data.setClassIndex(data.numAttributes() - 1);
 			
-			MultilayerPerceptron LR = new MultilayerPerceptron();
+			GaussianProcesses LR = new GaussianProcesses();
 			
 			infoMatrix[i][0] = algorithms[i];
 			
@@ -223,9 +225,9 @@ public class RegressionAndRanking {
 				
 				modifiedData = new Instances(data);
 				modifiedData.delete(j);
-				LR = new MultilayerPerceptron();
-				LR.setTrainingTime(trainingTime);
-				LR.setHiddenLayers(String.valueOf(hiddenLayer));
+				LR = new GaussianProcesses();
+				//LR.setTrainingTime(trainingTime);
+				//LR.setHiddenLayers(String.valueOf(hiddenLayer));
 				LR.buildClassifier(modifiedData);
 				
 				infoMatrix[i][j+1]= String.valueOf(LR.classifyInstance(currentInstance));

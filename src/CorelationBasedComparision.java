@@ -17,10 +17,10 @@ public class CorelationBasedComparision {
 		
 		
 		//int[][] sample = readCSV("D:/work241/CorelationNeededF.csv", 8,13);
-		int[][] sample = readCSV("D:/st/st/CorelationMatrix.csv", 14,13);
+		int[][] sample = readCSV("D:/Experiment/large/Experiments/Correlation.csv", 44,70);
 		double[][] result = calculateCorelationMatrix(sample);
 		int[][] rank = calculateRankMatrix(result);
-		printTopK(rank,10,"d:/st/st/CorelationMatrixResult.txt");
+		printTopK(rank,44,"D:/Experiment/large/Experiments/CorrelationTopK.csv");
 		System.out.println("Done!!");
 	}
 	
@@ -120,7 +120,7 @@ public class CorelationBasedComparision {
 		StringBuilder st = new StringBuilder(str);
 		for(int i=0;i<rank.length;i++)
 		{
-			st.append("("+(i+1)+")->");
+			//st.append("("+(i+1)+")->");
 			for(int j=0;j<k;j++)
 			{
 				st.append(rank[i][j]);
