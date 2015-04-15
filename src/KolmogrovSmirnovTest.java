@@ -324,22 +324,22 @@ public class KolmogrovSmirnovTest {
 	
 	
 	public static void main(String[] args) {
-		int dataset=44;
+		int dataset=484;
 		int bin=20;
-		int topk = 44;
-		int[][] data = readCSV("D:/Experiment/large/Experiments/Correlation.csv", dataset, bin);
+		int topk = 483;
+		/*int[][] data = readCSV("D:/Experiment/large/Experiments/result/Correlation70.csv", dataset, bin);
 		double[][] normalizeMatrix = normalizeHistogram(data);
 		double[][] runningTotal = runningTotal(normalizeMatrix);
 		double[][] similarityMatrix = similarityMatrix(runningTotal, dataset);
 		int[][] rankMatrix = calculateRankMatrix(similarityMatrix);
-		printTopK(rankMatrix, topk, "D:/Experiment/large/Experiments/KolMogrovTopk.csv");
-		
+		printTopK(rankMatrix, topk, "D:/Experiment/large/Experiments/result/KolMogrovTopk.csv");
+		*/
 		
 		//Code for binary Separate classes
-		int[][] dataBinary = readCSVBinary("D:/Experiment/large/Experiments/BinTranspose.csv", dataset, bin);
+		int[][] dataBinary = readCSVBinary("D:/Experiment/large/Experiments/result/BinTranspose484.csv", dataset, bin);
 		double[][] similarityMatrixBinary = similarityMatrixBinary(dataBinary, dataset, bin);
 		int[][] rankMatrixBinary = calculateRankMatrix(similarityMatrixBinary);
-		printTopK(rankMatrixBinary, topk, "D:/Experiment/large/Experiments/KolMogrovBinarySepTopk.csv");
+		printTopK(rankMatrixBinary, topk, "D:/Experiment/large/Experiments/result/KolMogrovTestTopk.csv");
 	}
 
 }

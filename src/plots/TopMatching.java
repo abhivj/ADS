@@ -184,6 +184,58 @@ public class TopMatching {
 		return sb;
 	}
 	
+	public void allResultExpectation(String FolderPath,String savePath,int algorithms,int start,int stepsize) throws Exception
+	{
+		File[] arffFiles = readAllFiles(FolderPath);
+		
+		ExpectedValuesInK ex = new ExpectedValuesInK();
+		ex.printPercentage(savePath+"-prob.csv", algorithms, start, stepsize);
+		int topk=0;
+		for(int i=start;i<=algorithms;i=i+stepsize)
+		{
+			topk++;
+		}
+		
+		
+		String[][] infoMatrix = new String[arffFiles.length+2][topk+1];
+		//Adding count till top k
+		infoMatrix[0][0] = "Count";
+		for(int i=start;i<=algorithms;i=i+stepsize)
+		{
+			infoMatrix[0][i/start] = String.valueOf(i);
+		}
+		//Adding Probability file
+		
+		infoMatrix[1][0] = "Random Probability";
+		BufferedReader probReader = new BufferedReader(new FileReader(savePath+"-prob.csv"));
+	    String probLine;
+	    int p=1;
+	    while ((probLine = probReader.readLine()) != null) {
+	       int index = probLine.indexOf(',');
+	       String value = probLine.substring(index+1);
+	       infoMatrix[1][p] = value;
+	       p++;
+	    }
+		for(int j=1;j<=arffFiles.length;j++)
+		{
+			infoMatrix[j+1][0] = arffFiles[j-1].getName().toString();
+				int i=1;
+				BufferedReader reader = new BufferedReader(new FileReader(arffFiles[j-1]));
+			    String line;
+			    while ((line = reader.readLine()) != null) {
+			       int index = line.indexOf(',');
+			       String value = line.substring(index+1);
+			       infoMatrix[j+1][i] = value;
+			       i++;
+			    }
+		}
+		String[][] printableMatrix = transpose(infoMatrix);
+		StringBuilder sb = stringPrep(printableMatrix);
+		writeCSVReport(sb.toString(), savePath);
+		
+	}
+	
+	
 	public void allResult(String FolderPath,String savePath,int topk) throws Exception
 	{
 		File[] arffFiles = readAllFiles(FolderPath);
@@ -260,6 +312,46 @@ public class TopMatching {
 			sb.append((k+1)*stepSize);
 			sb.append(",");
 			res[k] = (double)res[k]/algorithms;
+			sb.append(res[k]+"\n");
+		}
+		writeCSVReport(sb.toString(), resultFile);
+	}
+	public void compareExpectationPercentage(String baseFile,String ExperimentFile,int algorithms,int start,int stepSize,String resultFile,int dataset) throws Exception
+	{
+		File bsFile = new File(baseFile);
+		File exFile = new File(ExperimentFile);
+		
+		int resultArraySize = algorithms/stepSize;
+		double res[] = new double[resultArraySize];
+		StringBuilder sb = new StringBuilder();
+		String bsStr = "";
+		String exStr="";
+		BufferedReader br = new BufferedReader(new FileReader(bsFile));
+		BufferedReader be = new BufferedReader(new FileReader(ExperimentFile));
+        int i = 0;
+		while (((bsStr = br.readLine()) != null) && ((exStr = be.readLine())!=null) && i<dataset) {
+            String[] split1 = bsStr.split(",");
+            String[] split2 = exStr.split(",");
+            
+            for(int k=stepSize;k<=algorithms;k=k+stepSize)
+            {
+            	
+            		 res[(k/stepSize) - 1 ] += match(split1,split2,k);  		
+            }
+           i++;
+         }
+		   for(int k=stepSize;k<=algorithms;k=k+stepSize)
+           {
+           	
+           		 res[(k/stepSize) - 1 ] =  res[(k/stepSize) - 1 ]/k;
+           	 
+           		
+           }
+		for(int k=0;k<resultArraySize;k++)
+		{
+			sb.append((k+1)*stepSize);
+			sb.append(",");
+			res[k] = (double)res[k]/(dataset);
 			sb.append(res[k]+"\n");
 		}
 		writeCSVReport(sb.toString(), resultFile);

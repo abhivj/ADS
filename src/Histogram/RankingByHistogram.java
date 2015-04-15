@@ -54,7 +54,7 @@ public class RankingByHistogram {
 		
 		
 		int actualRank[][] = new int[dataset][algo];
-		int similarity[][] = new int[dataset][dataset];
+		int similarity[][] = new int[dataset][dataset-1];
 		
 		
 		StringBuilder sb = new StringBuilder();
@@ -65,8 +65,9 @@ public class RankingByHistogram {
 		int i=0;
 		while (((bsStr = br.readLine()) != null)  && i<dataset) {
             String[] split1 = bsStr.split(",");
-            for(int p=0;p<dataset;p++)
+            for(int p=0;p<dataset-1;p++)
             {
+            	
             	similarity[i][p] = Integer.parseInt(split1[p]);
             }
             i++;

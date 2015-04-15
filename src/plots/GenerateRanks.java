@@ -13,7 +13,7 @@ public class GenerateRanks {
 	public int maxIndex(double[] values)
 	{
 		int maxIndex=-1;
-		double max=Double.MIN_VALUE;
+		double max=-Double.MAX_VALUE;
 		for(int i=0;i<values.length;i++)
 		{
 			if(max<values[i])
@@ -27,14 +27,14 @@ public class GenerateRanks {
 	public int[] generateRanks(double[] values)
 	{
 		int ranks[] = new int[values.length];
-		double max=Double.MIN_VALUE;
+		double max=-Double.MAX_VALUE;
 		for(int i=0;i<values.length;i++)
 		{
 			int maxIndex = maxIndex(values);
 			if(maxIndex!=-1)
 			{
 				ranks[maxIndex]=i+1;
-				values[maxIndex] = Double.MIN_VALUE;
+				values[maxIndex] = -Double.MAX_VALUE;
 			}
 		}
 		return ranks;

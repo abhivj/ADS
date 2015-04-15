@@ -13,7 +13,7 @@ import java.io.IOException;
 public class CompareBinaryClass {
 
 	public static void main(String[] args) {
-	
+	/*
 		int datasets = 44;
 		int bins = 20;
 		int topk=44;
@@ -22,7 +22,18 @@ public class CompareBinaryClass {
 		int[][] rankMatrix = calculateRankMatrix(valueMatrix);
 		printTopK(rankMatrix, topk, "D:/Experiment/large/Experiments/EuclidianHistCompareTopk.csv");
 		System.out.println("Done");
-
+*/
+		int datasets = 484;
+		int bins = 20;
+		int topk=483;
+		double[][] dataMatrix = readCSV("D:/Experiment/large/Experiments/result/BinTranspose484.csv",datasets,bins);
+		double[][] valueMatrix = generateCompareMatrix(dataMatrix,datasets,bins);
+		int[][] rankMatrix = calculateRankMatrix(valueMatrix);
+		printTopK(rankMatrix, topk, "D:/Experiment/large/Experiments/result/EuclidianHistCompareTopk.csv");
+		System.out.println("Done");
+		
+		
+		
 	}
 
 	/**

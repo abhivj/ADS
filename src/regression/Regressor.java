@@ -183,6 +183,122 @@ public class Regressor {
 		}
 		return RT;
 	}
+	public RegressorTraining[] createTrainingDataFiltered(String tempFolder1,String tempFolder2,boolean convertNominal,boolean doPCA,boolean doNormalization,boolean doRejectIfLess,boolean rejectIfNotBinary, int dimOfPCA,int minimumInstance,int type,int numberOfBins,int numberOfClasses,int numberOfClaster,int numOfGaussionsInEM) throws Exception
+	{
+		
+		//We got all files in arffFile array. 
+
+		
+		File[] arffFiles = readAllFiles(tempFolder1);
+		RegressorTraining[] RT = new RegressorTraining[arffFiles.length];
+		for(int i=0;i<arffFiles.length;i++)
+		{
+			RT[i] = new RegressorTraining();
+			String fileName = arffFiles[i].getName().toString();
+			RT[i].fileName = fileName;
+			//Cleaning Traning data
+			
+			//Delete all previous
+			
+			//Modifying to {0 to N-1} classes and separating it
+			ModifyBinary MB = new ModifyBinary();
+			MB.modifyTo01File(tempFolder1,fileName, tempFolder2);
+			
+			
+			//Creating Filename array
+			String[] st = new String[numberOfClasses];
+			for(int j=0;j<st.length;j++)
+			{
+				st[j] = String.valueOf(j)+fileName;
+			}
+			
+			//Creating bin of Histogram
+			MakeHistogram MH = new MakeHistogram();
+			RT[i].histogramBins = new int[numberOfClasses][numberOfBins];
+			RT[i].histogramBins = MH.createBinFile(tempFolder2, type, numberOfBins, numberOfClasses,st);
+			
+			//KMeans Clustering
+			File[] splittedFiles = readAllFiles(tempFolder2);
+			RT[i].co = new ClusterObject[splittedFiles.length];
+			for(int j=0;j<st.length;j++)
+			{
+				KMeansClustering KMS = new KMeansClustering();
+				RT[i].co[j] =  KMS.kMeansCluster(st[j], tempFolder2, numberOfClaster);
+			}
+			
+			//Expectation Maximization algorithm
+			RT[i].pp = new Pairs[splittedFiles.length];
+			for(int j=0;j<st.length;j++)
+			{
+				ExpectationMaximizationAlgorithm EMA =new ExpectationMaximizationAlgorithm();
+				RT[i].pp[j] = EMA.getMeanOfGaussionsFromEMFile(tempFolder2, st[j], numOfGaussionsInEM);
+			}
+			
+			//Multivariate Normal Distribution
+			RT[i].mnd = new MultivariateNormalDistribution[splittedFiles.length];
+			for(int j=0;j<st.length;j++)
+			{
+				MultivariateNormalDistribution mndr = new MultivariateNormalDistribution();
+				BufferedReader datafile = mndr.readDataFile(st[j],tempFolder2);
+				Instances data = new Instances(datafile);
+				RT[i].mnd[j] = mndr.fitModel(data);
+			}
+			
+			//Diagonal Matrix Vector of above Covariance Matrix
+			RT[i].diagonalOfCovarianceMatrix = new double[st.length][RT[i].mnd[0].getCovariances().length];
+			for(int j=0;j<st.length;j++)
+			{
+				SVD sv = new SVD();
+				RT[i].diagonalOfCovarianceMatrix[j] = sv.getSigma(RT[i].mnd[j].getCovariances());
+			}
+			
+			//Second, Third and Forth Order Moments
+		
+				Moments mn = new Moments();
+				RT[i].secondOrderMoment = mn.secondOrderMoments(tempFolder2, numberOfClasses, st, dimOfPCA);
+				RT[i].thirdOrderMoment = mn.thirdOrderMoments(tempFolder2, numberOfClasses, st, dimOfPCA);
+				RT[i].forthOrderMoment = mn.forthOrderMoments(tempFolder2, numberOfClasses, st, dimOfPCA);
+			
+				
+			/*
+			File dir = new File(tempFolder2);
+			String[] myFiles;
+			if(dir.isDirectory())
+			{
+				 myFiles = dir.list();
+	               for (int k=0; k<myFiles.length; k++) {
+	                   File myFile = new File(dir, myFiles[k]); 
+	                   if(myFile.delete())
+	                   	System.out.println("deleted");
+	                   	else	
+	                   	System.out.println("rejected");
+	                   	
+	               }
+			}
+			*/
+		//	File dir = new File(tempFolder2);
+		//	FileUtils.cleanDirectory(dir);
+			/*
+			for(int j=0;j<splittedFiles.length;j++)
+			{
+				splittedFiles[j].setWritable(true);
+				if(splittedFiles[j].delete())
+					System.out.println("deleted");
+               	else	
+               	System.out.println("rejected");
+			
+			}
+			*/	
+			/*
+			File dir = new File(tempFolder2);
+			//File dir = new File(tempFolder2);
+			//Delete all files in tempfolder2
+			FileUtils.cleanDirectory(dir); 
+			//for(File file: splittedFiles) file.delete(); 
+		*/
+		}
+		return RT;
+	}
 	
 	
 }

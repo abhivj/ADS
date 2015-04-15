@@ -472,6 +472,8 @@ public class Main {
 				130,
 				true,40);				
 		*/
+		
+		/*
 		GenerateRanks GR = new GenerateRanks();
 		GR.generateRankFile("D:/Experiment/large/Experiments/AlgorithmRunAndAccuracyResult-484-71-8.csv",						//Base File which Contains true result
 				"D:/Experiment/ExperimentFeb/march24/temp.txt", 
@@ -490,6 +492,42 @@ public class Main {
 		
 		
 		*/
+/*
+		ExpectedValuesInK ex = new ExpectedValuesInK();
+		//ex.ExpectedValue("ss", 50, 50);
+		ex.ExpectationCalculationForAll("D:/Experiment/large/Experiments/ExpectedValues.csv", 70, 5, 5);
+		
+		TopMatching tpm = new TopMatching();
+		tpm.compareExpectation("D:/Experiment/ExperimentFeb/march24/actual1.txt",  "D:/Experiment/ExperimentFeb/march24/predicted1.txt", 70, 5, 5, "D:/Experiment/large/Experiments/TopK-result-70-484-ExpectedAnalysis.csv");
+	*/
+		
+	//	TopRankingGenerator trg = new TopRankingGenerator();
+	//	trg.bestRanking("d:/Experiment/large/dataset/expDarff/report/AlgoAccuracy-484-70-8.csv", "d:/Experiment/large/dataset/expDarff/report/bestRank-484-70.txt", 484, 70);
+		/*
+		GenerateRanks GR = new GenerateRanks();
+		GR.generateRankFile("d:/Experiment/large/dataset/expDarff/report/AlgoAccuracy-484-70-8.csv",						//Base File which Contains true result
+				"D:/Experiment/ExperimentFeb/march24/temp.txt", 
+				"d:/Experiment/large/dataset/expDarff/report/actual1.txt", 
+				"D:/Experiment/ExperimentFeb/march24/temp.txt",  70);
+		
+		GR.generateRankFile("d:/Experiment/large/dataset/expDarff/report/Gaussion-ExperimentAccuracy-484-70-8.csv", 	//Prediction From Experiment
+				"D:/Experiment/ExperimentFeb/march24/temp.txt", 
+				"d:/Experiment/large/dataset/expDarff/report/predicted1.txt", 
+				"D:/Experiment/ExperimentFeb/march24/temp.txt",  70);
+		*/
+	//	TopMatching TM = new TopMatching();
+		/*TM.compareTwoFile("d:/Experiment/large/dataset/expDarff/report/actual1.txt",
+						  "d:/Experiment/large/dataset/expDarff/report/predicted1.txt", 70,
+						  "d:/Experiment/large/dataset/expDarff/report/top-k-result-acpc-484-70.csv");
+		*/
+	//	TM.compareTwoFile("d:/Experiment/large/dataset/expDarff/report/actual1.txt",
+	//			  "d:/Experiment/large/dataset/expDarff/report/bestRank-484-70.txt", 70,
+	//			  "d:/Experiment/large/dataset/expDarff/report/top-k-result-acbs-484-70.csv");
+		/*
+		RandomProbabilityCalculator rbc = new RandomProbabilityCalculator();
+		rbc.printProbability("d:/Experiment/large/dataset/expDarff/report/Top-k-result-prob-70.csv",70);
+		*/
+		/*
 
 		ExpectedValuesInK ex = new ExpectedValuesInK();
 		//ex.ExpectedValue("ss", 50, 50);
@@ -497,7 +535,18 @@ public class Main {
 		
 		TopMatching tpm = new TopMatching();
 		tpm.compareExpectation("D:/Experiment/ExperimentFeb/march24/actual1.txt",  "D:/Experiment/ExperimentFeb/march24/predicted1.txt", 70, 5, 5, "D:/Experiment/large/Experiments/TopK-result-70-484-ExpectedAnalysis.csv");
-		
+	*/
+		/*
+		TopMatching tpm = new TopMatching();
+		//tpm.compareExpectation("D:/Experiment/ExperimentFeb/march24/actual1.txt",  "D:/Experiment/ExperimentFeb/march24/predicted1.txt", 70, 5, 5, "D:/Experiment/large/Experiments/TopK-result-70-484-ExpectedAnalysis-Trail-Run.csv");
+		tpm.compareExpectationPercentage("D:/Experiment/ExperimentFeb/march24/actual1.txt",  "D:/Experiment/ExperimentFeb/march24/predicted1.txt", 70, 5, 5, "D:/Experiment/large/Experiments/TopK-result-70-484-ExpectedAnalysis-Trail-Run.csv",484);
+	*/
+		double k = - Double.MAX_VALUE;
+		System.out.println(k);
+		if(k>-5.366)
+		{
+			System.out.print("jehhe");
+		}
 		
 	}
 	

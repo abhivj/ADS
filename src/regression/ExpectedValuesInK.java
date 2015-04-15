@@ -64,7 +64,7 @@ public class ExpectedValuesInK {
 			//System.out.println("\n");
 			result+=ans;
 		}
-		System.out.println(result);
+		
 		
 		return result;
 	}
@@ -76,6 +76,18 @@ public class ExpectedValuesInK {
 		for(int i=start;i<=algorithms;i=i+stepsize)
 		{
 			double result = ExpectedValue(algorithms, i);
+			sb.append(i+","+result+"\n");
+		}
+		sb.deleteCharAt(sb.length()-1);
+		writeCSVReport(sb.toString(), filePath);
+	}
+	public void printPercentage(String filePath,int algorithms,int start,int stepsize)
+	{
+		StringBuilder sb = new StringBuilder();
+		//sb.append("Values of k out of n,Expected Value\n");
+		for(int i=start;i<=algorithms;i=i+stepsize)
+		{
+			double result = ExpectedValue(algorithms, i)/i;
 			sb.append(i+","+result+"\n");
 		}
 		sb.deleteCharAt(sb.length()-1);
