@@ -6,7 +6,7 @@
 	<classpathentry kind="lib" path="C:/Users/abhivj/workspace/Artificial Data Scientist/libs/REngine.jar"/>
 	<classpathentry kind="lib" path="C:/Users/abhivj/workspace/Artificial Data Scientist/libs/RserveEngine.jar"/>
 	<classpathentry kind="lib" path="C:/Users/abhivj/workspace/Artificial Data Scientist/libs/libsvm.jar"/>
-	<classpathentry kind="lib" path="C:/Users/abhivj/workspace/Artificial Data Scientist/libs/weka.jar"/>
+	<classpathentry kind="lib" path="C:/Users/abhivj/workspace/Artificial Data Scientist/libs/weka.jar" sourcepath="D:/software/weka/Weka-3-7/weka-src.jar"/>
 	<classpathentry kind="lib" path="C:/Users/abhivj/workspace/Artificial Data Scientist/libs/weka-src.jar"/>
 	<classpathentry kind="lib" path="C:/Users/abhivj/workspace/Artificial Data Scientist/libs/wlsvm.jar"/>
 	<classpathentry kind="lib" path="C:/Users/abhivj/workspace/Artificial Data Scientist/libs/jahmm-0.6.1.jar">

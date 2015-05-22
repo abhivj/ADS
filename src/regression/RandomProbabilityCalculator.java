@@ -43,7 +43,7 @@ public class RandomProbabilityCalculator {
 			}
 			//System.out.println(result);
 			result = 1 - result;
-			System.out.println(result);
+			
 			prob[i-1] = result;
 		}
 		return prob;

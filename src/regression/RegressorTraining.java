@@ -139,7 +139,7 @@ public class RegressorTraining {
 					coloumnCounter++;
 				}
 				
-				
+				/*
 				for(int k=0;k<(mnd[j].getCovariances()).length;k++)
 				{
 					for(int l=0;l<(mnd[j].getCovariances()[k]).length;l++)
@@ -148,7 +148,7 @@ public class RegressorTraining {
 						coloumnCounter++;
 					}
 				}
-				
+				*/
 			
 				//Instead of adding complete covariance matrix we can get vector of diagonal matrix and add it.
 				for(int k=0;k<diagonalOfCovarianceMatrix[j].length;k++)
@@ -188,7 +188,7 @@ public class RegressorTraining {
 				}
 			}
 		
-			
+		
 			sb.deleteCharAt(sb.length()-1);
 			sb.append("\n");
 			if(flag==false)

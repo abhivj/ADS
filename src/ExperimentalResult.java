@@ -2,10 +2,12 @@ import java.io.File;
 
 import plots.GenerateRanks;
 import plots.TopMatching;
+import plots.TopRankingGenerator;
 import regression.ExpectedValuesInK;
 import regression.RandomProbabilityCalculator;
 import regression.Regressor;
 import regression.RegressorTraining;
+import Clustering.KMeansClustering;
 import DataCleaning.GenerateRegressionData;
 import DataCleaning.ModifyBinary;
 import DataCleaning.PerformanceToRank;
@@ -399,41 +401,132 @@ public class ExperimentalResult {
 		//ExpectedValuesInK ex = new ExpectedValuesInK();
 		//ex.ExpectedValue("ss", 50, 50);
 		//ex.printPercentage("D:/Experiment/large/Experiments/result/ExpectedValues.csv", 70, 5, 5);
-		
-		File[] arffFiles = readAllFiles("d:/Experiment/large/Experiments/result/regression/dataset44/algo70/all/result");
+		/*
+		File[] arffFiles = readAllFiles("d:/Experiment/large/Experiments/result/regression/dataset44/algo13/result");
 		//D:\Experiment\large\Experiments\result\regression\dataset44\algo13\all\result
 		//Accuracy-Base-44-13-8
 		for(int i=0;i<arffFiles.length;i++)
 		{
 		GenerateRanks GR = new GenerateRanks();
+		GR.generateRankFile("d:/Experiment/large/Experiments/result/Accuracy-Base-44-13-8.csv",						//Base File which Contains true result
+				"D:/Experiment/ExperimentFeb/march24/temp.txt", 
+				"D:/Experiment/ExperimentFeb/march24/actual.txt", 
+				"D:/Experiment/ExperimentFeb/march24/temp.txt",  13);
+		
+		GR.generateRankFile("d:/Experiment/large/Experiments/result/regression/dataset44/algo13/result/"+arffFiles[i].getName().toString(),		//Prediction From Experiment
+				"D:/Experiment/ExperimentFeb/march24/temp.txt", 
+				"D:/Experiment/ExperimentFeb/march24/predicted"+arffFiles[i].getName().toString()+".txt", 
+				"D:/Experiment/ExperimentFeb/march24/temp.txt",  13);
+		
+		TopMatching TM = new TopMatching();
+		System.out.println("Working on "+arffFiles[i].getName().toString());
+		TM.compareTwoFile("D:/Experiment/ExperimentFeb/march24/actual.txt",
+				"D:/Experiment/ExperimentFeb/march24/predicted"+arffFiles[i].getName().toString()+".txt",  13,
+				"d:/Experiment/large/Experiments/result/regression/dataset44/algo13/topk/"+arffFiles[i].getName().toString());	
+		
+		TM.compareExpectationPercentage("D:/Experiment/ExperimentFeb/march24/actual.txt",
+				"D:/Experiment/ExperimentFeb/march24/predicted"+arffFiles[i].getName().toString()+".txt", 
+				13, 1, 1, 
+				"d:/Experiment/large/Experiments/result/regression/dataset44/algo13/topkt/"+arffFiles[i].getName().toString(), 44);
+		
+		}
+		TopMatching TM = new TopMatching();
+		//TM.allResult("d:/Experiment/large/Experiments/result/regression/dataset484/algo70/topkt/", "d:/Experiment/large/Experiments/result/regression/dataset484/algo70/All_Result_70_20_Expected.csv",70);
+		TM.allResultExpectation("d:/Experiment/large/Experiments/result/regression/dataset44/algo13/topkt/", "d:/Experiment/large/Experiments/result/regression/dataset44/result/All_Result_13_Expactation_cluster_value_44_datasets.csv", 13, 1, 1);
+		TM.allResult("d:/Experiment/large/Experiments/result/regression/dataset44/algo13/topk/", "d:/Experiment/large/Experiments/result/regression/dataset44/result/All_Result_13_Probability_cluster_value_44_datasets.csv",13);
+		*/
+		/*
+		TopMatching TM = new TopMatching();
+		GenerateRanks GR = new GenerateRanks();
+		TopRankingGenerator trg = new TopRankingGenerator();
+		trg.bestRanking("d:/Experiment/large/Experiments/result/Accuracy-Base-44-70-8.csv", "d:/Experiment/large/Experiments/result/best-44-70-8.txt", 44, 70);
+			
 		GR.generateRankFile("d:/Experiment/large/Experiments/result/Accuracy-Base-44-70-8.csv",						//Base File which Contains true result
 				"D:/Experiment/ExperimentFeb/march24/temp.txt", 
 				"D:/Experiment/ExperimentFeb/march24/actual.txt", 
 				"D:/Experiment/ExperimentFeb/march24/temp.txt",  70);
 		
-		GR.generateRankFile("d:/Experiment/large/Experiments/result/regression/dataset44/algo70/all/result/"+arffFiles[i].getName().toString(),		//Prediction From Experiment
+		TM.compareTwoFile("D:/Experiment/ExperimentFeb/march24/actual.txt",
+				"d:/Experiment/large/Experiments/result/best-44-70-8.txt",  70,
+				"d:/Experiment/large/Experiments/result/topk-prob-best-44-70-8.csv");
+		
+		TM.compareExpectationPercentage("D:/Experiment/ExperimentFeb/march24/actual.txt",
+				"d:/Experiment/large/Experiments/result/best-44-70-8.txt", 
+				70, 5, 5, 
+				"d:/Experiment/large/Experiments/result/topk-expected-best-44-70-8.csv", 44);
+		*/
+		
+		//Experiment with autoencoder
+		//We have created attribute file with autoencoder
+		
+		/*GenerateRegressionData GRD = new GenerateRegressionData();
+	GRD.generateFiles("d:/Experiment/large/autoencoder/clustervalue/AttributeFileClusterValues44-stack-25.csv",	//Attribute File from above step
+				"d:/Experiment/large/Experiments/result/Accuracy-Base-44-13-8.csv", 								//Performance File
+				"d:/Experiment/large/autoencoder/clustervalue/datasets/stack-25/dataset44/algo13/");									//TargetFolder
+		GRD.generateFiles("d:/Experiment/large/autoencoder/clustervalue/AttributeFileClusterValues44-stack-25.csv",	//Attribute File from above step
+				"d:/Experiment/large/Experiments/result/Accuracy-Base-44-70-8.csv", 								//Performance File
+				"d:/Experiment/large/autoencoder/clustervalue/datasets/stack-25/dataset44/algo70/");	
+		GRD.generateFiles("d:/Experiment/large/autoencoder/clustervalue/AttributeFileClusterValues484-stack-25.csv",	//Attribute File from above step
+				"d:/Experiment/large/Experiments/result/Accuracy-Base-484-70-8.csv", 								//Performance File
+				"d:/Experiment/large/autoencoder/clustervalue/datasets/stack-25/dataset484/algo70/");	
+		*/
+	/*	File[] arffFiles = readAllFiles("d:/Experiment/large/autoencoder/clustervalue/datasets/stack-25/dataset484/algo70/result/");
+		//D:\Experiment\large\Experiments\result\regression\dataset44\algo13\all\result
+		//Accuracy-Base-44-13-8
+		for(int i=0;i<arffFiles.length;i++)
+		{
+		GenerateRanks GR = new GenerateRanks();
+		GR.generateRankFile("d:/Experiment/large/Experiments/result/Accuracy-Base-484-70-8.csv",						//Base File which Contains true result
 				"D:/Experiment/ExperimentFeb/march24/temp.txt", 
-				"D:/Experiment/ExperimentFeb/march24/predicted.txt", 
+				"D:/Experiment/ExperimentFeb/march24/actual.txt", 
+				"D:/Experiment/ExperimentFeb/march24/temp.txt",  70);
+		
+		GR.generateRankFile("d:/Experiment/large/autoencoder/clustervalue/datasets/stack-25/dataset484/algo70/result/"+arffFiles[i].getName().toString(),		//Prediction From Experiment
+				"D:/Experiment/ExperimentFeb/march24/temp.txt", 
+				"D:/Experiment/ExperimentFeb/march24/predicted"+arffFiles[i].getName().toString()+".txt", 
 				"D:/Experiment/ExperimentFeb/march24/temp.txt",  70);
 		
 		TopMatching TM = new TopMatching();
 		System.out.println("Working on "+arffFiles[i].getName().toString());
-		TM.compareTwoFile("D:/Experiment/ExperimentFeb/march24/actual1.txt",
-				"D:/Experiment/ExperimentFeb/march24/predicted.txt", 70,
-				"d:/Experiment/large/Experiments/result/regression/dataset44/algo70/all/topk/"+arffFiles[i].getName().toString());	
+		TM.compareTwoFile("D:/Experiment/ExperimentFeb/march24/actual.txt",
+				"D:/Experiment/ExperimentFeb/march24/predicted"+arffFiles[i].getName().toString()+".txt",  70,
+				"d:/Experiment/large/autoencoder/clustervalue/datasets/stack-25/dataset484/algo70/topk/"+arffFiles[i].getName().toString());	
 		
-		TM.compareExpectationPercentage("D:/Experiment/ExperimentFeb/march24/actual1.txt",
-				"D:/Experiment/ExperimentFeb/march24/predicted.txt", 
+		TM.compareExpectationPercentage("D:/Experiment/ExperimentFeb/march24/actual.txt",
+				"D:/Experiment/ExperimentFeb/march24/predicted"+arffFiles[i].getName().toString()+".txt", 
 				70, 5, 5, 
-				"d:/Experiment/large/Experiments/result/regression/dataset44/algo70/all/topkt/"+arffFiles[i].getName().toString(), 44);
+				"d:/Experiment/large/autoencoder/clustervalue/datasets/stack-25/dataset484/algo70/topkt/"+arffFiles[i].getName().toString(), 484);
 		
 		}
 		TopMatching TM = new TopMatching();
 		//TM.allResult("d:/Experiment/large/Experiments/result/regression/dataset484/algo70/topkt/", "d:/Experiment/large/Experiments/result/regression/dataset484/algo70/All_Result_70_20_Expected.csv",70);
-		TM.allResultExpectation("d:/Experiment/large/Experiments/result/regression/dataset44/algo70/all/topkt/", "d:/Experiment/large/Experiments/result/regression/dataset44/result/All_Result_70_Expactation_all_features.csv", 70, 5, 5);
-		TM.allResult("d:/Experiment/large/Experiments/result/regression/dataset44/algo70/all/topk/", "d:/Experiment/large/Experiments/result/regression/dataset44/result/All_Result_70_Probability_all_features.csv",70);
+		TM.allResultExpectation("d:/Experiment/large/autoencoder/clustervalue/datasets/stack-25/dataset484/algo70/topkt/", "d:/Experiment/large/Experiments/result/regression/dataset484/result/All_Result_70_Expactation_cluster_value_stack-25_dim_484_datasets.csv", 70, 5, 5);
+		TM.allResult("d:/Experiment/large/autoencoder/clustervalue/datasets/stack-25/dataset484/algo70/topk/", "d:/Experiment/large/Experiments/result/regression/dataset484/result/All_Result_70_Probability_cluster_value_stack-25_dim_484_datasets.csv",70);
 		
-		}
+		*/
+	
+		//test exp
+	//	KMeansClustering KMS = new KMeansClustering();
+	//	KMS.kMeansCluster("0MultivariateData1.arff", "d:/Experiment/large/dataset/expDarff/temp2/", 2);
+		
+		/*
+		Regressor reg = new Regressor();
+		//RegressorTraining[] RT = reg.createTrainingData("d:/Experiment/large/dataset/dataset44/", "d:/Experiment/large/dataset/dataset44/temp1/", "d:/Experiment/large/dataset/dataset44/temp2/", true, true, true, true, true, 8, 100, 0, 20, 2, 2, 2);
+		RegressorTraining[] RT = reg.createTrainingDataFiltered("d:/Experiment/large/dataset/expDarff/temp1/", "d:/Experiment/large/dataset/expDarff/temp2/", true, true, true, true, true, 8, 100, 0, 20, 2, 2, 2);
+		
+		RegressorTraining print = new RegressorTraining();
+		print.printInFeatureVector("d:/Experiment/large/Experiments/result/", "AttributeFile484Test.csv", RT,2);
+	*/
+		
+		//ttttttttttt
+		Regressor reg = new Regressor();
+		//RegressorTraining[] RT = reg.createTrainingData("d:/Experiment/large/dataset/dataset44/", "d:/Experiment/large/dataset/dataset44/temp1/", "d:/Experiment/large/dataset/dataset44/temp2/", true, true, true, true, true, 8, 100, 0, 20, 2, 2, 2);
+		RegressorTraining[] RT = reg.createTrainingDataFiltered("d:/Experiment/large/dataset/dataset44/temp1/", "d:/Experiment/large/dataset/dataset44/temp2/", true, true, true, true, true, 8, 100, 0, 20, 2, 2, 2);
+		
+		RegressorTraining print = new RegressorTraining();
+		print.printInFeatureVector("d:/Experiment/large/Experiments/result/", "AttributeFileClusterValues484_test.csv", RT,2);
+		
+	}
 		
 	
 

@@ -240,6 +240,9 @@ public class KMeansClustering {
 		{
 			sizeOfClusters1[i]=sizeOfClusters[maxIndices[i]];
 			clusterValues1[i]=clusterValues[maxIndices[i]];
+			System.out.println(sizeOfClusters1[i]);
+			System.out.println(clusterValues1[i]);
+			
 			clusterCentroids[maxIndices[i]]=centroids.instance(i).toDoubleArray();
 		}
 		

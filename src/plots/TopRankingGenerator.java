@@ -101,7 +101,7 @@ public class TopRankingGenerator {
 		for(int i=0;i<algorithms;i++)
 		{
 			int index = minValueIndex(ranks);
-			trueRanking[i] = index+1;
+			trueRanking[i] = index;
 			ranks[index] = Integer.MAX_VALUE;
 		}
 		StringBuilder rs = new StringBuilder();

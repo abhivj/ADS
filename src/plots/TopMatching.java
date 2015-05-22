@@ -12,7 +12,7 @@ import java.util.Set;
 
 import regression.*;
 import weka.core.converters.ConverterUtils.DataSource;
-
+import Stats.*;
 import com.opencsv.CSVReader;
 
 public class TopMatching {
@@ -53,6 +53,58 @@ public class TopMatching {
 			}
 	}
 
+	public void compareTwoFileCor(String actualFilePath,String calculatedFilePath,int topk,String saveFilePath) throws Exception
+	{
+		BufferedReader brRow = new BufferedReader(new FileReader(actualFilePath));
+		String line;
+		int lineCount=0;
+		while((line=brRow.readLine())!=null)
+		{
+			lineCount++;
+		}
+		brRow.close();
+		
+		BufferedReader br1 = new BufferedReader(new FileReader(actualFilePath));
+		BufferedReader br2 = new BufferedReader(new FileReader(calculatedFilePath));
+
+		double[] dd = new double[topk];
+		double[] corValues = new double[topk];
+		boolean matrix[][] = new boolean[lineCount][topk];
+		
+		String line1;
+		String line2;
+		int k=0;
+		SpearmanCor sp = new SpearmanCor();
+		while ((line1 = br1.readLine()) != null && (line2=br2.readLine())!=null)
+		{
+			String[] first = line1.split(",");
+			String[] second = line2.split(",");
+			double[] val1 = new double[first.length];
+			double[] val2 = new double[first.length];
+			
+			for(int i=0;i<first.length;i++)
+			{
+				val1[i] = Double.parseDouble(first[i]);
+				val2[i] = Double.parseDouble(second[i]);
+				
+			}
+			//corValues[k] = sp.value(val1, val2);
+			corValues[k] = sp.kendalls(val1, val2);
+			k++;
+		}
+		br1.close();
+		br2.close();
+		
+
+		StringBuilder sb = new StringBuilder();
+		for(int i=0;i<topk;i++)
+		{
+			sb.append((i+1)+",");
+			sb.append(corValues[i]+"\n");
+		}
+		sb.deleteCharAt(sb.length()-1);
+		writeCSVReport(sb.toString(), saveFilePath);
+	}
 	public void compareTwoFile(String actualFilePath,String calculatedFilePath,int topk,String saveFilePath) throws Exception
 	{
 		BufferedReader brRow = new BufferedReader(new FileReader(actualFilePath));
