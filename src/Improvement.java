@@ -93,10 +93,42 @@ public class Improvement {
 		TM.allResult("d:/Experiment/large/Improvement/topkBest/", "d:/Experiment/large/Improvement/Comparision-with-actual-13.csv",13);
 */
 		Statistical st = new Statistical("d:/Experiment/large/Improvement/dataset/ada_prior.arff");
-		System.out.println(st.SDRatio());
-		System.out.println(st.corr_abs());
-		System.out.println(st.kurtosis());
-		System.out.println(st.skewness());
+	//	System.out.println(st.SDRatio());
+	//	System.out.println(st.corr_abs());
+	//	System.out.println(st.kurtosis());
+	//	System.out.println(st.skewness());
+		
+		InformationTheory IT = new InformationTheory("d:/Experiment/large/Improvement/dataset/ada_prior.arff");
+//		System.out.println(IT.entropyAttr());
+	//	System.out.println(IT.entropyClass());
+		//System.out.println(IT.jointEntropy());
+		//System.out.println(IT.mutualInformation());
+		//System.out.println(IT.equivalaentAttr());
+		
+		ModelBased mb = new ModelBased("d:/Experiment/large/Improvement/dataset/iris.arff");
+		System.out.println("Numer Of Leaves "+mb.noLeaves());
+		System.out.println("Numer Of Nodes "+mb.noNodes());
+		System.out.println("Height of tree "+mb.treeHeight());
+		System.out.println("WidthMax of tree "+mb.treeWidth());
+		System.out.println("maxLevel "+mb.maxLevel());
+		System.out.println("minLevel "+mb.minLevel());
+		System.out.println("meanLevel "+mb.meanLevel());
+		System.out.println("dev Level "+mb.devLevel());
+		System.out.println("Long Branch "+mb.longBranch());
+		System.out.println("Short Branch "+mb.shortBranch());
+		System.out.println("Mean Branch "+mb.meanBranch());
+		System.out.println("dev Branch "+mb.devBranch());
+		System.out.println("maxAtt "+mb.maxAtt());
+		System.out.println("minAtt "+mb.minAtt());
+		System.out.println("meanAtt "+mb.meanAtt());
+		System.out.println("dev Attr "+mb.devAtt());
+		//System.out.println(mb.numberOfLeavesID3());
+		//System.out.println(mb.printTree());
+	//	System.out.println(mb.prefixTree());
+		//mb.attributeVector();
+		//mb.generateTree();
+		//mb.levelVector();
+		//mb.branchVector();
 		
 		//double d = Math.pow(1.5284942461104516E14,0.16*0.5);
 		//System.out.println(d);

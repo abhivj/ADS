@@ -8,8 +8,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+
 
 import org.apache.commons.io.FileUtils;
 
@@ -42,29 +41,6 @@ public class Statistical {
 	{
 		this.dataset = dataset;
 		this.classSeparated = classSeparation();
-	}
-	public void writeCSVReport(String stringToWrite,String path)
-	{
-		String savePath = path;
-		try {
-			
-			File file = new File(savePath);
- 
-			// if file doesnt exists, then create it
-			if (!file.exists())
-			{
-				file.createNewFile();
-			}
- 			FileWriter fw = new FileWriter(file.getAbsoluteFile());
-			BufferedWriter bw = new BufferedWriter(fw);
-			bw.write(stringToWrite);
-			bw.close();
-			System.out.println("Done File Writing : "+savePath);
-			}
-			catch (IOException e)
-			{
-				e.printStackTrace();
-			}
 	}
 	
 
