@@ -65,6 +65,7 @@ public J48 trainmodel() throws Exception
 	data.setClassIndex(data.numAttributes() - 1);
 	
 	J48 j48 = new J48();
+	j48.setBinarySplits(true);
 	j48.buildClassifier(data);
 	return j48;
 }

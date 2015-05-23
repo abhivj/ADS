@@ -105,7 +105,7 @@ public class Improvement {
 		//System.out.println(IT.mutualInformation());
 		//System.out.println(IT.equivalaentAttr());
 		
-		ModelBased mb = new ModelBased("d:/Experiment/large/Improvement/dataset/iris.arff");
+		ModelBased mb = new ModelBased("d:/Experiment/large/Improvement/dataset/ada_prior.arff");
 		System.out.println("Numer Of Leaves "+mb.noLeaves());
 		System.out.println("Numer Of Nodes "+mb.noNodes());
 		System.out.println("Height of tree "+mb.treeHeight());
@@ -130,6 +130,15 @@ public class Improvement {
 		//mb.levelVector();
 		//mb.branchVector();
 		
+		
+		LandMarking LM = new LandMarking("d:/Experiment/large/Improvement/dataset/ada_prior.arff");
+		System.out.println(LM.decisionNodeLearning());
+		System.out.println(LM.worstNodeLearning());
+		System.out.println(LM.randomNodeLearning());
+		System.out.println(LM.averageNodeLearning());
+		System.out.println(LM.NaiveBayesLearning());
+		System.out.println(LM.eliteNNLearning());
+		System.out.println(LM.NearestNeighbourLearning());
 		//double d = Math.pow(1.5284942461104516E14,0.16*0.5);
 		//System.out.println(d);
 	}
